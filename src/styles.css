@@ -1,0 +1,42 @@
+:root {
+  --paper: oklch(0.94 0.018 85);
+  --card: oklch(0.97 0.012 88);
+  --ink: oklch(0.28 0.03 50);
+  --metal: oklch(0.76 0.105 82);
+  --metal-deep: oklch(0.52 0.09 72);
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Outfit', system-ui, sans-serif;
+}
+/* Thème "nuit / cabinet" via attribut (le plateau reste vert feutrine) */
+[data-theme="nuit"] {
+  --paper: oklch(0.26 0.025 60);
+  --card: oklch(0.31 0.028 62);
+  --ink: oklch(0.92 0.02 80);
+  --metal: oklch(0.80 0.11 83);
+  --metal-deep: oklch(0.72 0.10 80);
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: oklch(0.16 0.01 60); overflow: hidden; }
+#stage {
+  position: fixed; inset: 0; display: grid; place-items: center;
+  background: radial-gradient(120% 90% at 50% 0%, oklch(0.22 0.012 60), oklch(0.13 0.008 50));
+}
+#frame {
+  width: 1280px; height: 800px; position: relative;
+  background:
+    radial-gradient(140% 120% at 20% 0%, color-mix(in oklab, var(--paper) 88%, white 12%), var(--paper)),
+    var(--paper);
+  box-shadow: 0 40px 100px rgba(0,0,0,0.55), 0 4px 0 rgba(0,0,0,0.3);
+  overflow: hidden; transform-origin: center center;
+}
+#frame::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  background-image: radial-gradient(circle at 50% 50%, transparent 60%, rgba(40,20,10,0.06));
+}
+#root { position: relative; z-index: 1; width: 100%; height: 100%; }
+.screen { position: relative; z-index: 1; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes pop { from { transform: scale(0.82); } to { transform: scale(1); } }
+@keyframes grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+input::placeholder { color: color-mix(in oklab, var(--ink) 30%, transparent); }
+::-webkit-scrollbar { width: 0; }
