@@ -18,11 +18,11 @@
 * { box-sizing: border-box; }
 html, body { margin: 0; height: 100%; background: oklch(0.16 0.01 60); overflow: hidden; }
 #stage {
-  position: fixed; inset: 0; display: grid; place-items: center;
+  position: fixed; inset: 0; overflow: hidden;
   background: radial-gradient(120% 90% at 50% 0%, oklch(0.22 0.012 60), oklch(0.13 0.008 50));
 }
 #frame {
-  width: 1280px; height: 800px; position: relative;
+  width: 1280px; height: 800px; position: absolute; left: 50%; top: 50%;
   background:
     radial-gradient(140% 120% at 20% 0%, color-mix(in oklab, var(--paper) 88%, white 12%), var(--paper)),
     var(--paper);

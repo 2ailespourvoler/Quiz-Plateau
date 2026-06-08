@@ -2369,10 +2369,12 @@ Object.assign(window, { stakeFor, ScreenBoard, RevealOverlay, JokerChooser, Scre
 // Mise à l'échelle du cadre fixe 1280×800
 function fitStage() {
   const frame = document.getElementById('frame');
+  if (!frame) return;
   const s = Math.min(window.innerWidth / 1280, window.innerHeight / 800);
-  frame.style.transform = `scale(${s})`;
+  frame.style.transform = `translate(-50%, -50%) scale(${s})`;
 }
 window.addEventListener('resize', fitStage);
+window.addEventListener('orientationchange', fitStage);
 
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   "theme": "patrimoine",
