@@ -7,9 +7,42 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  #fs-btn {
+    position: fixed; top: 12px; right: 12px; z-index: 9999;
+    width: 44px; height: 44px; border-radius: 50%; border: none;
+    background: rgba(20, 16, 10, 0.55); color: #f3e7cf;
+    font-size: 20px; line-height: 1; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.4); transition: background 0.2s;
+  }
+  #fs-btn:hover, #fs-btn:active { background: rgba(40, 32, 20, 0.85); }
+  :fullscreen #fs-btn { opacity: 0.35; }
+</style>
 </head>
 <body>
 <div id="stage"><div id="frame"><div id="root"></div></div></div>
+<button id="fs-btn" type="button" aria-label="Plein écran" title="Plein écran">⛶</button>
+<script>
+  (function () {
+    var btn = document.getElementById('fs-btn');
+    function inFs() { return document.fullscreenElement || document.webkitFullscreenElement; }
+    function enter() {
+      var el = document.documentElement;
+      var req = el.requestFullscreen || el.webkitRequestFullscreen;
+      if (req) req.call(el);
+    }
+    function leave() {
+      var ex = document.exitFullscreen || document.webkitExitFullscreen;
+      if (ex) ex.call(document);
+    }
+    btn.addEventListener('click', function () { inFs() ? leave() : enter(); });
+    function sync() { btn.textContent = inFs() ? '\u2715' : '\u26F6'; }
+    document.addEventListener('fullscreenchange', sync);
+    document.addEventListener('webkitfullscreenchange', sync);
+  })();
+</script>
 <script type="module" src="/src/main.tsx"></script>
 </body>
 </html>
