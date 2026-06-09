@@ -152,6 +152,26 @@ const QUESTIONS = {
       { q: "Quel chancelier dirigea la République de Weimar avant l'arrivée des nazis ?", a: ["Adenauer", "Brüning", "Ebert", "Stresemann"], correct: 1 },
       { q: "Quelle dynastie française succéda aux Carolingiens à partir de 987 ?", a: ["Les Capétiens", "Les Valois", "Les Mérovingiens", "Les Bourbons"], correct: 0 },
       { q: "Quel conflit de 1853-1856 opposa la Russie à une coalition franco-britannique et ottomane ?", a: ["La guerre de Crimée", "La guerre russo-japonaise", "La guerre des Balkans", "La guerre de Sécession"], correct: 0 },
+      { q: "Quel pape appela à la première croisade au concile de Clermont en 1095 ?", a: ["Calixte II", "Grégoire VII", "Innocent III", "Urbain II"], correct: 3 },
+      { q: "Quelle bataille de 1346 illustra la supériorité des archers gallois et anglais ?", a: ["Azincourt", "Patay", "Bouvines", "Crécy"], correct: 3 },
+      { q: "Quel roi d'Angleterre rompit avec Rome et fonda l'Église anglicane ?", a: ["Henri VII", "Édouard VI", "Henri VIII", "Jacques Ier"], correct: 2 },
+      { q: "Quel souverain régnait sur les Aztèques lors de l'arrivée de Cortés au Mexique ?", a: ["Cuauhtémoc", "Atahualpa", "Itzcoatl", "Moctezuma II"], correct: 3 },
+      { q: "Quelle reine catholique de Castille finança le voyage de Colomb avec Ferdinand ?", a: ["Jeanne la Folle", "Isabelle Ire", "Marie de Bourgogne", "Catherine d'Aragon"], correct: 1 },
+      { q: "Quelle dynastie russe régna de 1613 à 1917 ?", a: ["Les Riourikides", "Les Romanov", "Les Godounov", "Les Holstein"], correct: 1 },
+      { q: "Quel homme d'État réalisa l'unité de l'Italie comme ministre du Piémont ?", a: ["Garibaldi", "Mazzini", "Victor-Emmanuel II", "Cavour"], correct: 3 },
+      { q: "En quelle année les bolcheviks prirent-ils le pouvoir en Russie ?", a: ["1917", "1924", "1918", "1905"], correct: 0 },
+      { q: "Quel conflit de 1936-1939 opposa républicains et nationalistes, avec l'intervention des Brigades internationales ?", a: ["La Reconquista", "La guerre du Rif", "La guerre d'Espagne", "La guerre des Communautés"], correct: 2 },
+      { q: "Quel haut dignitaire nazi dirigea la SS sous le IIIe Reich ?", a: ["Himmler", "Goering", "Hess", "Bormann"], correct: 0 },
+      { q: "Quelle ville japonaise fut frappée par la première bombe atomique en août 1945 ?", a: ["Nagasaki", "Hiroshima", "Tokyo", "Kyoto"], correct: 1 },
+      { q: "Quel président américain décida le largage des bombes atomiques sur le Japon ?", a: ["Roosevelt", "Truman", "Wilson", "Eisenhower"], correct: 1 },
+      { q: "Quelle méthode de lutte Gandhi prôna-t-il contre la domination britannique ?", a: ["Le panafricanisme", "La lutte armée", "La révolution culturelle", "La désobéissance civile"], correct: 3 },
+      { q: "En quelle année l'Inde obtint-elle son indépendance du Royaume-Uni ?", a: ["1930", "1947", "1950", "1962"], correct: 1 },
+      { q: "Quel affrontement de 1962 amena les États-Unis et l'URSS au bord de la guerre nucléaire ?", a: ["La crise de Suez", "La crise de Berlin", "La crise de Cuba", "La crise des Sudètes"], correct: 2 },
+      { q: "Quel dirigeant sud-africain, emprisonné 27 ans, devint président en 1994 ?", a: ["Nelson Mandela", "Steve Biko", "Jacob Zuma", "Desmond Tutu"], correct: 0 },
+      { q: "Quel système de ségrégation raciale fut institué en Afrique du Sud après 1948 ?", a: ["L'apartheid", "Le servage", "La colonisation", "Le protectorat"], correct: 0 },
+      { q: "Quel roi de France partit à la troisième croisade aux côtés de Richard Cœur de Lion ?", a: ["Saint Louis", "Louis VII", "Philippe Auguste", "Charles V"], correct: 2 },
+      { q: "Quelle invention chinoise médiévale révolutionna l'orientation en mer ?", a: ["La boussole", "La poudre", "Le papier", "Le gouvernail d'étambot"], correct: 0 },
+      { q: "Quelle bataille de 1863 marqua un tournant de la guerre de Sécession ?", a: ["Bull Run", "Antietam", "Gettysburg", "Appomattox"], correct: 2 },
     ],
     expert: [
       { q: "En quelle année eut lieu la bataille de Bouvines, victoire de Philippe Auguste ?", a: ["1204", "1214", "1226", "1242"], correct: 1 },
@@ -174,6 +194,26 @@ const QUESTIONS = {
       { q: "Quel souverain perse acheva la conquête de l'Empire babylonien en 539 avant notre ère ?", a: ["Cyrus le Grand", "Xerxès", "Cambyse", "Darius Ier"], correct: 0 },
       { q: "Quel soulèvement paysan secoua l'Angleterre en 1381 sous Richard II ?", a: ["La guerre des Deux-Roses", "La Jacquerie", "La révolte de Wat Tyler", "La révolte des Ciompi"], correct: 2 },
       { q: "Quelle assemblée de l'Église, réunie de 1414 à 1418, mit fin au Grand Schisme d'Occident ?", a: ["Le concile de Bâle", "Le concile de Ferrare", "Le concile de Latran", "Le concile de Constance"], correct: 3 },
+      { q: "Quel empereur romain instaura la Tétrarchie à la fin du IIIe siècle ?", a: ["Aurélien", "Dioclétien", "Constantin", "Galère"], correct: 1 },
+      { q: "Quelle défaite de 9 apr. J.-C. coûta à Rome trois légions en Germanie ?", a: ["Cannes", "Carrhes", "Andrinople", "Teutobourg"], correct: 3 },
+      { q: "Quel général de Justinien reconquit l'Afrique vandale et l'Italie ostrogothe ?", a: ["Narsès", "Aétius", "Bélisaire", "Stilicon"], correct: 2 },
+      { q: "Quel concile de 325 condamna l'arianisme ?", a: ["Éphèse", "Nicée", "Constantinople", "Chalcédoine"], correct: 1 },
+      { q: "Quel calife abbasside fonda Bagdad en 762 ?", a: ["Al-Mansour", "Haroun al-Rachid", "Al-Mamoun", "Al-Walid"], correct: 0 },
+      { q: "Quel partage de 843 divisa l'Empire carolingien entre les petits-fils de Charlemagne ?", a: ["Le traité de Meerssen", "Le traité de Verdun", "Le serment de Strasbourg", "Le traité de Ribemont"], correct: 1 },
+      { q: "Quelle dynastie musulmane fit de Cordoue le centre d'un califat brillant ?", a: ["Les Abbassides", "Les Fatimides", "Les Almohades", "Les Omeyyades"], correct: 3 },
+      { q: "Quel roi de France fut fait prisonnier à la bataille de Pavie en 1525 ?", a: ["Louis XII", "Charles VIII", "François Ier", "Henri II"], correct: 2 },
+      { q: "Quel édit de 1685 supprima la liberté de culte accordée aux protestants ?", a: ["L'édit de Beaulieu", "L'édit de Fontainebleau", "La paix d'Alès", "L'édit de Saint-Germain"], correct: 1 },
+      { q: "Quel conflit européen éclata à la mort de Charles II, dernier Habsbourg de Madrid, en 1700 ?", a: ["La guerre de Dévolution", "La guerre de Sept Ans", "La guerre de Succession d'Espagne", "La guerre de la Ligue d'Augsbourg"], correct: 2 },
+      { q: "Quel traité de 1713 mit fin à la guerre de Succession d'Espagne ?", a: ["Le traité d'Utrecht", "Le traité de Rastatt", "La paix de Ryswick", "La paix des Pyrénées"], correct: 0 },
+      { q: "Quelle impératrice incarna le despotisme éclairé en Russie au XVIIIe siècle ?", a: ["Élisabeth Ire", "Catherine II", "Sophie Alexeïevna", "Anna Ivanovna"], correct: 1 },
+      { q: "Quel ministre de Louis XIV développa le mercantilisme et la marine royale ?", a: ["Le Tellier", "Louvois", "Fouquet", "Colbert"], correct: 3 },
+      { q: "Quel ingénieur fortifia les frontières du royaume sous Louis XIV ?", a: ["Louvois", "Turenne", "Vauban", "Le Nôtre"], correct: 2 },
+      { q: "Quel club révolutionnaire, dominé par Robespierre, marqua la période de la Terreur ?", a: ["Les Girondins", "Les Cordeliers", "Les Feuillants", "Les Jacobins"], correct: 3 },
+      { q: "Quel coup d'État porta Bonaparte au pouvoir en novembre 1799 ?", a: ["Le 18 Brumaire", "Le 13 Vendémiaire", "Le 18 Fructidor", "Le 9 Thermidor"], correct: 0 },
+      { q: "Quel passage meurtrier marqua la retraite de Russie de la Grande Armée en 1812 ?", a: ["La Bérézina", "La Moskova", "Smolensk", "Eylau"], correct: 0 },
+      { q: "Quelle révolution de juillet 1830 renversa le roi Charles X ?", a: ["La révolution de Février", "Les journées de Juin", "Les Trois Glorieuses", "La Commune"], correct: 2 },
+      { q: "Quel souverain fut le dernier empereur du Saint-Empire romain germanique en 1806 ?", a: ["Joseph II", "Léopold II", "Ferdinand Ier", "François II"], correct: 3 },
+      { q: "Quel chancelier de fer mena les guerres d'unification de l'Allemagne contre l'Autriche puis la France ?", a: ["Bismarck", "Adenauer", "Stresemann", "Metternich"], correct: 0 },
     ],
   },
   geo: {
@@ -300,6 +340,26 @@ const QUESTIONS = {
       { q: "Quel pays insulaire d'Asie du Sud-Est compte le plus grand nombre d'îles ?", a: ["Les Philippines", "Le Japon", "L'Indonésie", "La Malaisie"], correct: 2 },
       { q: "Quel grand désert froid couvre le sud de la Mongolie et le nord de la Chine ?", a: ["Le Taklamakan", "Le Gobi", "Le Karakoum", "Le Thar"], correct: 1 },
       { q: "Quelle région du sud-ouest de l'Europe abrite l'Espagne et le Portugal ?", a: ["La péninsule des Balkans", "La péninsule Scandinave", "La péninsule Italique", "La péninsule Ibérique"], correct: 3 },
+      { q: "Quel pays scandinave a pour capitale Helsinki ?", a: ["La Norvège", "La Suède", "La Finlande", "L'Estonie"], correct: 2 },
+      { q: "Quel pays a la forme d'une botte sur la carte de l'Europe ?", a: ["L'Italie", "La Grèce", "La Croatie", "Le Portugal"], correct: 0 },
+      { q: "Quel fleuve traverse Londres ?", a: ["La Severn", "La Mersey", "La Tamise", "Le Clyde"], correct: 2 },
+      { q: "Quel pays compte le plus grand nombre d'habitants en Afrique ?", a: ["L'Égypte", "Le Nigeria", "L'Afrique du Sud", "L'Éthiopie"], correct: 1 },
+      { q: "Quel pays abrite la plus grande partie de la forêt amazonienne ?", a: ["Le Pérou", "Le Brésil", "La Colombie", "Le Venezuela"], correct: 1 },
+      { q: "Quel est le plus grand des Grands Lacs d'Amérique du Nord ?", a: ["Le lac Supérieur", "Le lac Michigan", "Le lac Huron", "Le lac Érié"], correct: 0 },
+      { q: "Quel est le plus vaste pays du monde par sa superficie ?", a: ["Le Canada", "La Chine", "Les États-Unis", "La Russie"], correct: 3 },
+      { q: "Quelle voie d'eau artificielle, en Égypte, relie la Méditerranée à la mer Rouge ?", a: ["Le canal de Panama", "Le canal de Suez", "Le canal de Kiel", "Le canal de Corinthe"], correct: 1 },
+      { q: "Quelle voie d'eau artificielle traverse l'Amérique centrale pour relier deux océans ?", a: ["Le canal de Kiel", "Le canal de Suez", "Le canal de Panama", "Le canal Rhin-Main-Danube"], correct: 2 },
+      { q: "Quelle est la monnaie officielle du Royaume-Uni ?", a: ["L'euro", "Le franc", "La couronne", "La livre sterling"], correct: 3 },
+      { q: "Quel pays est surnommé « le pays du Soleil-Levant » ?", a: ["La Chine", "La Corée du Sud", "La Thaïlande", "Le Japon"], correct: 3 },
+      { q: "Quel pays asiatique a pour monnaie le yen ?", a: ["La Chine", "La Corée du Sud", "Le Japon", "La Thaïlande"], correct: 2 },
+      { q: "Quelle mer borde la Croatie et le Monténégro ?", a: ["La mer Ionienne", "La mer Égée", "L'Adriatique", "La mer Tyrrhénienne"], correct: 2 },
+      { q: "Quel pays nordique est découpé par des milliers de fjords sur sa côte ouest ?", a: ["La Suède", "La Finlande", "Le Danemark", "La Norvège"], correct: 3 },
+      { q: "Quel pays scandinave est le plus peuplé ?", a: ["La Suède", "Le Danemark", "La Norvège", "La Finlande"], correct: 0 },
+      { q: "Quel fleuve d'Amérique du Sud possède le plus grand débit du monde ?", a: ["Le Paraná", "L'Amazone", "Le Rio de la Plata", "L'Orénoque"], correct: 1 },
+      { q: "Quel pays d'Asie est traditionnellement surnommé « l'Empire du Milieu » ?", a: ["Le Japon", "La Chine", "L'Inde", "La Mongolie"], correct: 1 },
+      { q: "Quel petit État est entièrement entouré par le territoire italien (hormis le Vatican) ?", a: ["Saint-Marin", "Monaco", "Andorre", "Le Liechtenstein"], correct: 0 },
+      { q: "Quel océan borde la côte ouest des États-Unis ?", a: ["L'Atlantique", "L'océan Indien", "L'Arctique", "Le Pacifique"], correct: 3 },
+      { q: "Quelle mer intérieure borde la Turquie, l'Ukraine et la Géorgie ?", a: ["La mer Noire", "La mer Égée", "La mer Adriatique", "La mer Baltique"], correct: 0 },
     ],
     expert: [
       { q: "Quel est le deuxième plus haut sommet du monde, dans l'Himalaya ?", a: ["Le K2", "Le Kangchenjunga", "Le Lhotse", "L'Annapurna"], correct: 0 },
@@ -322,6 +382,26 @@ const QUESTIONS = {
       { q: "Quelle est la plus longue chaîne de montagnes continentale du monde ?", a: ["L'Himalaya", "Les Rocheuses", "La cordillère des Andes", "Le Grand Rift"], correct: 2 },
       { q: "Quel pays insulaire de l'océan Indien fut autrefois appelé Ceylan ?", a: ["Maurice", "Les Maldives", "Madagascar", "Le Sri Lanka"], correct: 3 },
       { q: "Quelle mer borde la côte nord de l'Iran ?", a: ["La mer Rouge", "La mer d'Oman", "Le golfe Persique", "La mer Caspienne"], correct: 3 },
+      { q: "Quelle est la capitale de la Mongolie ?", a: ["Oulan-Bator", "Astana", "Bichkek", "Douchanbé"], correct: 0 },
+      { q: "Quel pays insulaire de l'océan Indien a pour capitale Antananarivo ?", a: ["Maurice", "Les Comores", "Madagascar", "Les Seychelles"], correct: 2 },
+      { q: "Quel est le point culminant de l'Océanie ?", a: ["La Puncak Jaya", "Le mont Cook", "Le mont Kosciuszko", "Le mont Wilhelm"], correct: 0 },
+      { q: "Quel fleuve traverse Bagdad ?", a: ["L'Euphrate", "Le Tigre", "L'Oronte", "Le Jourdain"], correct: 1 },
+      { q: "Quelle est la capitale du Bhoutan ?", a: ["Katmandou", "Thimphou", "Dacca", "Naypyidaw"], correct: 1 },
+      { q: "Quel bras de mer sépare la Sibérie de l'Alaska ?", a: ["Le détroit de Torres", "Le détroit de Davis", "Le détroit de Béring", "Le détroit de Cook"], correct: 2 },
+      { q: "Quel micro-État européen est le plus densément peuplé du monde ?", a: ["Le Vatican", "Malte", "Saint-Marin", "Monaco"], correct: 3 },
+      { q: "Quelle est la capitale administrative (siège du gouvernement) de l'Afrique du Sud ?", a: ["Le Cap", "Johannesburg", "Pretoria", "Durban"], correct: 2 },
+      { q: "Quel lac est la plus grande étendue d'eau douce du continent africain ?", a: ["Le lac Malawi", "Le lac Tanganyika", "Le lac Victoria", "Le lac Tchad"], correct: 2 },
+      { q: "Quel pays d'Amérique centrale a aboli son armée en 1948 ?", a: ["Le Costa Rica", "Le Panama", "Le Belize", "Le Honduras"], correct: 0 },
+      { q: "Quelle mer sépare l'Australie de la Nouvelle-Zélande ?", a: ["La mer de Corail", "La mer de Tasman", "La mer d'Arafura", "La mer de Timor"], correct: 1 },
+      { q: "Quelle est la capitale de la Jordanie ?", a: ["Amman", "Beyrouth", "Bagdad", "Damas"], correct: 0 },
+      { q: "Quels deux pays partagent la plus longue frontière terrestre continue du monde ?", a: ["La Russie et le Kazakhstan", "Le Canada et les États-Unis", "La Chine et la Mongolie", "Le Chili et l'Argentine"], correct: 1 },
+      { q: "Quel désert du nord du Chili est l'un des plus arides de la planète ?", a: ["Le Namib", "Le Sonora", "Le Kalahari", "L'Atacama"], correct: 3 },
+      { q: "Quel fleuve forme une grande partie de la frontière entre le Mexique et les États-Unis ?", a: ["Le Colorado", "Le Missouri", "Le Brazos", "Le Rio Grande"], correct: 3 },
+      { q: "Quel archipel autonome danois de l'Atlantique Nord a pour chef-lieu Tórshavn ?", a: ["L'Islande", "Le Groenland", "Les îles Féroé", "Les Shetland"], correct: 2 },
+      { q: "Quel pays insulaire est le plus peuplé du monde ?", a: ["Le Royaume-Uni", "Le Japon", "Les Philippines", "L'Indonésie"], correct: 3 },
+      { q: "Quelle est la capitale du Vietnam ?", a: ["Hanoï", "Hô Chi Minh-Ville", "Hué", "Da Nang"], correct: 0 },
+      { q: "Quelle est la capitale du Kenya ?", a: ["Mombasa", "Nairobi", "Dar es Salaam", "Kampala"], correct: 1 },
+      { q: "Quel pays possède le plus de fuseaux horaires sur un territoire d'un seul tenant ?", a: ["Les États-Unis", "Le Canada", "La Chine", "La Russie"], correct: 3 },
     ],
   },
   litterature: {
@@ -448,6 +528,26 @@ const QUESTIONS = {
       { q: "Quelle héroïne de Flaubert s'empoisonne à l'arsenic à la fin du roman ?", a: ["Cosette", "Emma Bovary", "Eugénie Grandet", "Nana"], correct: 1 },
       { q: "Quel auteur grec antique est traditionnellement crédité de « L'Iliade » ?", a: ["Homère", "Sophocle", "Hésiode", "Euripide"], correct: 0 },
       { q: "Quel écrivain américain est l'auteur de « Le Vieil Homme et la Mer » ?", a: ["Faulkner", "Steinbeck", "Hemingway", "Fitzgerald"], correct: 2 },
+      { q: "Quel écrivain anglais a créé le personnage de Robinson Crusoé ?", a: ["Jonathan Swift", "Daniel Defoe", "R. L. Stevenson", "Walter Scott"], correct: 1 },
+      { q: "Quel auteur a créé le personnage du gentleman cambrioleur Arsène Lupin ?", a: ["Gaston Leroux", "Conan Doyle", "Maurice Leblanc", "Georges Simenon"], correct: 2 },
+      { q: "Quel écrivain a écrit « Vingt Mille Lieues sous les mers » ?", a: ["H. G. Wells", "Jules Verne", "Daniel Defoe", "R. L. Stevenson"], correct: 1 },
+      { q: "Quel dramaturge français du XVIIe siècle est l'auteur du « Cid » ?", a: ["Racine", "Corneille", "Marivaux", "Molière"], correct: 1 },
+      { q: "Quel dramaturge est l'auteur de la comédie « Le Tartuffe » ?", a: ["Molière", "Corneille", "Racine", "Beaumarchais"], correct: 0 },
+      { q: "Quel poète adolescent est l'auteur du « Dormeur du val » ?", a: ["Verlaine", "Lamartine", "Rimbaud", "Hugo"], correct: 2 },
+      { q: "Quel écrivain est l'auteur du roman « L'Étranger » ?", a: ["Sartre", "Malraux", "Gide", "Camus"], correct: 3 },
+      { q: "Quel romancier russe est l'auteur de « Crime et Châtiment » ?", a: ["Dostoïevski", "Gogol", "Pouchkine", "Tolstoï"], correct: 0 },
+      { q: "Quel écrivain est l'auteur de « Notre-Dame de Paris » ?", a: ["Balzac", "Victor Hugo", "Mérimée", "Sue"], correct: 1 },
+      { q: "Quel conteur danois est l'auteur de « La Petite Sirène » ?", a: ["Perrault", "les frères Grimm", "Carlo Collodi", "Andersen"], correct: 3 },
+      { q: "Quel écrivain britannique a inventé l'univers de la Terre du Milieu ?", a: ["C. S. Lewis", "George Orwell", "Tolkien", "Lewis Carroll"], correct: 2 },
+      { q: "Quel romancier britannique est l'auteur de « 1984 » ?", a: ["Aldous Huxley", "Ray Bradbury", "George Orwell", "H. G. Wells"], correct: 2 },
+      { q: "Quel romancier normand est l'auteur de « Bel-Ami » ?", a: ["Maupassant", "Flaubert", "Zola", "Stendhal"], correct: 0 },
+      { q: "Quel écrivain américain est l'auteur des « Aventures de Tom Sawyer » ?", a: ["Jack London", "Steinbeck", "Hemingway", "Mark Twain"], correct: 3 },
+      { q: "Quel philosophe des Lumières est l'auteur du conte « Candide » ?", a: ["Rousseau", "Diderot", "Montesquieu", "Voltaire"], correct: 3 },
+      { q: "Quel poète romantique est l'auteur du poème « Le Lac » ?", a: ["Lamartine", "Vigny", "Musset", "Hugo"], correct: 0 },
+      { q: "Qui est l'auteur de la pièce « Cyrano de Bergerac » ?", a: ["Victor Hugo", "Edmond Rostand", "Alfred de Musset", "Sacha Guitry"], correct: 1 },
+      { q: "Quel romancier est l'auteur de « Germinal » ?", a: ["Hugo", "Maupassant", "Balzac", "Zola"], correct: 3 },
+      { q: "Quel écrivain et aviateur est l'auteur du « Petit Prince » ?", a: ["Saint-Exupéry", "André Gide", "Jean Giono", "Marcel Pagnol"], correct: 0 },
+      { q: "Quel romancier anglais est l'auteur d'« Oliver Twist » ?", a: ["Thackeray", "Hardy", "Dickens", "Walter Scott"], correct: 2 },
     ],
     expert: [
       { q: "Quel poète grec antique, né près de Thèbes, est l'auteur d'« Odes » triomphales ?", a: ["Anacréon", "Pindare", "Théocrite", "Alcée"], correct: 1 },
@@ -470,6 +570,26 @@ const QUESTIONS = {
       { q: "Quelle femme de lettres française tint un salon célèbre et écrivit de nombreuses lettres à sa fille au XVIIe siècle ?", a: ["Madame de Lafayette", "Madame de Sévigné", "Madame de Staël", "George Sand"], correct: 1 },
       { q: "Quel auteur tchèque a écrit « La Métamorphose » ?", a: ["Kafka", "Kundera", "Hašek", "Rilke"], correct: 0 },
       { q: "Quel dramaturge grec est considéré comme le père de la tragédie et auteur de « L'Orestie » ?", a: ["Eschyle", "Aristophane", "Ménandre", "Sophocle"], correct: 0 },
+      { q: "Quel poète symboliste est l'auteur du « Coup de dés jamais n'abolira le hasard » ?", a: ["Verlaine", "Mallarmé", "Rimbaud", "Valéry"], correct: 1 },
+      { q: "Quel écrivain russe est l'auteur du « Maître et Marguerite » ?", a: ["Pasternak", "Nabokov", "Boulgakov", "Soljenitsyne"], correct: 2 },
+      { q: "Quel romancier autrichien est l'auteur de « L'Homme sans qualités » ?", a: ["Musil", "Roth", "Zweig", "Broch"], correct: 0 },
+      { q: "Quel dramaturge espagnol du Siècle d'or écrivit « La vie est un songe » ?", a: ["Lope de Vega", "Calderón", "Cervantès", "Tirso de Molina"], correct: 1 },
+      { q: "Quel poète anglais est l'auteur du « Paradis perdu » ?", a: ["Spenser", "Blake", "Donne", "Milton"], correct: 3 },
+      { q: "Quel écrivain américain est l'auteur de « Moby Dick » ?", a: ["Hawthorne", "Poe", "Melville", "Whitman"], correct: 2 },
+      { q: "Quel écrivain russe est l'auteur des « Âmes mortes » ?", a: ["Gogol", "Gontcharov", "Tourgueniev", "Leskov"], correct: 0 },
+      { q: "Quel humaniste italien chanta son amour pour Laure dans le « Canzoniere » ?", a: ["Boccace", "L'Arioste", "Le Tasse", "Pétrarque"], correct: 3 },
+      { q: "Quel romancier français est l'auteur de « Voyage au bout de la nuit » ?", a: ["Malraux", "Aragon", "Céline", "Drieu la Rochelle"], correct: 2 },
+      { q: "Quel poète et dramaturge allemand est l'auteur de « Faust » ?", a: ["Goethe", "Schiller", "Heine", "Hölderlin"], correct: 0 },
+      { q: "Quel dramaturge russe est l'auteur de « La Cerisaie » ?", a: ["Gorki", "Ostrovski", "Tourgueniev", "Tchekhov"], correct: 3 },
+      { q: "Quelle romancière anglaise est l'auteur d'« Orgueil et Préjugés » ?", a: ["Emily Brontë", "George Eliot", "Jane Austen", "Mary Shelley"], correct: 2 },
+      { q: "Quel écrivain de la « Génération perdue » est l'auteur de « Gatsby le Magnifique » ?", a: ["Anderson", "Dos Passos", "Faulkner", "Fitzgerald"], correct: 3 },
+      { q: "Quel poète espagnol, assassiné en 1936, est l'auteur de « Noces de sang » ?", a: ["Antonio Machado", "García Lorca", "Rafael Alberti", "Miguel Hernández"], correct: 1 },
+      { q: "Quel romancier russe écrivit « Le Docteur Jivago » ?", a: ["Boulgakov", "Cholokhov", "Grossman", "Pasternak"], correct: 3 },
+      { q: "Quel poète latin est l'auteur des « Métamorphoses » ?", a: ["Virgile", "Horace", "Ovide", "Catulle"], correct: 2 },
+      { q: "Quel écrivain japonais, prix Nobel 1968, est l'auteur de « Pays de neige » ?", a: ["Kawabata", "Mishima", "Tanizaki", "Oé"], correct: 0 },
+      { q: "Quel romancier français est l'auteur de « L'Éducation sentimentale » ?", a: ["Flaubert", "Stendhal", "Balzac", "Zola"], correct: 0 },
+      { q: "Quel dramaturge élisabéthain, rival de Shakespeare, écrivit « La Tragique Histoire du docteur Faust » ?", a: ["Ben Jonson", "Marlowe", "Thomas Kyd", "John Webster"], correct: 1 },
+      { q: "Quel écrivain colombien reçut le prix Nobel de littérature en 1982 ?", a: ["Vargas Llosa", "García Márquez", "Carpentier", "Cortázar"], correct: 1 },
     ],
   },
   sciences: {
@@ -596,6 +716,26 @@ const QUESTIONS = {
       { q: "Quelle est la vitesse approximative de la lumière dans le vide ?", a: ["30 000 km/s", "3 000 km/s", "300 000 km/s", "300 km/s"], correct: 2 },
       { q: "Quel élément chimique a pour symbole « Fe » ?", a: ["Le francium", "Le fluor", "Le fer", "Le phosphore"], correct: 2 },
       { q: "Quel organe humain filtre le sang pour produire l'urine ?", a: ["Le foie", "Le rein", "La rate", "Le pancréas"], correct: 1 },
+      { q: "Combien d'os compte le squelette d'un être humain adulte ?", a: ["256", "186", "226", "206"], correct: 3 },
+      { q: "Combien de planètes compte le système solaire depuis 2006 ?", a: ["Neuf", "Huit", "Sept", "Dix"], correct: 1 },
+      { q: "Quel gaz, vital pour la respiration, représente environ 21 % de l'air ?", a: ["L'azote", "Le dioxyde de carbone", "L'oxygène", "L'hydrogène"], correct: 2 },
+      { q: "Quelle est la planète la plus proche du Soleil ?", a: ["Vénus", "Mercure", "La Terre", "Mars"], correct: 1 },
+      { q: "Combien de paires de côtes possède normalement un être humain ?", a: ["12", "10", "14", "8"], correct: 0 },
+      { q: "Quel organe humain sécrète l'insuline ?", a: ["Le foie", "Le pancréas", "La rate", "Les reins"], correct: 1 },
+      { q: "Quelle est l'unité de mesure de la force dans le Système international ?", a: ["Le joule", "Le pascal", "Le newton", "Le watt"], correct: 2 },
+      { q: "Quel processus fait passer l'eau de l'état liquide à l'état gazeux ?", a: ["L'évaporation", "La fusion", "La sublimation", "La condensation"], correct: 0 },
+      { q: "Combien de chromosomes compte une cellule humaine normale ?", a: ["23", "46", "48", "44"], correct: 1 },
+      { q: "Quel gaz noble donne sa couleur rouge-orangé aux enseignes lumineuses ?", a: ["L'argon", "L'hélium", "Le néon", "Le krypton"], correct: 2 },
+      { q: "Quel appareil mesure la pression atmosphérique ?", a: ["Le baromètre", "L'hygromètre", "Le thermomètre", "L'anémomètre"], correct: 0 },
+      { q: "Quel est le principal constituant du gaz naturel ?", a: ["Le butane", "Le méthane", "L'éthane", "Le propane"], correct: 1 },
+      { q: "Quel nutriment la peau fabrique-t-elle sous l'effet du soleil ?", a: ["La vitamine A", "La vitamine C", "La vitamine D", "La vitamine B12"], correct: 2 },
+      { q: "Quel élément chimique est le plus abondant dans l'Univers ?", a: ["L'hélium", "Le carbone", "L'oxygène", "L'hydrogène"], correct: 3 },
+      { q: "Quelle partie de l'œil règle la quantité de lumière qui entre ?", a: ["La cornée", "La rétine", "Le cristallin", "L'iris"], correct: 3 },
+      { q: "Quel phénomène explique qu'un rayon lumineux se courbe en changeant de milieu ?", a: ["La réfraction", "La diffraction", "La diffusion", "La réflexion"], correct: 0 },
+      { q: "Quel métal est le meilleur conducteur de l'électricité ?", a: ["L'aluminium", "Le cuivre", "L'or", "L'argent"], correct: 3 },
+      { q: "Quel savant écossais a découvert la pénicilline ?", a: ["Pasteur", "Lister", "Koch", "Fleming"], correct: 3 },
+      { q: "Quelle catégorie géologique résulte du refroidissement du magma ?", a: ["La roche magmatique", "La roche métamorphique", "La roche sédimentaire", "Le calcaire"], correct: 0 },
+      { q: "Quel organe humain pompe le sang dans tout le corps ?", a: ["Le foie", "Les poumons", "Le cœur", "Les reins"], correct: 2 },
     ],
     expert: [
       { q: "Quel est le symbole chimique du tungstène ?", a: ["Tu", "Tg", "W", "Wo"], correct: 2 },
@@ -618,6 +758,26 @@ const QUESTIONS = {
       { q: "Quelle est la particule médiatrice de l'interaction électromagnétique ?", a: ["Le gluon", "Le photon", "Le boson de Higgs", "Le boson W"], correct: 1 },
       { q: "Quel mathématicien suisse a introduit la notation « e » pour la base du logarithme naturel ?", a: ["Gauss", "Euler", "Leibniz", "Bernoulli"], correct: 1 },
       { q: "Quelle structure du cerveau joue un rôle clé dans la consolidation de la mémoire ?", a: ["L'hippocampe", "Le cervelet", "Le thalamus", "Le bulbe rachidien"], correct: 0 },
+      { q: "Quelle grandeur fondamentale relie l'énergie d'un photon à sa fréquence ?", a: ["La constante de Faraday", "La constante de Boltzmann", "La constante de Rydberg", "La constante de Planck"], correct: 3 },
+      { q: "Quel est le numéro atomique du carbone ?", a: ["12", "8", "6", "14"], correct: 2 },
+      { q: "Quel savant énonça les lois de l'hérédité à partir de croisements de pois ?", a: ["Darwin", "Mendel", "Pasteur", "Watson"], correct: 1 },
+      { q: "Quelle particule fut mise en évidence au CERN en 2012 ?", a: ["Le quark top", "Le neutrino", "Le muon", "Le boson de Higgs"], correct: 3 },
+      { q: "Quel acide nucléique porte l'information du noyau jusqu'au ribosome ?", a: ["L'ARN de transfert", "L'ADN mitochondrial", "L'ARN messager", "L'ARN ribosomique"], correct: 2 },
+      { q: "Quelle loi relie pression et volume d'un gaz à température constante ?", a: ["La loi de Boyle-Mariotte", "La loi de Charles", "La loi d'Avogadro", "La loi de Gay-Lussac"], correct: 0 },
+      { q: "Quel physicien français découvrit la radioactivité en 1896 ?", a: ["Pierre Curie", "Rutherford", "Röntgen", "Henri Becquerel"], correct: 3 },
+      { q: "Quel rayonnement fut découvert par Röntgen en 1895 ?", a: ["Les rayons X", "Les rayons cosmiques", "Les ultraviolets", "Les rayons gamma"], correct: 0 },
+      { q: "Quelle est l'unité de mesure de la fréquence ?", a: ["Le décibel", "Le hertz", "Le baud", "Le sievert"], correct: 1 },
+      { q: "Quel processus produit l'énergie rayonnée par le Soleil ?", a: ["La fission", "La radioactivité naturelle", "La combustion", "La fusion nucléaire"], correct: 3 },
+      { q: "Quelle molécule transporte l'oxygène dans le sang humain ?", a: ["L'albumine", "L'hémoglobine", "La myoglobine", "La kératine"], correct: 1 },
+      { q: "Quel physicien danois proposa un modèle d'atome avec des orbites quantifiées ?", a: ["Rutherford", "Niels Bohr", "Schrödinger", "Thomson"], correct: 1 },
+      { q: "Quelle grandeur physique se mesure en pascals ?", a: ["La pression", "La force", "L'énergie", "La puissance"], correct: 0 },
+      { q: "Quel type de lien chimique repose sur le partage d'électrons entre atomes ?", a: ["La liaison ionique", "La liaison métallique", "La liaison covalente", "La liaison hydrogène"], correct: 2 },
+      { q: "Quel astronome italien observa le premier les principaux satellites de Jupiter ?", a: ["Copernic", "Kepler", "Cassini", "Galilée"], correct: 3 },
+      { q: "Quelle est l'unité de base de la quantité de matière dans le Système international ?", a: ["Le kelvin", "Le candela", "La mole", "Le kilogramme"], correct: 2 },
+      { q: "Quel élément chimique a pour symbole « Na » ?", a: ["Le nickel", "Le sodium", "Le néon", "L'azote"], correct: 1 },
+      { q: "Quel mathématicien grec donna son nom au théorème sur le triangle rectangle ?", a: ["Pythagore", "Euclide", "Thalès", "Archimède"], correct: 0 },
+      { q: "Quel naturaliste expliqua l'évolution des espèces par la sélection naturelle ?", a: ["Darwin", "Cuvier", "Lamarck", "Wallace"], correct: 0 },
+      { q: "Quel mathématicien et physicien allemand donna son nom à l'unité d'induction magnétique (le tesla mis à part) utilisée pour le flux ?", a: ["Hertz", "Ohm", "Weber", "Ampère"], correct: 2 },
     ],
   },
   musique: {
@@ -744,6 +904,26 @@ const QUESTIONS = {
       { q: "Quel terme musical indique un tempo lent ?", a: ["Presto", "Adagio", "Vivace", "Allegro"], correct: 1 },
       { q: "Quel compositeur polonais est célèbre pour ses œuvres pour piano, notamment des nocturnes ?", a: ["Chopin", "Liszt", "Schumann", "Debussy"], correct: 0 },
       { q: "Quel instrument à clavier produit le son par des cordes pincées et non frappées ?", a: ["Le piano", "L'orgue", "Le clavecin", "Le célesta"], correct: 2 },
+      { q: "Combien de touches compte un piano de concert standard ?", a: ["88", "76", "61", "96"], correct: 0 },
+      { q: "Quel instrument à tuyaux est surnommé « le roi des instruments » ?", a: ["Le piano", "Le clavecin", "La harpe", "L'orgue"], correct: 3 },
+      { q: "Quel compositeur français est l'auteur de l'opéra « Carmen » ?", a: ["Bizet", "Massenet", "Gounod", "Offenbach"], correct: 0 },
+      { q: "Quel groupe suédois des années 1970 a popularisé « Dancing Queen » ?", a: ["Les Bee Gees", "ABBA", "Les Carpenters", "Boney M."], correct: 1 },
+      { q: "Quel chanteur américain fut surnommé « le King » du rock'n'roll ?", a: ["Elvis Presley", "Chuck Berry", "Little Richard", "Buddy Holly"], correct: 0 },
+      { q: "Quel instrument à cordes frottées se tient entre les genoux et descend dans le grave ?", a: ["Le violon", "Le violoncelle", "L'alto", "La mandoline"], correct: 1 },
+      { q: "Quelle famille d'instruments réunit la flûte, le hautbois et la clarinette ?", a: ["Les cuivres", "Les cordes", "Les percussions", "Les bois"], correct: 3 },
+      { q: "Quel compositeur autrichien mourut jeune en laissant un « Requiem » inachevé ?", a: ["Schubert", "Haydn", "Mozart", "Salieri"], correct: 2 },
+      { q: "Quel style musical naquit à La Nouvelle-Orléans au début du XXe siècle ?", a: ["La soul", "Le jazz", "Le rock", "Le reggae"], correct: 1 },
+      { q: "Quel chanteur britannique était la voix du groupe Queen ?", a: ["Mick Jagger", "Elton John", "David Bowie", "Freddie Mercury"], correct: 3 },
+      { q: "Combien de musiciens composent un quatuor ?", a: ["Quatre", "Cinq", "Trois", "Deux"], correct: 0 },
+      { q: "Quel compositeur russe est l'auteur du ballet « Le Lac des cygnes » ?", a: ["Tchaïkovski", "Prokofiev", "Borodine", "Stravinsky"], correct: 0 },
+      { q: "Quel terme italien indique un tempo vif et enjoué ?", a: ["Adagio", "Allegro", "Largo", "Andante"], correct: 1 },
+      { q: "Quel instrument Louis Armstrong jouait-il principalement ?", a: ["Le saxophone", "La clarinette", "La trompette", "Le trombone"], correct: 2 },
+      { q: "Quel groupe britannique a publié l'album « The Dark Side of the Moon » ?", a: ["Led Zeppelin", "Pink Floyd", "Les Who", "Deep Purple"], correct: 1 },
+      { q: "Quelle voix d'homme est la plus grave ?", a: ["Le ténor", "Le baryton", "La basse", "Le contre-ténor"], correct: 2 },
+      { q: "Quel compositeur tchèque est l'auteur de la « Symphonie du Nouveau Monde » ?", a: ["Mahler", "Smetana", "Brahms", "Dvořák"], correct: 3 },
+      { q: "Quel instrument à vent grave possède un bocal courbé et une anche double ?", a: ["Le hautbois", "Le cor anglais", "Le basson", "La clarinette basse"], correct: 2 },
+      { q: "Quel instrument à clavier de l'orchestre possède des lames de bois que l'on frappe ?", a: ["Le vibraphone", "Le célesta", "Le glockenspiel", "Le xylophone"], correct: 3 },
+      { q: "Quelle nuance musicale demande une exécution puissante et sonore ?", a: ["Le piano", "Le legato", "Le forte", "Le staccato"], correct: 2 },
     ],
     expert: [
       { q: "Quel compositeur autrichien a inventé le dodécaphonisme, la musique à douze sons ?", a: ["Alban Berg", "Anton Webern", "Arnold Schoenberg", "Igor Stravinsky"], correct: 2 },
@@ -766,6 +946,26 @@ const QUESTIONS = {
       { q: "Quel terme désigne une pièce vocale religieuse pour solistes, chœur et orchestre, sans mise en scène ?", a: ["La cantate", "Le motet", "L'oratorio", "Le madrigal"], correct: 2 },
       { q: "Quel compositeur finlandais est l'auteur du poème symphonique « Finlandia » ?", a: ["Grieg", "Sibelius", "Nielsen", "Alfvén"], correct: 1 },
       { q: "Quel ténor italien fut l'une des plus célèbres voix lyriques du XXe siècle, des « Trois Ténors » ?", a: ["Pavarotti", "Domingo", "Carreras", "Di Stefano"], correct: 0 },
+      { q: "Quel compositeur impressionniste français est l'auteur du « Clair de lune » de la Suite bergamasque ?", a: ["Debussy", "Ravel", "Fauré", "Satie"], correct: 0 },
+      { q: "Quel compositeur italien est l'auteur de l'opéra « La Traviata » ?", a: ["Puccini", "Verdi", "Donizetti", "Bellini"], correct: 1 },
+      { q: "Quel compositeur allemand est l'auteur de l'opéra « Tristan et Isolde » ?", a: ["Strauss", "Weber", "Wagner", "Gluck"], correct: 2 },
+      { q: "Quel compositeur hongrois recueillit des musiques folkloriques et écrivit « Le Château de Barbe-Bleue » ?", a: ["Liszt", "Kodály", "Bartók", "Dohnányi"], correct: 2 },
+      { q: "Quel compositeur italien est l'auteur de « L'Orfeo » (1607), à l'aube du genre lyrique ?", a: ["Monteverdi", "Cavalli", "Scarlatti", "Pergolèse"], correct: 0 },
+      { q: "Quel compositeur autrichien, surnommé « père de la symphonie », en écrivit plus de cent ?", a: ["Mozart", "Haydn", "Gluck", "Dittersdorf"], correct: 1 },
+      { q: "Quel instrument à clavier et à cordes frappées précéda le clavecin et le piano ?", a: ["Le virginal", "L'épinette", "L'orgue portatif", "Le clavicorde"], correct: 3 },
+      { q: "Quel compositeur russe est l'auteur des « Tableaux d'une exposition » ?", a: ["Borodine", "Rimski-Korsakov", "Balakirev", "Moussorgski"], correct: 3 },
+      { q: "Quel saxophoniste de jazz a enregistré l'album « A Love Supreme » ?", a: ["Charlie Parker", "John Coltrane", "Sonny Rollins", "Dexter Gordon"], correct: 1 },
+      { q: "Quel chef d'orchestre autrichien dirigea longtemps le Philharmonique de Berlin au XXe siècle ?", a: ["Karajan", "Furtwängler", "Böhm", "Solti"], correct: 0 },
+      { q: "Quel compositeur français est l'auteur d'un « Requiem » célèbre pour son « Pie Jesu » ?", a: ["Berlioz", "Duruflé", "Fauré", "Gounod"], correct: 2 },
+      { q: "Quel trompettiste de jazz dirigea la séance de l'album « Kind of Blue » ?", a: ["Dizzy Gillespie", "Miles Davis", "Clifford Brown", "Chet Baker"], correct: 1 },
+      { q: "Quel compositeur français est l'auteur de la « Symphonie fantastique » ?", a: ["Berlioz", "Saint-Saëns", "Franck", "d'Indy"], correct: 0 },
+      { q: "Quel compositeur autrichien du début du XXe siècle développa le « Sprechgesang » ?", a: ["Berg", "Webern", "Schönberg", "Zemlinsky"], correct: 2 },
+      { q: "Quel compositeur allemand baroque est l'auteur de l'oratorio « Le Messie » ?", a: ["Bach", "Telemann", "Purcell", "Haendel"], correct: 3 },
+      { q: "Quel compositeur tchèque a écrit le cycle « Ma patrie », dont « La Moldau » ?", a: ["Smetana", "Janáček", "Suk", "Dvořák"], correct: 0 },
+      { q: "Quel compositeur allemand romantique est l'auteur du cycle de lieder « L'Amour et la Vie d'une femme » ?", a: ["Brahms", "Schubert", "Schumann", "Wolf"], correct: 2 },
+      { q: "Quel intervalle de trois tons fut jadis surnommé « diabolus in musica » ?", a: ["La quinte juste", "La septième majeure", "La tierce mineure", "Le triton"], correct: 3 },
+      { q: "Quelle structure musicale en trois sections (A-B-A) caractérise le menuet et le scherzo ?", a: ["La forme sonate", "Le rondo", "Le thème et variations", "La forme ternaire"], correct: 3 },
+      { q: "Quel compositeur finlandais est l'auteur du poème symphonique « Finlandia »… non, plutôt du « Concerto pour violon en ré mineur » op. 47 ?", a: ["Grieg", "Sibelius", "Alfvén", "Nielsen"], correct: 1 },
     ],
   },
   cinema: {
@@ -892,6 +1092,26 @@ const QUESTIONS = {
       { q: "Quel acteur incarne le personnage de Jack Sparrow dans « Pirates des Caraïbes » ?", a: ["Orlando Bloom", "Brad Pitt", "Johnny Depp", "Tom Cruise"], correct: 2 },
       { q: "Quel film de science-fiction de 1999 met en scène Néo et la « Matrice » ?", a: ["Inception", "Blade Runner", "Terminator", "Matrix"], correct: 3 },
       { q: "Quelle réalisatrice néo-zélandaise a remporté la Palme d'or pour « La Leçon de piano » ?", a: ["Sofia Coppola", "Jane Campion", "Kathryn Bigelow", "Agnès Varda"], correct: 1 },
+      { q: "Quel acteur américain incarne l'archéologue Indiana Jones ?", a: ["Mel Gibson", "Tom Hanks", "Harrison Ford", "Kevin Costner"], correct: 2 },
+      { q: "Quel film de James Cameron de 1997 raconte le naufrage d'un célèbre paquebot ?", a: ["Titanic", "Avatar", "Aliens", "Abyss"], correct: 0 },
+      { q: "Quel réalisateur est le créateur de la saga « Star Wars » ?", a: ["George Lucas", "Ridley Scott", "Spielberg", "J. J. Abrams"], correct: 0 },
+      { q: "Quel acteur écossais incarna James Bond dans les années 1960 ?", a: ["Roger Moore", "Daniel Craig", "Sean Connery", "Pierce Brosnan"], correct: 2 },
+      { q: "Quel film d'animation Disney de 1994 met en scène le lionceau Simba ?", a: ["Le Livre de la jungle", "Bambi", "Tarzan", "Le Roi lion"], correct: 3 },
+      { q: "Quel réalisateur français a réalisé « Le Fabuleux Destin d'Amélie Poulain » ?", a: ["Luc Besson", "Jean-Pierre Jeunet", "François Ozon", "Cédric Klapisch"], correct: 1 },
+      { q: "Quel acteur tient le rôle-titre de « Forrest Gump » ?", a: ["Kevin Costner", "Robin Williams", "Bill Murray", "Tom Hanks"], correct: 3 },
+      { q: "Quelle saga met en scène un jeune sorcier à lunettes rondes et cicatrice ?", a: ["Harry Potter", "Narnia", "Percy Jackson", "Le Seigneur des anneaux"], correct: 0 },
+      { q: "Quel acteur australien incarne Wolverine dans les films « X-Men » ?", a: ["Ryan Reynolds", "Hugh Jackman", "Ben Affleck", "Patrick Stewart"], correct: 1 },
+      { q: "Quel film de 1985 met en scène une DeLorean qui voyage dans le temps ?", a: ["Terminator", "Les Visiteurs", "Retour vers le futur", "L'Effet papillon"], correct: 2 },
+      { q: "Quel réalisateur a dirigé la trilogie cinématographique du « Seigneur des anneaux » ?", a: ["Peter Jackson", "James Cameron", "Guillermo del Toro", "Christopher Nolan"], correct: 0 },
+      { q: "Quel film de Spielberg de 1975 met en scène un grand requin blanc ?", a: ["Orca", "Piranhas", "Les Dents de la mer", "Open Water"], correct: 2 },
+      { q: "Quelle actrice multi-oscarisée incarna Margaret Thatcher dans « La Dame de fer » ?", a: ["Helen Mirren", "Meryl Streep", "Judi Dench", "Cate Blanchett"], correct: 1 },
+      { q: "Quel film de Christopher Nolan de 2010 explore des rêves imbriqués les uns dans les autres ?", a: ["Interstellar", "Le Prestige", "Memento", "Inception"], correct: 3 },
+      { q: "Quel acteur français partage l'affiche d'« Intouchables » avec Omar Sy ?", a: ["Jean Dujardin", "Gérard Depardieu", "Daniel Auteuil", "François Cluzet"], correct: 3 },
+      { q: "Quel film français muet et en noir et blanc remporta l'Oscar du meilleur film en 2012 ?", a: ["Amour", "Intouchables", "The Artist", "La Vie d'Adèle"], correct: 2 },
+      { q: "Quelle franchise d'animation des studios DreamWorks met en scène un ogre vert au grand cœur ?", a: ["Monstres et Cie", "Shrek", "Madagascar", "L'Âge de glace"], correct: 1 },
+      { q: "Quel film de 1994 raconte l'amitié de deux détenus, Andy et Red ?", a: ["La Ligne verte", "Le Prisonnier d'Alcatraz", "Évasion", "Les Évadés"], correct: 3 },
+      { q: "Quel film de Spielberg de 1993 met en scène des dinosaures recréés en laboratoire ?", a: ["King Kong", "Jurassic Park", "Godzilla", "Le Monde perdu"], correct: 1 },
+      { q: "Quelle actrice incarne la Mariée dans le diptyque « Kill Bill » ?", a: ["Uma Thurman", "Scarlett Johansson", "Charlize Theron", "Angelina Jolie"], correct: 0 },
     ],
     expert: [
       { q: "Quel cinéaste soviétique a théorisé le montage avec « Le Cuirassé Potemkine » ?", a: ["Dziga Vertov", "Eisenstein", "Poudovkine", "Dovjenko"], correct: 1 },
@@ -914,6 +1134,26 @@ const QUESTIONS = {
       { q: "Quel premier long métrage entièrement parlant sortit en 1927 ?", a: ["Les Lumières de la ville", "Metropolis", "Le Cuirassé Potemkine", "Le Chanteur de jazz"], correct: 3 },
       { q: "Quel réalisateur danois a fondé en 1995 le mouvement « Dogme95 » avec Thomas Vinterberg ?", a: ["Lars von Trier", "Bille August", "Carl Dreyer", "Susanne Bier"], correct: 0 },
       { q: "Quel film italien de 1948 de Vittorio De Sica est un chef-d'œuvre du néoréalisme ?", a: ["Rome, ville ouverte", "La Strada", "Le Voleur de bicyclette", "Senso"], correct: 2 },
+      { q: "Quel réalisateur italien dirigea la « trilogie du dollar » avec Clint Eastwood ?", a: ["Sergio Leone", "Fellini", "Visconti", "Bertolucci"], correct: 0 },
+      { q: "Quel film de 1960 de Hitchcock contient une célèbre scène de meurtre sous la douche ?", a: ["Les Oiseaux", "Fenêtre sur cour", "Sueurs froides", "Psychose"], correct: 3 },
+      { q: "Quel cinéaste de la Nouvelle Vague réalisa « À bout de souffle » ?", a: ["Truffaut", "Chabrol", "Rohmer", "Godard"], correct: 3 },
+      { q: "Quel film de Stanley Kubrick de 1971 suit Alex et ses « droogs » ?", a: ["Orange mécanique", "Full Metal Jacket", "Barry Lyndon", "Shining"], correct: 0 },
+      { q: "Quel cinéaste japonais réalisa « Voyage à Tokyo » ?", a: ["Naruse", "Kurosawa", "Mizoguchi", "Ozu"], correct: 3 },
+      { q: "Quel réalisateur américain dirigea « Taxi Driver » et « Les Affranchis » ?", a: ["Scorsese", "Coppola", "De Palma", "Cimino"], correct: 0 },
+      { q: "Quel film de Coppola de 1979, inspiré de Conrad, se déroule pendant la guerre du Vietnam ?", a: ["Platoon", "Apocalypse Now", "Voyage au bout de l'enfer", "Full Metal Jacket"], correct: 1 },
+      { q: "Quel cinéaste soviétique réalisa « Andreï Roublev » et « Stalker » ?", a: ["Eisenstein", "Tarkovski", "Mikhalkov", "Paradjanov"], correct: 1 },
+      { q: "Quel réalisateur britannique dirigea « Lawrence d'Arabie » ?", a: ["Carol Hitchcock", "Carol Reed", "Michael Powell", "David Lean"], correct: 3 },
+      { q: "Quel film de Marcel Carné, sur un scénario de Prévert, sortit en 1945 ?", a: ["Les Enfants du paradis", "Le Jour se lève", "Quai des brumes", "Hôtel du Nord"], correct: 0 },
+      { q: "Quel cinéaste de l'expressionnisme allemand réalisa « Metropolis » ?", a: ["Murnau", "Pabst", "Fritz Lang", "Robert Wiene"], correct: 2 },
+      { q: "Quel film muet de Murnau de 1922 est une adaptation détournée de « Dracula » ?", a: ["Le Cabinet du docteur Caligari", "Nosferatu", "L'Aurore", "Faust"], correct: 1 },
+      { q: "Quel cinéaste taïwanais réalisa « Tigre et Dragon » ?", a: ["Wong Kar-wai", "Ang Lee", "Zhang Yimou", "John Woo"], correct: 1 },
+      { q: "Quel réalisateur grec réalisa « Le Regard d'Ulysse » et « L'Éternité et un jour » ?", a: ["Cacoyannis", "Costa-Gavras", "Angelopoulos", "Lanthimos"], correct: 2 },
+      { q: "Quel réalisateur espagnol a réalisé « Tout sur ma mère » et « Parle avec elle » ?", a: ["Amenábar", "Medem", "Almodóvar", "Trueba"], correct: 2 },
+      { q: "Quel cinéaste américain indépendant réalisa « Reservoir Dogs » en 1992 ?", a: ["Tarantino", "Steven Soderbergh", "Richard Linklater", "Robert Rodriguez"], correct: 0 },
+      { q: "Quel film de 1957 de Sidney Lumet se déroule dans la salle de délibération d'un jury ?", a: ["Le Verdict", "Témoin à charge", "Douze hommes en colère", "Le Crime était presque parfait"], correct: 2 },
+      { q: "Quel cinéaste réalisa « Les Quatre Cents Coups » en 1959 ?", a: ["Godard", "Resnais", "Truffaut", "Malle"], correct: 2 },
+      { q: "Quel film de 1948 de Hitchcock fut conçu pour donner l'illusion d'un plan-séquence unique ?", a: ["Les Enchaînés", "La Corde", "Rebecca", "L'Inconnu du Nord-Express"], correct: 1 },
+      { q: "Quel cinéaste suédois réalisa « Le Septième Sceau » et « Fanny et Alexandre » ?", a: ["Dreyer", "Sjöström", "von Trier", "Bergman"], correct: 3 },
     ],
   },
   sport: {
@@ -1040,6 +1280,26 @@ const QUESTIONS = {
       { q: "Quelle distance, en kilomètres, parcourt-on lors d'un marathon ?", a: ["32 km", "42 km", "40 km", "26 km"], correct: 1 },
       { q: "Quel sport est associé au célèbre stade de Wimbledon… pardon, au tournoi de Wimbledon ?", a: ["Le rugby", "Le cricket", "Le golf", "Le tennis"], correct: 3 },
       { q: "Combien de bases compte un terrain de baseball ?", a: ["Quatre", "Trois", "Cinq", "Six"], correct: 0 },
+      { q: "Combien de joueurs composent une équipe de basket-ball sur le terrain ?", a: ["Six", "Cinq", "Sept", "Quatre"], correct: 1 },
+      { q: "Dans quel sport utilise-t-on un volant et des raquettes légères ?", a: ["Le tennis", "Le badminton", "Le squash", "Le tennis de table"], correct: 1 },
+      { q: "Combien de joueurs composent une équipe de handball sur le terrain ?", a: ["Six", "Cinq", "Huit", "Sept"], correct: 3 },
+      { q: "Dans quel sport marque-t-on un « essai » ?", a: ["Le football américain", "Le hockey", "Le rugby", "Le handball"], correct: 2 },
+      { q: "Quel art martial japonais signifie « la voie de la souplesse » ?", a: ["Le karaté", "Le judo", "L'aïkido", "Le taekwondo"], correct: 1 },
+      { q: "Combien de manches gagnantes faut-il pour remporter un match de tennis masculin en Grand Chelem ?", a: ["Deux", "Trois", "Quatre", "Cinq"], correct: 1 },
+      { q: "Quel sport olympique d'hiver combine ski de fond et tir à la carabine ?", a: ["Le biathlon", "Le pentathlon", "Le combiné nordique", "Le triathlon"], correct: 0 },
+      { q: "Quelle nation a remporté la Coupe du monde de football 2022 ?", a: ["L'Argentine", "Le Brésil", "La Croatie", "La France"], correct: 0 },
+      { q: "Dans quel sport décerne-t-on le « Ballon d'or » à un joueur ?", a: ["Le basket-ball", "Le football", "Le rugby", "Le tennis"], correct: 1 },
+      { q: "Combien de joueurs composent une équipe de volley-ball sur le terrain ?", a: ["Six", "Cinq", "Sept", "Quatre"], correct: 0 },
+      { q: "Quel sprinteur jamaïcain a longtemps détenu les records du monde du 100 m et du 200 m ?", a: ["Carl Lewis", "Tyson Gay", "Usain Bolt", "Asafa Powell"], correct: 2 },
+      { q: "Quelle équipe nationale de football est surnommée la « Squadra Azzurra » ?", a: ["L'Espagne", "L'Allemagne", "Le Brésil", "L'Italie"], correct: 3 },
+      { q: "Sur quelle surface se joue l'Open d'Australie de tennis ?", a: ["Le gazon", "La terre battue", "Le dur", "La moquette"], correct: 2 },
+      { q: "Quel sport pratiqua le champion Mohamed Ali ?", a: ["La lutte", "Le karaté", "La boxe", "L'escrime"], correct: 2 },
+      { q: "Dans quel sport s'affrontent historiquement les Lakers et les Celtics ?", a: ["Le basket-ball", "Le hockey", "Le baseball", "Le football américain"], correct: 0 },
+      { q: "Combien de minutes dure un match de football réglementaire, hors arrêts de jeu ?", a: ["80", "60", "120", "90"], correct: 3 },
+      { q: "Quelle compétition cycliste française se déroule chaque été sur environ trois semaines ?", a: ["Le Tour de France", "Le Giro", "La Vuelta", "Paris-Roubaix"], correct: 0 },
+      { q: "Quel sport d'équipe se joue avec une crosse recourbée et une petite balle dure ?", a: ["Le cricket", "Le polo", "Le hockey sur gazon", "Le croquet"], correct: 2 },
+      { q: "Quelle discipline consiste à descendre des rapides en radeau pneumatique ?", a: ["L'aviron", "Le canoë de vitesse", "La voile", "Le rafting"], correct: 3 },
+      { q: "Quel pays organise chaque année le tournoi de tennis de Wimbledon ?", a: ["Les États-Unis", "L'Australie", "La France", "Le Royaume-Uni"], correct: 3 },
     ],
     expert: [
       { q: "Quel athlète américain remporta quatre médailles d'or aux Jeux de Berlin en 1936 ?", a: ["Jesse Owens", "Carl Lewis", "Jim Thorpe", "Ralph Metcalfe"], correct: 0 },
@@ -1062,6 +1322,26 @@ const QUESTIONS = {
       { q: "Quel boxeur américain s'autoproclamait « le plus grand » et reprit le titre des lourds à plusieurs reprises ?", a: ["Mohamed Ali", "Mike Tyson", "George Foreman", "Joe Frazier"], correct: 0 },
       { q: "Quel joueur de basket-ball, surnommé « His Airness », mena les Bulls de Chicago à six titres NBA ?", a: ["Larry Bird", "Magic Johnson", "Michael Jordan", "Kareem Abdul-Jabbar"], correct: 2 },
       { q: "Quelle épreuve d'athlétisme combine dix disciplines pour les hommes ?", a: ["L'heptathlon", "Le décathlon", "Le pentathlon", "Le triathlon"], correct: 1 },
+      { q: "Dans quelle principauté se court chaque année un Grand Prix de Formule 1 sur circuit urbain ?", a: ["Monaco", "Singapour", "Bakou", "Las Vegas"], correct: 0 },
+      { q: "Quel boxeur affronta Mohamed Ali lors du « combat du siècle » en 1971 ?", a: ["George Foreman", "Sonny Liston", "Joe Frazier", "Ken Norton"], correct: 2 },
+      { q: "Quel coureur tchèque remporta trois médailles d'or de fond aux Jeux de 1952 ?", a: ["Paavo Nurmi", "Lasse Virén", "Emil Zátopek", "Abebe Bikila"], correct: 2 },
+      { q: "Quelle équipe nationale détient le plus de titres mondiaux de football ?", a: ["L'Allemagne", "L'Italie", "L'Argentine", "Le Brésil"], correct: 3 },
+      { q: "Quel joueur de tennis a remporté le plus de titres du Grand Chelem chez les hommes ?", a: ["Novak Djokovic", "Rafael Nadal", "Roger Federer", "Pete Sampras"], correct: 0 },
+      { q: "Quel cycliste belge, surnommé « le Cannibale », remporta cinq Tours de France ?", a: ["Eddy Merckx", "Bernard Hinault", "Jacques Anquetil", "Miguel Indurain"], correct: 0 },
+      { q: "Quel meneur de jeu français fut champion du monde de football en 1998 ?", a: ["Thierry Henry", "Michel Platini", "Just Fontaine", "Zinédine Zidane"], correct: 3 },
+      { q: "Quel nageur remporta sept médailles d'or aux Jeux de Munich en 1972 ?", a: ["Michael Phelps", "Matt Biondi", "Mark Spitz", "Ian Thorpe"], correct: 2 },
+      { q: "Quelle gymnaste roumaine obtint le premier 10 parfait aux Jeux de 1976 ?", a: ["Larissa Latynina", "Olga Korbut", "Nadia Comăneci", "Vera Caslavska"], correct: 2 },
+      { q: "Quelle nation remporta le premier Championnat du monde de rugby en 1987 ?", a: ["L'Australie", "L'Angleterre", "L'Afrique du Sud", "La Nouvelle-Zélande"], correct: 3 },
+      { q: "Quel footballeur argentin est surnommé « la Pulga » (la puce) ?", a: ["Ronaldinho", "Lionel Messi", "Neymar", "Sergio Agüero"], correct: 1 },
+      { q: "Quel pilote brésilien de Formule 1 trouva la mort à Imola en 1994 ?", a: ["Ayrton Senna", "Emerson Fittipaldi", "Rubens Barrichello", "Nelson Piquet"], correct: 0 },
+      { q: "Quel basketteur détient le record de points marqués lors d'un seul match NBA (100) ?", a: ["Wilt Chamberlain", "Kobe Bryant", "Michael Jordan", "Kareem Abdul-Jabbar"], correct: 0 },
+      { q: "Quel champion d'échecs soviétique régna sur le titre mondial de 1985 à 2000 ?", a: ["Anatoli Karpov", "Garry Kasparov", "Mikhaïl Tal", "Boris Spassky"], correct: 1 },
+      { q: "Quel club espagnol a remporté le plus grand nombre de Ligues des champions ?", a: ["Le FC Barcelone", "L'AC Milan", "Le Bayern Munich", "Le Real Madrid"], correct: 3 },
+      { q: "Quelle course d'endurance automobile se dispute chaque année en France pendant une journée entière ?", a: ["Le Rallye Monte-Carlo", "Les 24 Heures du Mans", "Le Bol d'or", "Le Grand Prix de Monaco"], correct: 1 },
+      { q: "Quel sprinteur fut disqualifié pour dopage après sa victoire sur 100 m aux Jeux de 1988 ?", a: ["Linford Christie", "Carl Lewis", "Ben Johnson", "Maurice Greene"], correct: 2 },
+      { q: "Quel sport de combat olympique se pratique avec un fleuret, une épée ou un sabre ?", a: ["Le kendo", "L'escrime", "La boxe", "Le judo"], correct: 1 },
+      { q: "Quelle ville accueillit les Jeux olympiques d'été de 1936 utilisés par la propagande nazie ?", a: ["Munich", "Hambourg", "Cologne", "Berlin"], correct: 3 },
+      { q: "Quel quintuple vainqueur du Tour de France français domina le cyclisme dans les années 1980 ?", a: ["Laurent Fignon", "Bernard Hinault", "Stephen Roche", "Greg LeMond"], correct: 1 },
     ],
   },
   geopolitique: {
@@ -1188,6 +1468,26 @@ const QUESTIONS = {
       { q: "Quel pays a quitté l'Union européenne à la suite d'un référendum de 2016 ?", a: ["La Grèce", "Le Royaume-Uni", "Le Danemark", "L'Irlande"], correct: 1 },
       { q: "Quelle juridiction basée à La Haye juge les crimes de guerre et de génocide ?", a: ["L'Unesco", "Le Conseil de l'Europe", "L'OMC", "La Cour pénale internationale"], correct: 3 },
       { q: "Quelle ligne de démarcation séparait autrefois l'Europe de l'Ouest de l'Europe de l'Est ?", a: ["La ligne Maginot", "Le rideau de fer", "Le mur de l'Atlantique", "La ligne Oder-Neisse"], correct: 1 },
+      { q: "Combien d'États membres compte l'Union européenne depuis le départ du Royaume-Uni ?", a: ["25", "28", "27", "30"], correct: 2 },
+      { q: "Quelle ville belge accueille le siège de la Commission européenne ?", a: ["Anvers", "Gand", "Liège", "Bruxelles"], correct: 3 },
+      { q: "Quel organe de l'ONU est chargé en priorité du maintien de la paix ?", a: ["L'Assemblée générale", "Le Secrétariat", "Le Conseil de sécurité", "Le Conseil économique et social"], correct: 2 },
+      { q: "Quelle organisation continentale réunit 54 États d'Afrique ?", a: ["L'Union africaine", "La SADC", "Le COMESA", "La CEDEAO"], correct: 0 },
+      { q: "Quelle institution financière, basée à Washington, accorde des prêts d'ajustement aux États ?", a: ["L'OMC", "Le FMI", "L'OCDE", "La BCE"], correct: 1 },
+      { q: "Quel pays est le plus peuplé du monde depuis 2023 ?", a: ["La Chine", "L'Indonésie", "Les États-Unis", "L'Inde"], correct: 3 },
+      { q: "Quelle ville française accueille les sessions plénières du Parlement européen ?", a: ["Lyon", "Paris", "Strasbourg", "Lille"], correct: 2 },
+      { q: "Quel forum réunit en sommets annuels sept des plus grandes économies industrialisées ?", a: ["L'OPEP", "Le BRICS", "L'ASEAN", "Le G7"], correct: 3 },
+      { q: "En quelle année l'Union soviétique fut-elle dissoute ?", a: ["1993", "1989", "1985", "1991"], correct: 3 },
+      { q: "Quel territoire d'Asie de l'Est reste divisé entre deux États rivaux depuis 1953 ?", a: ["L'Indochine", "La péninsule coréenne", "Les Balkans", "Le Sinaï"], correct: 1 },
+      { q: "Quel territoire insulaire la Chine considère-t-elle comme une de ses provinces ?", a: ["Taïwan", "Le Japon", "La Corée du Sud", "Les Philippines"], correct: 0 },
+      { q: "Quelle alliance militaire réunit les États-Unis et de nombreux pays européens depuis 1949 ?", a: ["Le pacte de Varsovie", "L'OCS", "L'OTAN", "L'UEO"], correct: 2 },
+      { q: "Quel conflit éclata en 2022 après l'invasion d'un pays voisin par la Russie ?", a: ["La guerre de Tchétchénie", "La guerre en Ukraine", "La guerre de Géorgie", "La guerre du Haut-Karabagh"], correct: 1 },
+      { q: "Quelle ville suisse abrite le siège du Comité international de la Croix-Rouge ?", a: ["Berne", "Genève", "Zurich", "Lausanne"], correct: 1 },
+      { q: "Quel détroit, entre l'Europe et l'Asie, traverse la ville d'Istanbul ?", a: ["Le Bosphore", "Gibraltar", "Les Dardanelles", "Ormuz"], correct: 0 },
+      { q: "Quel acronyme désigne le groupe de pays émergents Brésil, Russie, Inde, Chine et Afrique du Sud ?", a: ["L'ASEAN", "Le Mercosur", "Le G20", "Les BRICS"], correct: 3 },
+      { q: "Quel accord créa une zone de libre-échange entre les États-Unis, le Canada et le Mexique ?", a: ["L'ALENA", "Le Mercosur", "L'ASEAN", "L'APEC"], correct: 0 },
+      { q: "Quel pays est, avec les États-Unis et la Russie, l'un des plus grands producteurs mondiaux de pétrole ?", a: ["L'Arabie saoudite", "Le Venezuela", "L'Iran", "Le Koweït"], correct: 0 },
+      { q: "Quelle zone démilitarisée sépare les deux Corées le long du 38e parallèle ?", a: ["La ligne Maginot", "La DMZ coréenne", "Le rideau de fer", "La ligne verte"], correct: 1 },
+      { q: "Quel ouvrage Israël a-t-il édifié le long de la Cisjordanie à partir de 2002 ?", a: ["Le mur de Berlin", "La ligne verte", "La barrière de séparation", "Le rideau de fer"], correct: 2 },
     ],
     expert: [
       { q: "En quelle année fut créée la Société des Nations, ancêtre de l'ONU ?", a: ["1920", "1919", "1945", "1946"], correct: 0 },
@@ -1210,6 +1510,26 @@ const QUESTIONS = {
       { q: "Quel mur, abattu en 1989, symbolisa la fin de la guerre froide en Europe ?", a: ["Le mur de Berlin", "La ligne verte", "Le mur d'Hadrien", "Le mur de l'Atlantique"], correct: 0 },
       { q: "Quel dirigeant soviétique lança les réformes de la perestroïka dans les années 1980 ?", a: ["Gorbatchev", "Brejnev", "Eltsine", "Andropov"], correct: 0 },
       { q: "Quel pays détient le droit de veto au Conseil de sécurité tout en n'étant ni les États-Unis, ni la Russie, ni la Chine, ni le Royaume-Uni ?", a: ["L'Allemagne", "L'Inde", "Le Japon", "La France"], correct: 3 },
+      { q: "Quel accord secret de 1916 partagea le Moyen-Orient entre la France et le Royaume-Uni ?", a: ["La déclaration Balfour", "Les accords Sykes-Picot", "Les accords de Camp David", "Le traité de Sèvres"], correct: 1 },
+      { q: "Quel texte britannique de 1917 soutenait un foyer national juif en Palestine ?", a: ["La déclaration Balfour", "Les accords Sykes-Picot", "Le plan de partage", "Les accords d'Oslo"], correct: 0 },
+      { q: "Quelle négociation de 1993 lança une dynamique de paix israélo-palestinienne ?", a: ["Camp David", "Wye River", "Les accords d'Oslo", "La feuille de route"], correct: 2 },
+      { q: "Quelle politique américaine, énoncée en 1947, visait à endiguer l'expansion du communisme ?", a: ["La doctrine Truman", "Le maccarthysme", "La doctrine Brejnev", "La doctrine Monroe"], correct: 0 },
+      { q: "Quelle ligne soviétique justifiait l'intervention armée dans les pays du bloc de l'Est ?", a: ["La doctrine Jdanov", "La doctrine Brejnev", "La doctrine du glacis", "La doctrine Khrouchtchev"], correct: 1 },
+      { q: "Quel sommet de l'été 1945 réunit Truman, Staline puis Attlee près de Berlin ?", a: ["Téhéran", "Yalta", "La conférence de Potsdam", "Casablanca"], correct: 2 },
+      { q: "Quel organisme remplaça le GATT en 1995 pour réguler le commerce mondial ?", a: ["Le FMI", "L'OCDE", "La CNUCED", "L'OMC"], correct: 3 },
+      { q: "Quel traité de 1968 visait à empêcher la dissémination des armes nucléaires ?", a: ["Le TNP", "Les accords SALT", "Le traité de Tlatelolco", "Le traité ABM"], correct: 0 },
+      { q: "Quel secrétaire d'État américain mena la « diplomatie de la navette » au Proche-Orient dans les années 1970 ?", a: ["Zbigniew Brzezinski", "Cyrus Vance", "Henry Kissinger", "James Baker"], correct: 2 },
+      { q: "Quel épisode de 1956 suivit la nationalisation d'une grande voie d'eau par le président Nasser ?", a: ["La crise de Suez", "La guerre des Six Jours", "La crise de Cuba", "La guerre du Kippour"], correct: 0 },
+      { q: "Quelle conférence de 1955 réunit les pays refusant l'alignement sur les deux blocs ?", a: ["Yalta", "Téhéran", "San Francisco", "Bandung"], correct: 3 },
+      { q: "Quelle alliance militaire du bloc de l'Est fut dissoute en 1991 ?", a: ["Le Comecon", "Le Kominform", "L'OTSC", "Le pacte de Varsovie"], correct: 3 },
+      { q: "Quel traité de 1957 institua la Communauté économique européenne ?", a: ["Le traité de Maastricht", "Le traité de Paris", "Le traité de Rome", "L'Acte unique"], correct: 2 },
+      { q: "Quel pays se retira du commandement militaire de l'OTAN en 1966 avant d'y revenir en 2009 ?", a: ["Le Royaume-Uni", "La France", "La Grèce", "L'Espagne"], correct: 1 },
+      { q: "Quelle zone européenne de libre circulation tient son nom d'un village luxembourgeois ?", a: ["La zone euro", "Le marché unique", "L'Union douanière", "L'espace Schengen"], correct: 3 },
+      { q: "Quelle série de conflits ravagea les Balkans occidentaux dans les années 1990 ?", a: ["La guerre de Crimée", "La guerre gréco-turque", "La guerre civile grecque", "Les guerres de Yougoslavie"], correct: 3 },
+      { q: "Quel acronyme désigne le forum de coopération économique des pays d'Asie-Pacifique ?", a: ["L'OCS", "L'ASEAN", "L'APEC", "Le RCEP"], correct: 2 },
+      { q: "Quelle année est surnommée « l'année de l'Afrique » en raison de nombreuses indépendances ?", a: ["1957", "1960", "1962", "1975"], correct: 1 },
+      { q: "Quel pays détient, avec les États-Unis, le plus grand arsenal nucléaire au monde ?", a: ["La Chine", "La Russie", "La France", "Le Royaume-Uni"], correct: 1 },
+      { q: "Quelle organisation pétrolière, fondée en 1960, coordonne la production de ses pays membres ?", a: ["L'OPEP", "Le cartel de Vienne", "Le G20", "L'AIE"], correct: 0 },
     ],
   },
 };
@@ -1820,6 +2140,65 @@ function Avatar({ player, size = 46, active = false, plain = false, style = {} }
   );
 }
 
+// ---- Glyphe de catégorie ---------------------------------------------------
+// La plupart des catégories utilisent leur caractère Unicode (cat.glyph).
+// Sport, Cinéma et Géographie utilisent une icône SVG monochrome tracée en
+// `currentColor` : elle hérite donc du quasi-blanc et de l'ombre du conteneur
+// (même rendu « gravé » que les caractères), et se dimensionne à 1em pour
+// suivre la taille de police de chaque emplacement. Les rayures du clap
+// « creusent » dans la couleur de la pastille (cat.color), comme un trou.
+function Glyph({ cat }) {
+  const svg = {
+    width: '1em', height: '1em', viewBox: '0 0 24 24', fill: 'none',
+    style: { display: 'inline-block', verticalAlign: '-0.125em' }, 'aria-hidden': true,
+  };
+  if (cat.id === 'sport') {
+    // Ballon de football : cercle + pentagone central + coutures.
+    return (
+      <svg {...svg}>
+        <circle cx="12" cy="12" r="9.5" stroke="currentColor" strokeWidth="1.4" />
+        <path d="M12 9 L14.85 11.07 L13.76 14.43 L10.24 14.43 L9.15 11.07 Z" fill="currentColor" />
+        <g stroke="currentColor" strokeWidth="1" strokeLinecap="round">
+          <path d="M13.43 10.04 L14.5 8.56" />
+          <path d="M14.31 12.75 L16.04 13.31" />
+          <path d="M12 14.43 L12 16.25" />
+          <path d="M9.69 12.75 L7.96 13.31" />
+          <path d="M10.57 10.04 L9.5 8.56" />
+        </g>
+        <path d="M17.38 4.6 L18.27 7.34 L15.94 9.03 L13.61 7.34 L14.5 4.6 Z M20.7 14.83 L18.37 16.52 L16.04 14.83 L16.93 12.09 L19.81 12.09 Z M12 21.15 L9.67 19.46 L10.56 16.72 L13.44 16.72 L14.33 19.46 Z M3.3 14.83 L4.19 12.09 L7.07 12.09 L7.96 14.83 L5.63 16.52 Z M6.62 4.6 L9.5 4.6 L10.39 7.34 L8.06 9.03 L5.73 7.34 Z" fill="currentColor" />
+      </svg>
+    );
+  }
+  if (cat.id === 'cinema') {
+    // Clap de cinéma : ardoise + barre supérieure rayée (rayures en cat.color).
+    return (
+      <svg {...svg}>
+        <rect x="2.6" y="9" width="18.8" height="11.6" rx="1.6" fill="currentColor" />
+        <rect x="2.6" y="3.8" width="18.8" height="4.2" rx="0.6" fill="currentColor" />
+        <g fill={cat.color}>
+          <path d="M4.6 8 L6 4 L7.6 4 L6.2 8 Z" />
+          <path d="M9.1 8 L10.5 4 L12.1 4 L10.7 8 Z" />
+          <path d="M13.6 8 L15 4 L16.6 4 L15.2 8 Z" />
+          <path d="M18.1 8 L19.5 4 L21.1 4 L19.7 8 Z" />
+        </g>
+      </svg>
+    );
+  }
+  if (cat.id === 'geo') {
+    // Globe Europe-Afrique : cercle (rebord) + silhouette des terres en blanc,
+    // l'océan étant la couleur de la pastille qui apparaît derrière.
+    return (
+      <svg {...svg}>
+        <circle cx="12" cy="12" r="9.4" stroke="currentColor" strokeWidth="1.5" />
+        <path d="M9 7.7 C11.6 7 14.6 7.6 14.7 9.5 C14.8 10.7 13.7 11.2 14 12.3 C14.3 13.6 15.6 13.9 15.2 15 C14.7 16.6 13.4 18.4 12.4 20 C12 20.6 11.3 20.4 11.2 19.5 C11 17.2 9.6 15.2 9 13 C8.5 11.1 7.2 9.6 8 8.4 C8.3 8 8.6 7.8 9 7.7 Z" fill="currentColor" />
+        <path d="M8 7.2 C7 6.7 5.8 7 6 7.9 C6.2 8.7 7.4 8.6 8.2 8.1 Z" fill="currentColor" />
+        <circle cx="16.2" cy="17.4" r="0.85" fill="currentColor" />
+      </svg>
+    );
+  }
+  return <>{cat.glyph}</>;
+}
+
 // ---- Pastille de catégorie (rond coloré + glyphe) --------------------------
 function CatBadge({ cat, size = 34, ring = true, style = {} }) {
   return (
@@ -1832,7 +2211,7 @@ function CatBadge({ cat, size = 34, ring = true, style = {} }) {
       boxShadow: 'inset 0 1px 3px rgba(255,255,255,0.35), inset 0 -2px 5px rgba(0,0,0,0.25), 0 3px 8px rgba(40,20,10,0.22)',
       ...style,
     }}>
-      {cat.glyph}
+      <Glyph cat={cat} />
     </div>
   );
 }
@@ -2353,7 +2732,7 @@ function BoardCell({ cell, revealed, peek, canPlay, onPick }) {
         fontSize: 'clamp(16px, 2.4vw, 26px)',
         animation: peek && !revealed ? 'pop .35s cubic-bezier(.2,1.2,.5,1)' : 'none',
       }}>
-        <span style={{ filter: 'drop-shadow(0 1px 1px rgba(0,0,0,0.3))' }}>{joker ? '★' : cat.glyph}</span>
+        <span style={{ filter: 'drop-shadow(0 1px 1px rgba(0,0,0,0.3))' }}>{joker ? '★' : <Glyph cat={cat} />}</span>
         <span style={{ position: 'absolute', bottom: 2, right: 4, fontFamily: 'var(--font-display)', fontSize: 10, opacity: 0.7 }}>{cell.number}</span>
       </div>
     );
@@ -2406,7 +2785,7 @@ function RevealOverlay({ cat, player, stake, delayMs }) {
           border: '3px solid var(--metal)',
           boxShadow: 'inset 0 2px 8px rgba(255,255,255,0.3), inset 0 -4px 12px rgba(0,0,0,0.3), 0 14px 40px rgba(0,0,0,0.4)',
           animation: 'pop .4s cubic-bezier(.2,1.3,.5,1)',
-        }}>{cat.glyph}</div>
+        }}><Glyph cat={cat} /></div>
         <div style={{ fontFamily: 'var(--font-display)', fontSize: 54, color: 'oklch(0.97 0.02 90)', lineHeight: 1 }}>{cat.label}</div>
 
         {stake > 1 && (
@@ -2509,7 +2888,7 @@ function ScreenQuestion({ cat, question, player, stake, onAnswer, timeLimit = 30
         border: `3px solid ${cat.color}`, overflow: 'hidden', boxShadow: '0 30px 70px rgba(20,10,5,0.45)',
       }}>
         <div style={{ background: cat.color, padding: '15px 28px', display: 'flex', alignItems: 'center', gap: 14, color: 'oklch(0.98 0.02 90)' }}>
-          <span style={{ fontSize: 26 }}>{cat.glyph}</span>
+          <span style={{ fontSize: 26 }}><Glyph cat={cat} /></span>
           <span style={{ fontFamily: 'var(--font-display)', fontSize: 28, letterSpacing: 0.5, whiteSpace: 'nowrap' }}>{cat.label}</span>
           <span style={{ flex: 1 }} />
           {/* Décompte */}
