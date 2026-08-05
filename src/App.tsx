@@ -2563,13 +2563,39 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
 
 const THEME_MAP = { patrimoine: '', nuit: 'nuit' };
 
+// Une question déjà posée ne peut pas revenir avant ce délai (1 heure).
+const NO_REPEAT_MS = 60 * 60 * 1000;
+
+function loadUsed() {
+  try {
+    if (typeof localStorage === 'undefined') return {};
+    const raw = localStorage.getItem('gq_recent_questions');
+    return raw ? JSON.parse(raw) : {};
+  } catch (e) { return {}; }
+}
+function saveUsed(map) {
+  try {
+    if (typeof localStorage !== 'undefined') localStorage.setItem('gq_recent_questions', JSON.stringify(map));
+  } catch (e) {}
+}
+
 function pickQuestion(catId, level, usedMap) {
   const pool = (QUESTIONS[catId] && QUESTIONS[catId][level]) || QUESTIONS[catId].debutant;
   const key = catId + '_' + level;
-  const used = usedMap[key] || [];
-  const avail = pool.map((_, i) => i).filter(i => !used.includes(i));
-  const list = avail.length ? avail : pool.map((_, i) => i);
-  const idx = list[Math.floor(Math.random() * list.length)];
+  const shown = usedMap[key] || {};            // { indice: horodatage (ms) de la derniere apparition }
+  const now = Date.now();
+  // Questions encore "fraiches" : jamais posees, ou posees il y a plus d'une heure.
+  const fresh = pool.map((_, i) => i).filter(i => !shown[i] || (now - shown[i]) >= NO_REPEAT_MS);
+  let idx;
+  if (fresh.length) {
+    // Priorite aux questions jamais posees, sinon au hasard parmi les disponibles.
+    const never = fresh.filter(i => !shown[i]);
+    const choose = never.length ? never : fresh;
+    idx = choose[Math.floor(Math.random() * choose.length)];
+  } else {
+    // Tout le stock est passe dans l'heure : on reprend la plus ancienne.
+    idx = pool.map((_, i) => i).sort((a, b) => (shown[a] || 0) - (shown[b] || 0))[0];
+  }
   return { idx, question: pool[idx], key };
 }
 
@@ -2594,7 +2620,7 @@ function App() {
   const [discoverLeft, setDiscoverLeft] = useState(0);
 
   const playedRef = useRef({});
-  const usedRef = useRef({});
+  const usedRef = useRef(loadUsed());
   const timerRef = useRef(null);
   const discTimerRef = useRef(null);
 
@@ -2666,7 +2692,9 @@ function App() {
 
   function answerQuestion(correct) {
     const gained = correct ? active.stake : 0;
-    usedRef.current = { ...usedRef.current, [active.key]: [...(usedRef.current[active.key] || []), active.qIdx] };
+    const prevForKey = usedRef.current[active.key] || {};
+    usedRef.current = { ...usedRef.current, [active.key]: { ...prevForKey, [active.qIdx]: Date.now() } };
+    saveUsed(usedRef.current);
     setUsedMap({ ...usedRef.current });
 
     const curIdx = current;
