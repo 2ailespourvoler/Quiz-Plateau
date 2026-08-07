@@ -2315,7 +2315,7 @@ function JokerChooser({ player, onPick }) {
 }
 
 // ---------- QUESTION --------------------------------------------
-function ScreenQuestion({ cat, question, player, stake, onAnswer, timeLimit = 30 }) {
+function ScreenQuestion({ cat, question, player, stake, onAnswer, timeLimit = 30, duel = false }) {
   const [picked, setPicked] = useState(null);
   const [timeLeft, setTimeLeft] = useState(timeLimit);
   const revealed = picked !== null;
@@ -2363,8 +2363,9 @@ function ScreenQuestion({ cat, question, player, stake, onAnswer, timeLimit = 30
             {revealed ? '—' : `${timeLeft}\u00a0s`}
           </span>
           <span style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '5px 12px', borderRadius: 999, background: 'rgba(255,255,255,0.18)', fontFamily: 'var(--font-body)', fontSize: 15, fontWeight: 600, whiteSpace: 'nowrap' }}>
-            {stake > 1 && <Stars level={stake === 3 ? 2 : 1} size={13} tone="oklch(0.97 0.02 90)" />}
-            {stake} {stake > 1 ? 'points en jeu' : 'point en jeu'}
+            {duel
+              ? <>{'\u2605'} Duel {'\u00b7'} {player.name || 'Joueur'}</>
+              : <>{stake > 1 && <Stars level={stake === 3 ? 2 : 1} size={13} tone="oklch(0.97 0.02 90)" />}{stake} {stake > 1 ? 'points en jeu' : 'point en jeu'}</>}
           </span>
         </div>
 
@@ -2414,9 +2415,11 @@ function ScreenQuestion({ cat, question, player, stake, onAnswer, timeLimit = 30
           {revealed && (
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 24, gap: 16 }}>
               <div style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', fontSize: 23, color: correct ? 'oklch(0.5 0.12 150)' : 'oklch(0.5 0.15 25)' }}>
-                {correct
-                  ? `Bravo ! +${gained} ${gained > 1 ? 'points' : 'point'} pour ${player.name || 'vous'}.`
-                  : timedOut ? 'Temps écoulé ! 0 point.' : 'Dommage… 0 point cette fois.'}
+                {duel
+                  ? (correct ? `Bonne réponse, ${player.name || 'bravo'} !` : timedOut ? 'Temps écoulé !' : 'Raté !')
+                  : correct
+                    ? `Bravo ! +${gained} ${gained > 1 ? 'points' : 'point'} pour ${player.name || 'vous'}.`
+                    : timedOut ? 'Temps écoulé ! 0 point.' : 'Dommage… 0 point cette fois.'}
               </div>
               <Button onClick={() => onAnswer(correct)}>Continuer →</Button>
             </div>
@@ -2599,6 +2602,34 @@ function pickQuestion(catId, level, usedMap) {
   return { idx, question: pool[idx], key };
 }
 
+function DuelOverlay({ contenders, players, msg, onStart }) {
+  return (
+    <div className="screen" style={{ position: 'absolute', inset: 0, zIndex: 60, background: 'color-mix(in oklab, var(--ink) 62%, transparent)', display: 'grid', placeItems: 'center', padding: 40 }}>
+      <div style={{ width: 660, maxWidth: '100%', background: 'var(--card)', borderRadius: 22, border: '3px solid var(--metal)', padding: '32px 40px 28px', textAlign: 'center', boxShadow: '0 30px 70px rgba(20,10,5,0.45)' }}>
+        <div style={{ fontFamily: 'var(--font-body)', fontSize: 13, letterSpacing: 3, textTransform: 'uppercase', color: 'var(--metal-deep)', fontWeight: 700 }}>Égalité au sommet</div>
+        <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 44, margin: '6px 0 6px', color: 'var(--ink)', fontWeight: 400 }}>Duel final</h2>
+        {msg
+          ? <div style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', fontSize: 21, color: 'var(--metal-deep)', margin: '2px 0 14px' }}>{msg}</div>
+          : <div style={{ fontFamily: 'var(--font-body)', fontSize: 16, lineHeight: 1.5, color: 'color-mix(in oklab, var(--ink) 62%, transparent)', margin: '6px auto 16px', maxWidth: 520 }}>Thème tiré au hasard. Chaque joueur répond à tour de rôle : celui qui répond juste quand l'autre se trompe l'emporte. En cas d'égalité, on rejoue&nbsp;!</div>}
+        <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: 12, margin: '8px 0 22px' }}>
+          {contenders.map(i => {
+            const p = players[i] || {};
+            const initial = (p.name || '?').trim().charAt(0).toUpperCase() || '?';
+            return (
+              <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 10, background: 'var(--paper)', border: '1.5px solid color-mix(in oklab, var(--ink) 15%, transparent)', borderRadius: 999, padding: '7px 16px 7px 7px' }}>
+                <span style={{ width: 34, height: 34, borderRadius: '50%', background: p.color || 'var(--metal)', color: '#fff', display: 'grid', placeItems: 'center', fontFamily: 'var(--font-display)', fontSize: 16 }}>{initial}</span>
+                <span style={{ fontFamily: 'var(--font-body)', fontWeight: 700, fontSize: 16, color: 'var(--ink)' }}>{p.name || ('Joueur ' + (i + 1))}</span>
+                <span style={{ fontFamily: 'var(--font-display)', fontSize: 22, color: 'var(--metal-deep)' }}>{p.score}</span>
+              </div>
+            );
+          })}
+        </div>
+        <Button size="lg" onClick={onStart}>Lancer la question →</Button>
+      </div>
+    </div>
+  );
+}
+
 function App() {
   const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
   const target = parseInt(t.winScore, 10) || 20;
@@ -2606,7 +2637,7 @@ function App() {
   const questionTime = parseInt(t.questionTime, 10) || 30;
   const discoveryS = t.discoveryTime == null ? 10 : parseInt(t.discoveryTime, 10);
 
-  const [phase, setPhase] = useState('accueil'); // accueil | count | names | stars | board | victory
+  const [phase, setPhase] = useState('accueil'); // accueil | count | names | stars | board | victory | duel
   const [count, setCount] = useState(2);
   const [players, setPlayers] = useState([]);
   const [current, setCurrent] = useState(0);
@@ -2623,6 +2654,13 @@ function App() {
   const usedRef = useRef(loadUsed());
   const timerRef = useRef(null);
   const discTimerRef = useRef(null);
+  const endgameRef = useRef(null);
+  const duelIdsRef = useRef([]);
+  const duelQueueRef = useRef([]);
+  const duelResRef = useRef({});
+  const duelCurRef = useRef(null);
+  const duelPlayersRef = useRef([]);
+  const [duelView, setDuelView] = useState({ mode: 'intro', contenders: [], msg: '' });
 
   useEffect(() => { fitStage(); }, [phase]);
   useEffect(() => {
@@ -2639,9 +2677,13 @@ function App() {
 
   function startGame() {
     clearTimeout(timerRef.current); clearInterval(discTimerRef.current);
-    playedRef.current = {}; usedRef.current = {};
+    playedRef.current = {}; usedRef.current = loadUsed();
+    endgameRef.current = null;
+    duelIdsRef.current = []; duelQueueRef.current = []; duelResRef.current = {};
+    duelCurRef.current = null; duelPlayersRef.current = [];
     setBoard(buildBoard());
-    setPlayed({}); setUsedMap({});
+    setPlayed({}); setUsedMap({ ...usedRef.current });
+    setDuelView({ mode: 'intro', contenders: [], msg: '' });
     setPlayers(prev => prev.map(p => ({ ...p, score: 0 })));
     setCurrent(0); setActive(null); setWinner(null); setReachedTarget(true);
     setDiscovery(discoveryS > 0 ? 'prompt' : 'done');
@@ -2698,26 +2740,94 @@ function App() {
     setUsedMap({ ...usedRef.current });
 
     const curIdx = current;
-    let newScore = players[curIdx].score + gained;
-    setPlayers(prev => prev.map((pl, i) => i === curIdx ? { ...pl, score: pl.score + gained } : pl));
+    const updated = players.map((pl, i) => i === curIdx ? { ...pl, score: pl.score + gained } : pl);
+    setPlayers(updated);
     setActive(null);
 
     const remaining = board.length - Object.keys(playedRef.current).length;
+
+    let triggered = false;
+    if (endgameRef.current === null && updated[curIdx].score >= target) {
+      endgameRef.current = (players.length - 1) - curIdx;
+      triggered = true;
+    }
+
     setTimeout(() => {
-      if (newScore >= target) {
-        setPlayers(prev => { setWinner(prev[curIdx]); return prev; });
-        setReachedTarget(true);
-        setPhase('victory');
-      } else if (remaining <= 0) {
-        setPlayers(prev => { setWinner([...prev].sort((a, b) => b.score - a.score)[0]); return prev; });
-        setReachedTarget(false);
-        setPhase('victory');
-      } else if (t.replayOnCorrect && correct) {
+      if (endgameRef.current !== null) {
+        if (!triggered) endgameRef.current -= 1;
+        if (endgameRef.current <= 0) { finishGame(updated); return; }
+        setCurrent(c => (c + 1) % players.length);
+        return;
+      }
+      if (remaining <= 0) { finishGame(updated); return; }
+      if (t.replayOnCorrect && correct) {
         // le joueur rejoue : on ne change pas `current`
       } else {
         setCurrent(c => (c + 1) % players.length);
       }
     }, 20);
+  }
+
+  function finishGame(finalPlayers) {
+    const max = Math.max(...finalPlayers.map(p => p.score));
+    const top = finalPlayers.map((p, i) => i).filter(i => finalPlayers[i].score === max);
+    if (top.length === 1) {
+      setWinner(finalPlayers[top[0]]);
+      setReachedTarget(max >= target);
+      setPhase('victory');
+    } else {
+      startDuel(top, finalPlayers);
+    }
+  }
+
+  function startDuel(ids, finalPlayers) {
+    duelPlayersRef.current = finalPlayers;
+    duelIdsRef.current = ids;
+    setDuelView({ mode: 'intro', contenders: ids, msg: '' });
+    setPhase('duel');
+  }
+  function runDuelRound() {
+    duelQueueRef.current = [...duelIdsRef.current];
+    duelResRef.current = {};
+    nextDuelAsk();
+  }
+  function nextDuelAsk() {
+    if (duelQueueRef.current.length === 0) { resolveDuelRound(); return; }
+    const pid = duelQueueRef.current.shift();
+    const cat = CATEGORIES[Math.floor(Math.random() * CATEGORIES.length)];
+    const level = (duelPlayersRef.current[pid] && duelPlayersRef.current[pid].level) || 'debutant';
+    const picked = pickQuestion(cat.id, level, usedRef.current);
+    duelCurRef.current = { playerIdx: pid, key: picked.key, qIdx: picked.idx };
+    setDuelView({ mode: 'ask', playerIdx: pid, cat, question: picked.question });
+  }
+  function answerDuel(correct) {
+    const cur = duelCurRef.current;
+    if (cur) {
+      const prevForKey = usedRef.current[cur.key] || {};
+      usedRef.current = { ...usedRef.current, [cur.key]: { ...prevForKey, [cur.qIdx]: Date.now() } };
+      saveUsed(usedRef.current);
+      duelResRef.current = { ...duelResRef.current, [cur.playerIdx]: correct };
+    }
+    nextDuelAsk();
+  }
+  function resolveDuelRound() {
+    const ids = duelIdsRef.current;
+    const res = duelResRef.current;
+    const good = ids.filter(i => res[i]);
+    const bad = ids.filter(i => !res[i]);
+    const nameOf = (i) => (duelPlayersRef.current[i] && duelPlayersRef.current[i].name) || ('Joueur ' + (i + 1));
+    if (good.length > 0 && bad.length > 0) {
+      if (good.length === 1) {
+        setWinner(duelPlayersRef.current[good[0]]);
+        setReachedTarget(true);
+        setPhase('victory');
+      } else {
+        duelIdsRef.current = good;
+        setDuelView({ mode: 'intro', contenders: good, msg: bad.map(nameOf).join(', ') + (bad.length > 1 ? ' sont elimines !' : ' est elimine !') });
+      }
+    } else {
+      setDuelView({ mode: 'intro', contenders: ids, msg: 'Personne n\'est departage : on rejoue une question !' });
+    }
   }
 
   // ----- Rendu selon la phase -----
@@ -2747,6 +2857,19 @@ function App() {
         )}
         {active && active.stage === 'question' && (
           <ScreenQuestion cat={active.cat} question={active.question} player={players[current]} stake={active.stake} timeLimit={questionTime} onAnswer={answerQuestion} />
+        )}
+      </>
+    );
+  } else if (phase === 'duel') {
+    content = (
+      <>
+        <ScreenBoard players={players} current={current} board={board} played={played}
+          target={target} canPlay={false} onPick={() => {}} />
+        {duelView.mode === 'intro' && (
+          <DuelOverlay contenders={duelView.contenders} players={duelPlayersRef.current} msg={duelView.msg} onStart={runDuelRound} />
+        )}
+        {duelView.mode === 'ask' && (
+          <ScreenQuestion cat={duelView.cat} question={duelView.question} player={duelPlayersRef.current[duelView.playerIdx] || {}} stake={0} duel timeLimit={questionTime} onAnswer={answerDuel} />
         )}
       </>
     );
