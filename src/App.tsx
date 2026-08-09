@@ -2194,7 +2194,7 @@ function BoardCell({ cell, revealed, peek, canPlay, onPick }) {
         animation: peek && !revealed ? 'pop .35s cubic-bezier(.2,1.2,.5,1)' : 'none',
       }}>
         <span style={{ filter: 'drop-shadow(0 1px 1px rgba(0,0,0,0.3))' }}>{joker ? '★' : cat.glyph}</span>
-        <span style={{ position: 'absolute', bottom: 2, right: 4, fontFamily: 'var(--font-display)', fontSize: 10, opacity: 0.7 }}>{cell.number}</span>
+        <span style={{ position: 'absolute', bottom: 2, right: 4, fontFamily: 'var(--font-display)', fontSize: 13, fontWeight: 700, color: 'oklch(0.98 0.01 90)', textShadow: '0 0 2px rgba(0,0,0,0.9), 0 1px 2px rgba(0,0,0,0.65)' }}>{cell.number}</span>
       </div>
     );
   }
