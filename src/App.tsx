@@ -7,10 +7,10 @@ const { useState, useEffect, useRef, useCallback, useMemo, useLayoutEffect } = R
 
 // ───────────────────────── data ─────────────────────────
 // ============================================================
-// data.jsx — 8 catégories, banque de questions, plateau 100 cases
+// data.jsx — 12 catégories, banque de questions, plateau 100 cases (8 catégories tirées par partie)
 // ============================================================
 
-// 8 catégories — couleurs distinctes (le vert feutrine est réservé au plateau,
+// 12 catégories — couleurs distinctes (le vert feutrine est réservé au plateau,
 // donc aucune catégorie n'utilise la teinte verte ~155 pour éviter le conflit).
 const CATEGORIES = [
   { id: 'histoire',     label: 'Histoire',     short: 'Histoire',  color: 'oklch(0.52 0.15 32)',  soft: 'oklch(0.92 0.045 32)',  glyph: '⚜' },
@@ -21,13 +21,22 @@ const CATEGORIES = [
   { id: 'cinema',       label: 'Cinéma',       short: 'Cinéma',    color: 'oklch(0.48 0.15 290)', soft: 'oklch(0.92 0.045 290)', glyph: '✲' },
   { id: 'sport',        label: 'Sport',        short: 'Sport',     color: 'oklch(0.64 0.14 62)',  soft: 'oklch(0.94 0.04 62)',   glyph: '✺' },
   { id: 'geopolitique', label: 'Géopolitique', short: 'Géopol.',   color: 'oklch(0.46 0.055 252)',soft: 'oklch(0.91 0.025 252)', glyph: '⊕' },
+  { id: 'arts',         label: 'Arts',         short: 'Arts',      color: 'oklch(0.50 0.14 271)', soft: 'oklch(0.92 0.05 271)',  glyph: '❖' },
+  { id: 'nature',       label: 'Nature',       short: 'Nature',    color: 'oklch(0.52 0.11 178)', soft: 'oklch(0.92 0.04 178)',  glyph: '❧' },
+  { id: 'gastronomie',  label: 'Gastronomie',  short: 'Gastro.',   color: 'oklch(0.55 0.15 25)',  soft: 'oklch(0.93 0.05 25)',   glyph: '✿' },
+  { id: 'mythologie',   label: 'Mythologie',   short: 'Mythes',    color: 'oklch(0.58 0.13 95)',  soft: 'oklch(0.93 0.045 95)',  glyph: '✵' },
 ];
+
+// Nombre de catégories tirées sur le plateau à chaque partie (parmi les 12).
+const BOARD_CATS = 8;
 
 const CAT_BY_ID = Object.fromEntries(CATEGORIES.map(c => [c.id, c]));
 
 // Banque de questions — culture générale familiale (FR), 4 réponses, index correct.
-// Trois niveaux de difficulté par catégorie : « debutant », « intermediaire » et « expert ».
+// Deux paliers de difficulté par catégorie : « debutant » (Initié) et « corse » (Corsé).
 const QUESTIONS = {
+// Deux paliers : « debutant » (Initié, conservé, 8 catégories d'origine) et « corse »
+// (palier corsé, 100 questions/catégorie — voir banque en préparation).
   histoire: {
     debutant: [
       { q: "Quel peuple antique a inventé l'écriture cunéiforme en Mésopotamie ?", a: ["Les Égyptiens", "Les Grecs", "Les Sumériens", "Les Romains"], correct: 2 },
@@ -131,30 +140,7 @@ const QUESTIONS = {
       { q: "Quelle capitale aztèque les Espagnols détruisirent-ils au Mexique ?", a: ["Cuzco", "Tenochtitlan", "Machu Picchu", "Chichén Itzá"], correct: 1 },
       { q: "Quel roi de France régnait à la fin de la guerre de Cent Ans, en 1453 ?", a: ["Louis XI", "François Ier", "Charles VII", "Charles VIII"], correct: 2 },
     ],
-    intermediaire: [
-      { q: "Quel roi de France imposa le français dans les actes officiels par l'ordonnance de Villers-Cotterêts en 1539 ?", a: ["François Ier", "Louis XI", "Henri II", "Charles IX"], correct: 0 },
-      { q: "Quelle dynastie perse fut renversée par Alexandre le Grand ?", a: ["Les Sassanides", "Les Parthes", "Les Séleucides", "Les Achéménides"], correct: 3 },
-      { q: "Quelle bataille navale de 1571 arrêta la flotte ottomane en Méditerranée ?", a: ["Trafalgar", "Actium", "Lépante", "Salamine"], correct: 2 },
-      { q: "Quel explorateur français fonda la ville de Québec en 1608 ?", a: ["Jacques Cartier", "Samuel de Champlain", "Cavelier de La Salle", "Jean Talon"], correct: 1 },
-      { q: "En quelle année débuta la guerre de Trente Ans ?", a: ["1618", "1648", "1555", "1700"], correct: 0 },
-      { q: "Quelle bataille de 1704 fut une défaite française face au duc de Marlborough ?", a: ["Malplaquet", "Fontenoy", "Denain", "Blenheim"], correct: 3 },
-      { q: "Quel souverain mongol acheva la conquête de la Chine et fonda la dynastie Yuan ?", a: ["Gengis Khan", "Tamerlan", "Kubilai Khan", "Ögödei"], correct: 2 },
-      { q: "Quelle paix de 1748 mit fin à la guerre de Succession d'Autriche ?", a: ["Utrecht", "Aix-la-Chapelle", "Westphalie", "Nimègue"], correct: 1 },
-      { q: "Quel grand soulèvement populaire de 1381 secoua l'Angleterre médiévale ?", a: ["La Jacquerie", "La révolte des paysans", "La Fronde", "La Praguerie"], correct: 1 },
-      { q: "Quel conflit civil anglais du XVe siècle opposa les maisons d'York et de Lancastre ?", a: ["La guerre des Deux-Roses", "La guerre de Cent Ans", "La guerre des Trois Henri", "La Fronde"], correct: 0 },
-    ],
-    expert: [
-      { q: "En quelle année eut lieu la bataille de Pharsale, victoire de César sur Pompée ?", a: ["52 av. J.-C.", "44 av. J.-C.", "31 av. J.-C.", "48 av. J.-C."], correct: 3 },
-      { q: "Quelle bataille de l'an 9 vit trois légions romaines anéanties en Germanie ?", a: ["Actium", "Cannes", "Teutobourg", "Andrinople"], correct: 2 },
-      { q: "Quel grand général reconquit l'Afrique et l'Italie pour l'Empire byzantin au VIe siècle ?", a: ["Narsès", "Aetius", "Bélisaire", "Stilicon"], correct: 2 },
-      { q: "Quelle dynastie musulmane établit sa capitale à Bagdad au VIIIe siècle ?", a: ["Les Omeyyades", "Les Fatimides", "Les Seldjoukides", "Les Abbassides"], correct: 3 },
-      { q: "Quel empereur du Saint-Empire s'humilia à Canossa devant le pape en 1077 ?", a: ["Henri IV", "Frédéric Barberousse", "Othon Ier", "Charles Quint"], correct: 0 },
-      { q: "Quel accord de 1360 céda de vastes territoires aux Anglais durant la guerre de Cent Ans ?", a: ["Le traité de Troyes", "Le traité de Brétigny", "Le traité d'Arras", "Le traité de Picquigny"], correct: 1 },
-      { q: "Quelle bataille de 1477 vit la mort de Charles le Téméraire ?", a: ["Grandson", "Morat", "Crécy", "Nancy"], correct: 3 },
-      { q: "Quel conquistador s'empara de l'Empire aztèque en 1521 ?", a: ["Cortés", "Pizarro", "Balboa", "Almagro"], correct: 0 },
-      { q: "Quel royaume repoussa l'Invincible Armada espagnole en 1588 ?", a: ["La France", "Les Provinces-Unies", "L'Angleterre", "Le Portugal"], correct: 2 },
-      { q: "Quel roi de Suède, grand stratège, intervint dans la guerre de Trente Ans ?", a: ["Charles XII", "Gustave-Adolphe", "Christian IV", "Frédéric-Guillaume"], correct: 1 },
-    ],
+    corse: [],
   },
   geo: {
     debutant: [
@@ -259,30 +245,7 @@ const QUESTIONS = {
       { q: "Quel pays possède le plus long littoral du monde ?", a: ["La Russie", "L'Australie", "Le Canada", "L'Indonésie"], correct: 2 },
       { q: "Comment appelle-t-on la région la plus au sud de la Terre, couverte de glace ?", a: ["Le pôle Nord", "Le pôle Sud", "L'équateur", "Le tropique"], correct: 1 },
     ],
-    intermediaire: [
-      { q: "Quelle est la capitale de l'Afghanistan ?", a: ["Islamabad", "Tachkent", "Kaboul", "Douchanbé"], correct: 2 },
-      { q: "Quelle est la capitale de la Croatie ?", a: ["Ljubljana", "Belgrade", "Sarajevo", "Zagreb"], correct: 3 },
-      { q: "Quel fleuve arrose la Mésopotamie aux côtés du Tigre ?", a: ["L'Euphrate", "Le Nil", "Le Jourdain", "L'Oronte"], correct: 0 },
-      { q: "Quelle grande île, au sud-est de l'Inde, forme un pays à part entière ?", a: ["Les Maldives", "Le Sri Lanka", "Madagascar", "Les Seychelles"], correct: 1 },
-      { q: "Quel long fleuve traverse la Russie avant de se jeter dans la mer Caspienne ?", a: ["La Volga", "Le Don", "L'Oural", "La Léna"], correct: 0 },
-      { q: "Quelle est la plus grande île de l'archipel japonais ?", a: ["Hokkaido", "Kyushu", "Honshu", "Shikoku"], correct: 2 },
-      { q: "Quel désert côtier très aride borde la Namibie ?", a: ["Le Kalahari", "Le Namib", "Le Sahara", "L'Atacama"], correct: 1 },
-      { q: "Quel lac d'Afrique de l'Est est le deuxième plus profond du monde ?", a: ["Le lac Victoria", "Le lac Malawi", "Le lac Tchad", "Le lac Tanganyika"], correct: 3 },
-      { q: "Entre quels deux pays se partage le lac Titicaca, le plus haut lac navigable ?", a: ["Le Chili et l'Argentine", "L'Équateur et la Colombie", "Le Pérou et la Bolivie", "Le Brésil et le Paraguay"], correct: 2 },
-      { q: "Quel émirat du Golfe, riche en gaz, a pour capitale Doha ?", a: ["Le Koweït", "Bahreïn", "Oman", "Le Qatar"], correct: 3 },
-    ],
-    expert: [
-      { q: "Quel gouffre océanique est le plus profond du monde ?", a: ["La fosse des Tonga", "La fosse des Mariannes", "La fosse du Japon", "La fosse de Porto Rico"], correct: 1 },
-      { q: "Quel pays nordique est surnommé « le pays des mille lacs » ?", a: ["La Finlande", "La Suède", "La Norvège", "L'Estonie"], correct: 0 },
-      { q: "Quel volcan hawaïen est la plus haute montagne du monde mesurée depuis sa base sous-marine ?", a: ["L'Everest", "Le Kilimandjaro", "Le Fuji", "Le Mauna Kea"], correct: 3 },
-      { q: "Quel courant marin chaud remonte l'Atlantique et adoucit le climat de l'Europe ?", a: ["Le Kuroshio", "Le courant de Humboldt", "Le Gulf Stream", "Le courant du Labrador"], correct: 2 },
-      { q: "Quel bras de mer, large d'environ 80 km, sépare l'Alaska de la Sibérie ?", a: ["Le détroit de Béring", "Le détroit de Magellan", "Le détroit de Malacca", "Le détroit de Torres"], correct: 0 },
-      { q: "Quel pays possède le plus grand nombre de fuseaux horaires grâce à ses territoires d'outre-mer ?", a: ["La Russie", "La France", "Les États-Unis", "Le Royaume-Uni"], correct: 1 },
-      { q: "Quelle mer intérieure d'Asie centrale a presque disparu à cause de l'irrigation ?", a: ["La mer Caspienne", "Le lac Baïkal", "La mer d'Aral", "La mer Noire"], correct: 2 },
-      { q: "Quel lac de Sibérie est le plus profond et le plus ancien du monde ?", a: ["Le lac Baïkal", "Le Tanganyika", "Le lac Victoria", "La Caspienne"], correct: 0 },
-      { q: "Quelle capitale d'Amérique du Sud se situe à près de 2 800 mètres d'altitude ?", a: ["Lima", "Quito", "Caracas", "Montevideo"], correct: 1 },
-      { q: "Quel pays africain compte encore plus de pyramides que l'Égypte ?", a: ["La Libye", "L'Éthiopie", "L'Algérie", "Le Soudan"], correct: 3 },
-    ],
+    corse: [],
   },
   litterature: {
     debutant: [
@@ -387,30 +350,7 @@ const QUESTIONS = {
       { q: "Quel écrivain colombien a écrit « L'Amour aux temps du choléra » ?", a: ["Mario Vargas Llosa", "Jorge Luis Borges", "Julio Cortázar", "Gabriel García Márquez"], correct: 3 },
       { q: "Quel auteur a écrit « Le Petit Nicolas » avec le dessinateur Sempé ?", a: ["Marcel Pagnol", "Roald Dahl", "René Goscinny", "Hergé"], correct: 2 },
     ],
-    intermediaire: [
-      { q: "Quel poète espagnol, fusillé en 1936, a écrit « Noces de sang » ?", a: ["Antonio Machado", "Rafael Alberti", "Federico García Lorca", "Luis Cernuda"], correct: 2 },
-      { q: "Quel écrivain nigérian a écrit le roman « Tout s'effondre » ?", a: ["Chinua Achebe", "Wole Soyinka", "Ben Okri", "Ngugi wa Thiong'o"], correct: 0 },
-      { q: "Quel écrivain américain a écrit « Le Bruit et la Fureur » ?", a: ["Francis Scott Fitzgerald", "John Dos Passos", "Ernest Hemingway", "William Faulkner"], correct: 3 },
-      { q: "Quelle romancière anglaise a écrit l'essai « Une chambre à soi » ?", a: ["George Eliot", "Virginia Woolf", "Doris Lessing", "Katherine Mansfield"], correct: 1 },
-      { q: "Quel écrivain russe a écrit « Le Maître et Marguerite » ?", a: ["Boris Pasternak", "Vladimir Nabokov", "Nicolas Gogol", "Mikhaïl Boulgakov"], correct: 3 },
-      { q: "Quel écrivain italien a écrit « Le Désert des Tartares » ?", a: ["Dino Buzzati", "Italo Calvino", "Alberto Moravia", "Cesare Pavese"], correct: 0 },
-      { q: "Quel écrivain sicilien a écrit le roman « Le Guépard » ?", a: ["Leonardo Sciascia", "Tomasi di Lampedusa", "Luigi Pirandello", "Giovanni Verga"], correct: 1 },
-      { q: "Quel dramaturge allemand a théorisé l'effet de « distanciation » au théâtre ?", a: ["Friedrich Schiller", "Georg Büchner", "Bertolt Brecht", "Frank Wedekind"], correct: 2 },
-      { q: "Quel écrivain américain a écrit « La Route » et « No Country for Old Men » ?", a: ["Cormac McCarthy", "Don DeLillo", "Philip Roth", "Paul Auster"], correct: 0 },
-      { q: "Quel poète anglophone a écrit le long poème « La Terre vaine » ?", a: ["Ezra Pound", "Thomas Stearns Eliot", "William Butler Yeats", "Wystan Auden"], correct: 1 },
-    ],
-    expert: [
-      { q: "Quel poète latin a écrit un « Art poétique » et de célèbres « Odes » ?", a: ["Virgile", "Ovide", "Catulle", "Horace"], correct: 3 },
-      { q: "Quel philosophe latin, auteur de tragédies, fut le précepteur de Néron ?", a: ["Cicéron", "Marc Aurèle", "Sénèque", "Épictète"], correct: 2 },
-      { q: "Quel poète anglais du Moyen Âge a écrit « Les Contes de Canterbury » ?", a: ["Thomas More", "Edmund Spenser", "Geoffrey Chaucer", "Thomas Malory"], correct: 2 },
-      { q: "Quel humaniste néerlandais a écrit « Éloge de la folie » ?", a: ["Érasme", "Thomas More", "Michel de Montaigne", "François Rabelais"], correct: 0 },
-      { q: "Quel penseur de la Renaissance a donné son nom au genre de l'« essai » ?", a: ["François Rabelais", "Érasme", "Blaise Pascal", "Michel de Montaigne"], correct: 3 },
-      { q: "Quel savant du XVIIe siècle a laissé des « Pensées » sur la condition humaine et la foi ?", a: ["René Descartes", "Blaise Pascal", "Nicolas Malebranche", "Bossuet"], correct: 1 },
-      { q: "Quel dramaturge allemand a écrit « Les Brigands » et « Guillaume Tell » ?", a: ["Friedrich Schiller", "Johann Goethe", "Gotthold Lessing", "Heinrich von Kleist"], correct: 0 },
-      { q: "Quel philosophe danois est célèbre pour ses réflexions sur l'angoisse et le désespoir ?", a: ["Hans Andersen", "Karen Blixen", "Georg Brandes", "Søren Kierkegaard"], correct: 3 },
-      { q: "Quel poète portugais a écrit sous plusieurs « hétéronymes », dont Alberto Caeiro ?", a: ["Luís de Camões", "Fernando Pessoa", "José Saramago", "Eça de Queiroz"], correct: 1 },
-      { q: "Quel poète anglais du XVIIe siècle est le chef de file des poètes « métaphysiques » ?", a: ["John Milton", "Andrew Marvell", "John Donne", "George Herbert"], correct: 2 },
-    ],
+    corse: [],
   },
   sciences: {
     debutant: [
@@ -515,30 +455,7 @@ const QUESTIONS = {
       { q: "Comment appelle-t-on le scientifique qui étudie les fossiles de dinosaures ?", a: ["Un archéologue", "Un paléontologue", "Un géographe", "Un chimiste"], correct: 1 },
       { q: "Comment appelle-t-on la disparition totale et définitive d'une espèce animale ?", a: ["La migration", "L'hibernation", "L'extinction", "La domestication"], correct: 2 },
     ],
-    intermediaire: [
-      { q: "Quel est le symbole chimique du magnésium ?", a: ["Ma", "Mn", "Mc", "Mg"], correct: 3 },
-      { q: "Quel est le symbole chimique du zinc ?", a: ["Zi", "Zn", "Zc", "Za"], correct: 1 },
-      { q: "Quel gaz noble et inerte remplit certaines ampoules d'éclairage ?", a: ["L'oxygène", "L'azote", "L'argon", "L'hydrogène"], correct: 2 },
-      { q: "Quelle est l'unité de mesure de la tension électrique ?", a: ["Le volt", "L'ampère", "L'ohm", "Le watt"], correct: 0 },
-      { q: "Quelle partie centrale de l'atome renferme protons et neutrons ?", a: ["L'électron", "L'orbite", "La molécule", "Le noyau"], correct: 3 },
-      { q: "Combien de dents de lait un enfant possède-t-il ?", a: ["Vingt", "Seize", "Vingt-huit", "Trente-deux"], correct: 0 },
-      { q: "Quel organe produit l'insuline qui régule le sucre du sang ?", a: ["Le foie", "Le rein", "Le pancréas", "La rate"], correct: 2 },
-      { q: "Comment appelle-t-on les vaisseaux qui ramènent le sang vers le cœur ?", a: ["Les artères", "Les veines", "Les nerfs", "Les tendons"], correct: 1 },
-      { q: "Quelle galaxie abrite notre Soleil et ses planètes ?", a: ["Andromède", "Le Triangle", "La Voie lactée", "Le Sombrero"], correct: 2 },
-      { q: "Quelle grandeur mesure la quantité de matière en chimie ?", a: ["Le gramme", "Le litre", "Le kelvin", "La mole"], correct: 3 },
-    ],
-    expert: [
-      { q: "Quel est le symbole chimique du mercure ?", a: ["Hg", "Me", "Mr", "Mc"], correct: 0 },
-      { q: "Quel est le symbole chimique de l'étain ?", a: ["Et", "Sn", "St", "Ét"], correct: 1 },
-      { q: "Quel physicien danois proposa un modèle de l'atome avec des orbites bien définies ?", a: ["Ernest Rutherford", "Niels Bohr", "Joseph Thomson", "James Chadwick"], correct: 1 },
-      { q: "Quelle particule neutre du noyau fut découverte par James Chadwick en 1932 ?", a: ["Le proton", "L'électron", "Le positon", "Le neutron"], correct: 3 },
-      { q: "Quelle loi relie la pression et le volume d'un gaz à température constante ?", a: ["La loi d'Ohm", "La loi de Hooke", "La loi de Boyle-Mariotte", "La loi de Coulomb"], correct: 2 },
-      { q: "Quelle unité mesure la charge électrique ?", a: ["Le coulomb", "Le volt", "L'ampère", "Le farad"], correct: 0 },
-      { q: "Comment appelle-t-on la température à laquelle un liquide se met à bouillir ?", a: ["Le point de fusion", "Le point de rosée", "Le point d'ébullition", "Le point triple"], correct: 2 },
-      { q: "Quel savant proposa le premier la théorie de la dérive des continents ?", a: ["Charles Lyell", "James Hutton", "Charles Darwin", "Alfred Wegener"], correct: 3 },
-      { q: "Quelle molécule, proche de l'ADN, sert d'intermédiaire pour fabriquer les protéines ?", a: ["L'ATP", "L'ARN", "Le glucose", "Le collagène"], correct: 1 },
-      { q: "Comment appelle-t-on l'ensemble des réactions chimiques qui font fonctionner une cellule ?", a: ["Le métabolisme", "La photosynthèse", "L'osmose", "La digestion"], correct: 0 },
-    ],
+    corse: [],
   },
   musique: {
     debutant: [
@@ -643,30 +560,7 @@ const QUESTIONS = {
       { q: "Quel compositeur italien a écrit les musiques de nombreux westerns, dont « Le Bon, la Brute et le Truand » ?", a: ["Nino Rota", "Ennio Morricone", "John Williams", "Hans Zimmer"], correct: 1 },
       { q: "Quelle chanteuse américaine fut la voix des Supremes, star de la Motown ?", a: ["Aretha Franklin", "Tina Turner", "Gladys Knight", "Diana Ross"], correct: 3 },
     ],
-    intermediaire: [
-      { q: "Quel terme italien indique d'accélérer progressivement le tempo ?", a: ["Ritardando", "Accelerando", "Crescendo", "Staccato"], correct: 1 },
-      { q: "Comment appelle-t-on des notes jouées détachées et piquées ?", a: ["Staccato", "Legato", "Crescendo", "Rubato"], correct: 0 },
-      { q: "Comment appelle-t-on des notes jouées liées, sans interruption ?", a: ["Staccato", "Pizzicato", "Legato", "Tenuto"], correct: 2 },
-      { q: "Comment appelle-t-on le fait de pincer les cordes d'un violon avec les doigts ?", a: ["L'archet", "Le vibrato", "Le trémolo", "Le pizzicato"], correct: 3 },
-      { q: "Comment appelle-t-on une augmentation progressive de l'intensité sonore ?", a: ["Le decrescendo", "Le staccato", "Le crescendo", "Le legato"], correct: 2 },
-      { q: "Quelle voix d'homme se situe entre le ténor et la basse ?", a: ["Le baryton", "Le ténor", "L'alto", "Le contre-ténor"], correct: 0 },
-      { q: "Combien de musiciens compte un quintette ?", a: ["Trois", "Quatre", "Six", "Cinq"], correct: 3 },
-      { q: "Quelle danse vive à deux temps, d'origine tchèque, fut populaire au XIXe siècle ?", a: ["La valse", "La polka", "Le menuet", "La mazurka"], correct: 1 },
-      { q: "Comment appelle-t-on une note tenue longuement qui sert de base sous une mélodie ?", a: ["Le bourdon", "Le trille", "L'appoggiature", "Le mordant"], correct: 0 },
-      { q: "Comment appelle-t-on le mouvement vif qui conclut souvent une symphonie ?", a: ["L'andante", "Le finale", "Le scherzo", "L'adagio"], correct: 1 },
-    ],
-    expert: [
-      { q: "Quel compositeur finlandais a écrit le poème symphonique « Finlandia » ?", a: ["Edvard Grieg", "Carl Nielsen", "Wilhelm Stenhammar", "Jean Sibelius"], correct: 3 },
-      { q: "Quel compositeur tchèque a écrit le cycle « Ma Patrie », dont « La Moldau » ?", a: ["Antonín Dvořák", "Leoš Janáček", "Bedřich Smetana", "Bohuslav Martinů"], correct: 2 },
-      { q: "Quel compositeur russe a écrit un « Concerto pour piano n° 2 » très romantique ?", a: ["Alexandre Scriabine", "Sergueï Prokofiev", "Sergueï Rachmaninov", "Modeste Moussorgski"], correct: 2 },
-      { q: "Quel compositeur autrichien a écrit « Le Chant de la Terre » et de vastes symphonies ?", a: ["Anton Bruckner", "Gustav Mahler", "Richard Strauss", "Arnold Schoenberg"], correct: 1 },
-      { q: "Quel compositeur allemand a écrit le poème symphonique « Ainsi parlait Zarathoustra » ?", a: ["Richard Strauss", "Gustav Mahler", "Richard Wagner", "Anton Bruckner"], correct: 0 },
-      { q: "Quel compositeur français a écrit les opéras « Manon » et « Werther » ?", a: ["Charles Gounod", "Georges Bizet", "Jacques Offenbach", "Jules Massenet"], correct: 3 },
-      { q: "Comment appelle-t-on une composition savante où plusieurs voix se répondent par imitation ?", a: ["Le canon", "La sonate", "La toccata", "La fugue"], correct: 3 },
-      { q: "Comment appelle-t-on un morceau libre et virtuose, souvent écrit pour orgue ou clavecin ?", a: ["La toccata", "La fugue", "La gigue", "La sonate"], correct: 0 },
-      { q: "Comment appelle-t-on une œuvre en plusieurs mouvements pour un instrument soliste, sans orchestre ?", a: ["Le concerto", "La sonate", "La symphonie", "La suite"], correct: 1 },
-      { q: "Quel terme italien désigne un tempo très lent et solennel ?", a: ["L'allegro", "Le presto", "Le largo", "Le vivace"], correct: 2 },
-    ],
+    corse: [],
   },
   cinema: {
     debutant: [
@@ -771,30 +665,7 @@ const QUESTIONS = {
       { q: "Quelle actrice incarne Rose face à Leonardo DiCaprio dans « Titanic » ?", a: ["Nicole Kidman", "Kate Winslet", "Cate Blanchett", "Charlize Theron"], correct: 1 },
       { q: "Quel acteur, maître d'arts martiaux, a tourné « Opération Dragon » ?", a: ["Jackie Chan", "Jet Li", "Chuck Norris", "Bruce Lee"], correct: 3 },
     ],
-    intermediaire: [
-      { q: "Quel acteur a gagné l'Oscar pour « My Left Foot » puis incarné Abraham Lincoln ?", a: ["Gary Oldman", "Christian Bale", "Eddie Redmayne", "Daniel Day-Lewis"], correct: 3 },
-      { q: "Quelle actrice a remporté trois Oscars, dont un pour « La Dame de fer » ?", a: ["Cate Blanchett", "Meryl Streep", "Nicole Kidman", "Julia Roberts"], correct: 1 },
-      { q: "Quel acteur britannique incarne Gandalf, et aussi Magnéto dans « X-Men » ?", a: ["Patrick Stewart", "Christopher Lee", "Ian McKellen", "Michael Gambon"], correct: 2 },
-      { q: "Quelle actrice incarne Ellen Ripley dans la saga « Alien » ?", a: ["Sigourney Weaver", "Linda Hamilton", "Jamie Lee Curtis", "Geena Davis"], correct: 0 },
-      { q: "Quel film de 1939 met en scène Scarlett O'Hara pendant la guerre de Sécession ?", a: ["Le Magicien d'Oz", "Casablanca", "Autant en emporte le vent", "Rebecca"], correct: 2 },
-      { q: "Quelle actrice a remporté l'Oscar pour sa danseuse obsessionnelle dans « Black Swan » ?", a: ["Mila Kunis", "Natalie Portman", "Anne Hathaway", "Jennifer Lawrence"], correct: 1 },
-      { q: "Quel film de Danny Boyle suit un jeune Indien candidat à un jeu télévisé ?", a: ["Slumdog Millionaire", "Lion", "Gandhi", "The Millionaire"], correct: 0 },
-      { q: "Quel western de Sergio Leone met en scène « l'homme sans nom » joué par Clint Eastwood ?", a: ["La Horde sauvage", "Django", "Le Train sifflera trois fois", "Le Bon, la Brute et le Truand"], correct: 3 },
-      { q: "Quel film de Sofia Coppola se déroule à Tokyo avec Bill Murray ?", a: ["Virgin Suicides", "Lost in Translation", "Marie-Antoinette", "Somewhere"], correct: 1 },
-      { q: "Quel film de Ron Howard, avec Tom Hanks, raconte une mission lunaire qui tourne mal en 1970 ?", a: ["Gravity", "First Man", "Apollo 13", "Interstellar"], correct: 2 },
-    ],
-    expert: [
-      { q: "Quel cinéaste japonais, maître du plan fixe, a tourné « Voyage à Tokyo » ?", a: ["Yasujiro Ozu", "Kenji Mizoguchi", "Mikio Naruse", "Akira Kurosawa"], correct: 0 },
-      { q: "Quel cinéaste allemand a tourné « Les Ailes du désir » et « Paris, Texas » ?", a: ["Werner Herzog", "Rainer Fassbinder", "Volker Schlöndorff", "Wim Wenders"], correct: 3 },
-      { q: "Quel cinéaste allemand a tourné « Aguirre » et « Fitzcarraldo » avec Klaus Kinski ?", a: ["Wim Wenders", "Rainer Fassbinder", "Friedrich Murnau", "Werner Herzog"], correct: 3 },
-      { q: "Quel cinéaste allemand de l'expressionnisme a tourné « Nosferatu » en 1922 ?", a: ["Fritz Lang", "Robert Wiene", "Friedrich Wilhelm Murnau", "Paul Wegener"], correct: 2 },
-      { q: "Quel cinéaste polonais a réalisé la trilogie « Trois Couleurs » ?", a: ["Krzysztof Kieślowski", "Andrzej Wajda", "Roman Polanski", "Krzysztof Zanussi"], correct: 0 },
-      { q: "Quel cinéaste soviétique arménien a tourné « La Couleur de la grenade » ?", a: ["Andreï Tarkovski", "Sergueï Paradjanov", "Sergueï Eisenstein", "Alexandre Dovjenko"], correct: 1 },
-      { q: "Quel cinéaste américain indépendant a tourné « There Will Be Blood » et « Magnolia » ?", a: ["Wes Anderson", "Paul Thomas Anderson", "David Fincher", "Alexander Payne"], correct: 1 },
-      { q: "Quel cinéaste danois a lancé le mouvement « Dogme95 » avec Thomas Vinterberg ?", a: ["Nicolas Winding Refn", "Susanne Bier", "Lars von Trier", "Carl Dreyer"], correct: 2 },
-      { q: "Quel court métrage de 1929 de Buñuel et Dalí montre un œil tranché au rasoir ?", a: ["L'Âge d'or", "Le Sang d'un poète", "Entr'acte", "Un chien andalou"], correct: 3 },
-      { q: "Quelle cinéaste de la Nouvelle Vague a tourné « Cléo de 5 à 7 » ?", a: ["Agnès Varda", "Jacques Demy", "Alain Resnais", "Éric Rohmer"], correct: 0 },
-    ],
+    corse: [],
   },
   sport: {
     debutant: [
@@ -899,30 +770,7 @@ const QUESTIONS = {
       { q: "Quel sport consiste à soulever la barre la plus lourde possible ?", a: ["La lutte", "La boxe", "Le lancer", "L'haltérophilie"], correct: 3 },
       { q: "Comment appelle-t-on l'ensemble des règles à respecter dans un sport ?", a: ["Le règlement", "Le classement", "Le championnat", "Le calendrier"], correct: 0 },
     ],
-    intermediaire: [
-      { q: "Quel club anglais surnommé « les Reds » joue au stade d'Anfield ?", a: ["Manchester United", "Arsenal", "Liverpool", "Everton"], correct: 2 },
-      { q: "Combien de joueurs compte chaque équipe au rugby à VII ?", a: ["Sept", "Cinq", "Neuf", "Treize"], correct: 0 },
-      { q: "Comment appelle-t-on le championnat de première division de football en Angleterre ?", a: ["La Liga", "La Serie A", "La Bundesliga", "La Premier League"], correct: 3 },
-      { q: "Comment appelle-t-on le championnat de première division de football en Espagne ?", a: ["La Premier League", "La Liga", "La Serie A", "La Ligue 1"], correct: 1 },
-      { q: "Quelle épreuve de ski alpin enchaîne des portes très rapprochées ?", a: ["La descente", "Le super-G", "Le combiné", "Le slalom"], correct: 3 },
-      { q: "Quel format de tennis oppose deux paires, à deux contre deux ?", a: ["Le double", "Le simple", "Le tie-break", "Le set"], correct: 0 },
-      { q: "Combien d'épreuves comporte l'heptathlon féminin en athlétisme ?", a: ["Cinq", "Sept", "Dix", "Douze"], correct: 1 },
-      { q: "Dans quel sport de combat cherche-t-on à marquer un « ippon » ?", a: ["La boxe", "L'escrime", "Le judo", "Le sumo"], correct: 2 },
-      { q: "Dans quel sport l'arbitre lance-t-il l'assaut par « en garde, prêts, allez » ?", a: ["La boxe", "L'escrime", "Le judo", "Le tir"], correct: 1 },
-      { q: "Combien de minutes dure une période (tiers-temps) de hockey sur glace ?", a: ["Quinze", "Trente", "Vingt", "Quarante-cinq"], correct: 2 },
-    ],
-    expert: [
-      { q: "Quel boxeur américain a pris sa retraite invaincu avec cinquante victoires ?", a: ["Floyd Mayweather", "Mike Tyson", "Evander Holyfield", "Lennox Lewis"], correct: 0 },
-      { q: "Quel footballeur allemand, « der Kaiser », a gagné la Coupe du monde comme joueur puis sélectionneur ?", a: ["Gerd Müller", "Lothar Matthäus", "Karl-Heinz Rummenigge", "Franz Beckenbauer"], correct: 3 },
-      { q: "Quel joueur de tennis australien a réussi le Grand Chelem calendaire en 1969 ?", a: ["Roy Emerson", "John Newcombe", "Ken Rosewall", "Rod Laver"], correct: 3 },
-      { q: "Quel perchiste ukrainien détint longtemps le record du monde du saut à la perche ?", a: ["Renaud Lavillenie", "Sergueï Bubka", "Armand Duplantis", "Steve Hooker"], correct: 1 },
-      { q: "Quelle écurie italienne, la plus titrée de la Formule 1, arbore un cheval cabré ?", a: ["McLaren", "Williams", "Ferrari", "Mercedes"], correct: 2 },
-      { q: "Quel hockeyeur canadien, surnommé « la Merveille », détient de nombreux records en NHL ?", a: ["Wayne Gretzky", "Mario Lemieux", "Bobby Orr", "Sidney Crosby"], correct: 0 },
-      { q: "Quelle gymnaste roumaine obtint la première note de dix parfaite aux Jeux de 1976 ?", a: ["Nadia Comăneci", "Olga Korbut", "Larissa Latynina", "Věra Čáslavská"], correct: 0 },
-      { q: "Quel basketteur américain a inscrit cent points en un seul match de NBA en 1962 ?", a: ["Bill Russell", "Kareem Abdul-Jabbar", "Michael Jordan", "Wilt Chamberlain"], correct: 3 },
-      { q: "Quel athlète marocain a dominé les courses de demi-fond autour de l'an 2000 ?", a: ["Saïd Aouita", "Noureddine Morceli", "Hicham El Guerrouj", "Haile Gebrselassie"], correct: 2 },
-      { q: "Quel ailier néo-zélandais, très puissant, a marqué les Coupes du monde de rugby ?", a: ["Dan Carter", "Jonah Lomu", "Richie McCaw", "Christian Cullen"], correct: 1 },
-    ],
+    corse: [],
   },
   geopolitique: {
     debutant: [
@@ -1027,30 +875,19 @@ const QUESTIONS = {
       { q: "Comment appelle-t-on un rassemblement de citoyens dans la rue pour défendre une cause ?", a: ["Une élection", "Un référendum", "Une manifestation", "Une cérémonie"], correct: 2 },
       { q: "Comment appelle-t-on une carte à plat qui représente tous les pays du monde ?", a: ["Un globe", "Un atlas", "Une boussole", "Un planisphère"], correct: 3 },
     ],
-    intermediaire: [
-      { q: "Que signifie le sigle « OTAN » ?", a: ["L'Office des traités de l'Atlantique", "L'Organisation des territoires alliés du Nord", "L'Alliance des traités de l'Atlantique Nord", "L'Organisation du traité de l'Atlantique Nord"], correct: 3 },
-      { q: "Quelle est la monnaie de la Pologne ?", a: ["Le forint", "La couronne", "Le zloty", "Le leu"], correct: 2 },
-      { q: "Comment s'appelle le parlement espagnol ?", a: ["Le Bundestag", "Les Cortes", "La Diète", "Le Sejm"], correct: 1 },
-      { q: "Comment s'appelle le parlement polonais ?", a: ["Le Sejm", "La Douma", "Les Cortes", "Le Storting"], correct: 0 },
-      { q: "Comment surnomme-t-on le ministère français des Affaires étrangères, du nom de son adresse parisienne ?", a: ["Matignon", "Bercy", "L'Élysée", "Le Quai d'Orsay"], correct: 3 },
-      { q: "Quel bâtiment à cinq côtés abrite le ministère américain de la Défense ?", a: ["Le Pentagone", "La Maison-Blanche", "Le Capitole", "Wall Street"], correct: 0 },
-      { q: "Dans quel bâtiment à coupole siège le Congrès des États-Unis ?", a: ["La Maison-Blanche", "Le Capitole", "Le Pentagone", "Westminster"], correct: 1 },
-      { q: "Quelle organisation réunit plusieurs pays d'Amérique du Sud dans un marché commun ?", a: ["L'ALENA", "L'ASEAN", "Le Mercosur", "La CEDEAO"], correct: 2 },
-      { q: "Quelle organisation rassemble cinquante-cinq pays de l'ensemble du continent africain ?", a: ["La Ligue arabe", "L'ASEAN", "Le Commonwealth", "L'Union africaine"], correct: 3 },
-      { q: "Quel pays a pour capitale Canberra ?", a: ["Le Canada", "La Nouvelle-Zélande", "L'Australie", "L'Afrique du Sud"], correct: 2 },
-    ],
-    expert: [
-      { q: "Quel affrontement de 1962 opposa les États-Unis et l'URSS au sujet de fusées installées sur une île des Caraïbes ?", a: ["La crise des missiles de Cuba", "Le blocus de Berlin", "La guerre de Corée", "La crise de Suez"], correct: 0 },
-      { q: "Dans quelle ville se trouve le siège de l'Organisation mondiale de la santé ?", a: ["New York", "Genève", "Vienne", "Paris"], correct: 1 },
-      { q: "Combien de pays membres compte aujourd'hui l'OTAN, environ ?", a: ["Une dizaine", "Une trentaine", "Une vingtaine", "Une cinquantaine"], correct: 1 },
-      { q: "Quel organe de l'ONU, formé de quinze membres, veille à la paix dans le monde ?", a: ["Le Conseil de sécurité", "L'Assemblée générale", "Le Secrétariat", "Le Conseil économique"], correct: 0 },
-      { q: "Comment appelle-t-on le chef de l'administration de l'ONU, élu pour cinq ans ?", a: ["Le président", "Le chancelier", "Le haut-commissaire", "Le secrétaire général"], correct: 3 },
-      { q: "Dans quelle ville se réunit chaque année l'Assemblée générale des Nations unies ?", a: ["À Genève", "À La Haye", "À New York", "À Vienne"], correct: 2 },
-      { q: "Quel tribunal international, à La Haye, juge des individus pour crimes de guerre et génocide ?", a: ["La Cour de justice de l'UE", "Interpol", "La Cour pénale internationale", "Le Conseil de l'Europe"], correct: 2 },
-      { q: "Quelle organisation coordonne la coopération policière entre de nombreux pays ?", a: ["Interpol", "Europol", "L'ONU", "L'OTAN"], correct: 0 },
-      { q: "Quel groupe informel réunit les vingt principales économies de la planète ?", a: ["Le G7", "L'OPEP", "L'OMC", "Le G20"], correct: 3 },
-      { q: "Quelle juridiction de l'ONU, à La Haye, règle les différends entre les États ?", a: ["La Cour pénale internationale", "La Cour internationale de justice", "Interpol", "L'OMC"], correct: 1 },
-    ],
+    corse: [],
+  },
+  arts: {
+    corse: [],
+  },
+  nature: {
+    corse: [],
+  },
+  gastronomie: {
+    corse: [],
+  },
+  mythologie: {
+    corse: [],
   },
 };
 
@@ -1063,10 +900,14 @@ const PLAYER_COLORS = [
 ];
 
 // Plateau de 100 cases : 12 cases par catégorie (8×12 = 96) + 4 cases « Joker ».
+// `selectedIds` = les 8 catégories retenues pour la partie (parmi les 12).
 // Répartition au hasard, cases numérotées de 1 à 100.
-function buildBoard() {
+function buildBoard(selectedIds) {
+  const ids = (selectedIds && selectedIds.length === BOARD_CATS)
+    ? selectedIds
+    : CATEGORIES.slice(0, BOARD_CATS).map(c => c.id);
   const cells = [];
-  CATEGORIES.forEach(c => { for (let k = 0; k < 12; k++) cells.push({ type: 'cat', category: c.id }); });
+  ids.forEach(id => { for (let k = 0; k < 12; k++) cells.push({ type: 'cat', category: id }); });
   for (let k = 0; k < 4; k++) cells.push({ type: 'joker' });
   // Mélange Fisher–Yates
   for (let i = cells.length - 1; i > 0; i--) {
@@ -1885,10 +1726,10 @@ function ScreenNames({ count, players, setPlayers, onStart, onBack }) {
                 {PLAYER_COLORS.find(c => c.id === p.colorId)?.label}
               </div>
               <div style={{ display: 'flex', gap: 0, background: 'color-mix(in oklab, var(--ink) 8%, transparent)', borderRadius: 999, padding: 3 }}>
-                {[['debutant', 'Initié'], ['intermediaire', 'Spécialiste'], ['expert', 'Expert']].map(([val, lab]) => {
+                {[['debutant', 'Initié'], ['corse', 'Corsé']].map(([val, lab]) => {
                   const on = (p.level || 'debutant') === val;
                   return (
-                    <button key={val} onClick={() => setLevel(i, val)} title={val === 'debutant' ? 'Initié-débutant' : val === 'intermediaire' ? 'Spécialiste-intermédiaire' : 'Expert académique'} style={{
+                    <button key={val} onClick={() => setLevel(i, val)} title={val === 'debutant' ? 'Initié — questions accessibles' : 'Corsé — questions relevées'} style={{
                       fontFamily: 'var(--font-body)', fontSize: 13, fontWeight: 600, cursor: 'pointer',
                       padding: '7px 13px', borderRadius: 999, border: 'none', whiteSpace: 'nowrap',
                       background: on ? 'var(--ink)' : 'transparent',
@@ -1910,7 +1751,8 @@ function ScreenNames({ count, players, setPlayers, onStart, onBack }) {
 }
 
 // ---------- CATÉGORIES FAVORITES (⭐⭐ et ⭐) ---------------------
-function ScreenStars({ players, setPlayers, onStart, onBack }) {
+function ScreenStars({ players, setPlayers, onStart, onBack, cats }) {
+  const pool = (cats && cats.length) ? cats : CATEGORIES.slice(0, BOARD_CATS);
   const [idx, setIdx] = useState(0);
   const [active, setActive] = useState('star2'); // quel emplacement on remplit
   const p = players[idx];
@@ -1970,7 +1812,7 @@ function ScreenStars({ players, setPlayers, onStart, onBack }) {
 
   return (
     <div className="screen" style={{ display: 'flex', flexDirection: 'column', height: '100%', padding: '34px 56px 28px' }}>
-      <SetupHeader step={3} title="Catégories favorites" onBack={goPrev} />
+      <SetupHeader step={4} title="Catégories favorites" onBack={goPrev} />
 
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 14, margin: '4px 0 14px' }}>
         <Avatar player={p} size={44} active />
@@ -1991,7 +1833,7 @@ function ScreenStars({ players, setPlayers, onStart, onBack }) {
       </div>
 
       <div style={{ flex: 1, display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12, maxWidth: 760, width: '100%', margin: '0 auto', alignContent: 'center' }}>
-        {CATEGORIES.map(c => {
+        {pool.map(c => {
           const picked = p.star2 === c.id ? 2 : p.star1 === c.id ? 1 : 0;
           return (
             <button key={c.id} onClick={() => assign(c.id)} style={{
@@ -2019,6 +1861,68 @@ function ScreenStars({ players, setPlayers, onStart, onBack }) {
   );
 }
 
+// ---------- CHOIX DES 8 CATÉGORIES (parmi 12) ------------------
+function ScreenCategories({ selected, setSelected, onStart, onBack }) {
+  const full = selected.length === BOARD_CATS;
+  function toggle(id) {
+    setSelected(prev => {
+      if (prev.includes(id)) return prev.filter(x => x !== id);
+      if (prev.length >= BOARD_CATS) return prev;  // plafond à 8
+      return [...prev, id];
+    });
+  }
+  return (
+    <div className="screen" style={{ display: 'flex', flexDirection: 'column', height: '100%', padding: '34px 56px 28px' }}>
+      <SetupHeader step={3} title="Les catégories de la partie" onBack={onBack} />
+
+      <div style={{ textAlign: 'center', fontFamily: 'var(--font-body)', fontSize: 15, color: 'color-mix(in oklab, var(--ink) 62%, transparent)', margin: '2px 0 14px' }}>
+        Choisissez <strong>{BOARD_CATS} catégories</strong> parmi les {CATEGORIES.length}. Seules celles-ci apparaîtront sur le plateau.
+      </div>
+
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, margin: '0 0 14px' }}>
+        <span style={{
+          fontFamily: 'var(--font-display)', fontSize: 22,
+          color: full ? 'var(--metal-deep)' : 'var(--ink)',
+        }}>{selected.length}/{BOARD_CATS}</span>
+        <span style={{ fontFamily: 'var(--font-body)', fontSize: 13, letterSpacing: 1, textTransform: 'uppercase', color: 'color-mix(in oklab, var(--ink) 50%, transparent)' }}>
+          {full ? 'sélection complète' : 'catégories choisies'}
+        </span>
+      </div>
+
+      <div style={{ flex: 1, display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12, maxWidth: 820, width: '100%', margin: '0 auto', alignContent: 'center' }}>
+        {CATEGORIES.map(c => {
+          const on = selected.includes(c.id);
+          const locked = !on && selected.length >= BOARD_CATS;
+          return (
+            <button key={c.id} onClick={() => toggle(c.id)} disabled={locked} style={{
+              display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8,
+              cursor: locked ? 'default' : 'pointer',
+              background: on ? 'color-mix(in oklab, ' + c.color + ' 16%, var(--card))' : 'var(--card)',
+              border: `2px solid ${on ? c.color : 'color-mix(in oklab, var(--ink) 12%, transparent)'}`,
+              borderRadius: 14, padding: '14px 8px 11px', position: 'relative',
+              opacity: locked ? 0.4 : 1, transition: 'all .15s',
+            }}>
+              <CatBadge cat={c} size={40} />
+              <span style={{ fontFamily: 'var(--font-body)', fontSize: 14, fontWeight: 600, color: 'var(--ink)' }}>{c.label}</span>
+              {on && (
+                <span style={{
+                  position: 'absolute', top: 7, right: 8, width: 20, height: 20, borderRadius: '50%',
+                  background: c.color, color: '#fff', display: 'grid', placeItems: 'center',
+                  fontSize: 12, fontWeight: 700, boxShadow: '0 1px 3px rgba(0,0,0,0.3)',
+                }}>✓</span>
+              )}
+            </button>
+          );
+        })}
+      </div>
+
+      <div style={{ display: 'flex', justifyContent: 'center', marginTop: 14 }}>
+        <Button size="lg" onClick={onStart} disabled={!full}>Catégories favorites →</Button>
+      </div>
+    </div>
+  );
+}
+
 // ---------- En-tête commun des écrans de configuration ----------
 function SetupHeader({ step, title, onBack }) {
   return (
@@ -2030,7 +1934,7 @@ function SetupHeader({ step, title, onBack }) {
       }}>← Retour</button>
       <div style={{ flex: 1, textAlign: 'center' }}>
         <div style={{ fontFamily: 'var(--font-body)', fontSize: 12, letterSpacing: 3, textTransform: 'uppercase', color: 'var(--metal-deep)', fontWeight: 600 }}>
-          Étape {step} sur 3
+          Étape {step} sur 4
         </div>
         <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 40, margin: '2px 0 0', color: 'var(--ink)', fontWeight: 400 }}>{title}</h2>
       </div>
@@ -2039,7 +1943,7 @@ function SetupHeader({ step, title, onBack }) {
   );
 }
 
-Object.assign(window, { ScreenAccueil, ScreenCount, ScreenNames, ScreenStars });
+Object.assign(window, { ScreenAccueil, ScreenCount, ScreenNames, ScreenCategories, ScreenStars });
 
 // ───────────────────────── screens-game ─────────────────────────
 // ============================================================
@@ -2481,7 +2385,8 @@ function ScreenVictory({ players, winner, target, reachedTarget, onReplay, onHom
 }
 
 // ---------- DÉCOUVERTE DU PLATEAU (prompt + décompte 10 s) ------
-function DiscoveryOverlay({ players, onReveal, durationS }) {
+function DiscoveryOverlay({ players, onReveal, durationS, cats }) {
+  const legend = (cats && cats.length) ? cats : CATEGORIES.slice(0, BOARD_CATS);
   return (
     <div className="screen" style={{
       position: 'absolute', inset: 0, zIndex: 50, padding: 40,
@@ -2512,7 +2417,7 @@ function DiscoveryOverlay({ players, onReveal, durationS }) {
           <span style={{ flex: 1, height: 1, background: 'currentColor', opacity: 0.45 }} />
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '8px 18px', width: '100%' }}>
-          {CATEGORIES.map(c => (
+          {legend.map(c => (
             <div key={c.id} style={{ display: 'flex', alignItems: 'center', gap: 9 }}>
               <CatBadge cat={c} size={28} />
               <span style={{ fontFamily: 'var(--font-body)', fontSize: 15, fontWeight: 600, color: 'var(--ink)' }}>{c.label}</span>
@@ -2582,9 +2487,17 @@ function saveUsed(map) {
   } catch (e) {}
 }
 
+// Question de secours si une catégorie n'a pas encore de questions (migration en cours).
+const PLACEHOLDER_Q = { q: 'Question en préparation pour cette catégorie.', a: ['—', '—', '—', '—'], correct: 0 };
+
 function pickQuestion(catId, level, usedMap) {
-  const pool = (QUESTIONS[catId] && QUESTIONS[catId][level]) || QUESTIONS[catId].debutant;
+  const cat = QUESTIONS[catId] || {};
+  // Palier demandé, sinon corsé, sinon initié, sinon n'importe quel palier non vide.
+  let pool = cat[level];
+  if (!pool || !pool.length) pool = (cat.corse && cat.corse.length) ? cat.corse : cat.debutant;
+  if (!pool || !pool.length) pool = Object.values(cat).find(a => Array.isArray(a) && a.length);
   const key = catId + '_' + level;
+  if (!pool || !pool.length) return { idx: 0, question: PLACEHOLDER_Q, key };
   const shown = usedMap[key] || {};            // { indice: horodatage (ms) de la derniere apparition }
   const now = Date.now();
   // Questions encore "fraiches" : jamais posees, ou posees il y a plus d'une heure.
@@ -2637,7 +2550,8 @@ function App() {
   const questionTime = parseInt(t.questionTime, 10) || 30;
   const discoveryS = t.discoveryTime == null ? 10 : parseInt(t.discoveryTime, 10);
 
-  const [phase, setPhase] = useState('accueil'); // accueil | count | names | stars | board | victory | duel
+  const [phase, setPhase] = useState('accueil'); // accueil | count | names | categories | stars | board | victory | duel
+  const [selectedCats, setSelectedCats] = useState(() => CATEGORIES.slice(0, BOARD_CATS).map(c => c.id));
   const [count, setCount] = useState(2);
   const [players, setPlayers] = useState([]);
   const [current, setCurrent] = useState(0);
@@ -2660,6 +2574,8 @@ function App() {
   const duelResRef = useRef({});
   const duelCurRef = useRef(null);
   const duelPlayersRef = useRef([]);
+  const selectedCatsRef = useRef(selectedCats);
+  useEffect(() => { selectedCatsRef.current = selectedCats; }, [selectedCats]);
   const [duelView, setDuelView] = useState({ mode: 'intro', contenders: [], msg: '' });
 
   useEffect(() => { fitStage(); }, [phase]);
@@ -2681,7 +2597,7 @@ function App() {
     endgameRef.current = null;
     duelIdsRef.current = []; duelQueueRef.current = []; duelResRef.current = {};
     duelCurRef.current = null; duelPlayersRef.current = [];
-    setBoard(buildBoard());
+    setBoard(buildBoard(selectedCats));
     setPlayed({}); setUsedMap({ ...usedRef.current });
     setDuelView({ mode: 'intro', contenders: [], msg: '' });
     setPlayers(prev => prev.map(p => ({ ...p, score: 0 })));
@@ -2794,7 +2710,9 @@ function App() {
   function nextDuelAsk() {
     if (duelQueueRef.current.length === 0) { resolveDuelRound(); return; }
     const pid = duelQueueRef.current.shift();
-    const cat = CATEGORIES[Math.floor(Math.random() * CATEGORIES.length)];
+    const inPlay = selectedCatsRef.current.map(id => CAT_BY_ID[id]).filter(Boolean);
+    const catPool = inPlay.length ? inPlay : CATEGORIES.slice(0, BOARD_CATS);
+    const cat = catPool[Math.floor(Math.random() * catPool.length)];
     const level = (duelPlayersRef.current[pid] && duelPlayersRef.current[pid].level) || 'debutant';
     const picked = pickQuestion(cat.id, level, usedRef.current);
     duelCurRef.current = { playerIdx: pid, key: picked.key, qIdx: picked.idx };
@@ -2837,9 +2755,20 @@ function App() {
   } else if (phase === 'count') {
     content = <ScreenCount onBack={() => setPhase('accueil')} onPick={(n) => { setCount(n); initPlayers(n); setPhase('names'); }} />;
   } else if (phase === 'names') {
-    content = <ScreenNames count={count} players={players} setPlayers={setPlayers} onBack={() => setPhase('count')} onStart={() => setPhase('stars')} />;
+    content = <ScreenNames count={count} players={players} setPlayers={setPlayers} onBack={() => setPhase('count')} onStart={() => setPhase('categories')} />;
+  } else if (phase === 'categories') {
+    content = <ScreenCategories selected={selectedCats} setSelected={setSelectedCats} onBack={() => setPhase('names')} onStart={() => {
+      // Retire des favoris toute catégorie qui ne fait plus partie de la sélection.
+      setPlayers(prev => prev.map(p => ({
+        ...p,
+        star2: selectedCats.includes(p.star2) ? p.star2 : null,
+        star1: selectedCats.includes(p.star1) ? p.star1 : null,
+      })));
+      setPhase('stars');
+    }} />;
   } else if (phase === 'stars') {
-    content = <ScreenStars players={players} setPlayers={setPlayers} onBack={() => setPhase('names')} onStart={startGame} />;
+    const starCats = CATEGORIES.filter(c => selectedCats.includes(c.id));
+    content = <ScreenStars players={players} setPlayers={setPlayers} cats={starCats} onBack={() => setPhase('categories')} onStart={startGame} />;
   } else if (phase === 'board') {
     content = (
       <>
@@ -2847,7 +2776,7 @@ function App() {
           target={target} canPlay={!active && discovery === 'done'} onPick={clickCell}
           peek={discovery === 'reveal'} discoverLeft={discoverLeft} />
         {discovery === 'prompt' && (
-          <DiscoveryOverlay players={players} onReveal={revealBoard} durationS={discoveryS} />
+          <DiscoveryOverlay players={players} onReveal={revealBoard} durationS={discoveryS} cats={CATEGORIES.filter(c => selectedCats.includes(c.id))} />
         )}
         {active && active.stage === 'reveal' && (
           <RevealOverlay cat={active.cat} player={players[current]} stake={active.stake} delayMs={delayMs} />
