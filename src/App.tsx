@@ -22,9 +22,9 @@ const CATEGORIES = [
   { id: 'sport',        label: 'Sport',        short: 'Sport',     color: 'oklch(0.64 0.14 62)',  soft: 'oklch(0.94 0.04 62)',   glyph: '✺' },
   { id: 'geopolitique', label: 'Géopolitique', short: 'Géopol.',   color: 'oklch(0.46 0.055 252)',soft: 'oklch(0.91 0.025 252)', glyph: '⊕' },
   { id: 'arts',         label: 'Arts',         short: 'Arts',      color: 'oklch(0.50 0.14 271)', soft: 'oklch(0.92 0.05 271)',  glyph: '❖' },
-  { id: 'nature',       label: 'Nature',       short: 'Nature',    color: 'oklch(0.52 0.11 178)', soft: 'oklch(0.92 0.04 178)',  glyph: '❧' },
+  { id: 'nature',       label: 'Nature',       short: 'Nature',    color: 'oklch(0.52 0.11 178)', soft: 'oklch(0.92 0.04 178)',  glyph: '♣' },
   { id: 'gastronomie',  label: 'Gastronomie',  short: 'Gastro.',   color: 'oklch(0.55 0.15 25)',  soft: 'oklch(0.93 0.05 25)',   glyph: '✿' },
-  { id: 'mythologie',   label: 'Mythologie',   short: 'Mythes',    color: 'oklch(0.58 0.13 95)',  soft: 'oklch(0.93 0.045 95)',  glyph: '✵' },
+  { id: 'mythologie',   label: 'Mythologie',   short: 'Mythes',    color: 'oklch(0.79 0.165 100)',soft: 'oklch(0.95 0.05 100)',  glyph: '✵' },
 ];
 
 // Nombre de catégories tirées sur le plateau à chaque partie (parmi les 12).
@@ -33,10 +33,10 @@ const BOARD_CATS = 8;
 const CAT_BY_ID = Object.fromEntries(CATEGORIES.map(c => [c.id, c]));
 
 // Banque de questions — culture générale familiale (FR), 4 réponses, index correct.
-// Deux paliers de difficulté par catégorie : « debutant » (Initié) et « corse » (Corsé).
+// Deux paliers de difficulté par catégorie : « debutant » (Initié) et « expert » (Expert).
 const QUESTIONS = {
-// Deux paliers : « debutant » (Initié, conservé, 8 catégories d'origine) et « corse »
-// (palier corsé, 100 questions/catégorie — voir banque en préparation).
+// Deux paliers : « debutant » (Initié, conservé, 8 catégories d'origine) et « expert »
+// (palier Expert, 100 questions/catégorie — voir banque en préparation).
   histoire: {
     debutant: [
       { q: "Quel peuple antique a inventé l'écriture cunéiforme en Mésopotamie ?", a: ["Les Égyptiens", "Les Grecs", "Les Sumériens", "Les Romains"], correct: 2 },
@@ -140,7 +140,7 @@ const QUESTIONS = {
       { q: "Quelle capitale aztèque les Espagnols détruisirent-ils au Mexique ?", a: ["Cuzco", "Tenochtitlan", "Machu Picchu", "Chichén Itzá"], correct: 1 },
       { q: "Quel roi de France régnait à la fin de la guerre de Cent Ans, en 1453 ?", a: ["Louis XI", "François Ier", "Charles VII", "Charles VIII"], correct: 2 },
     ],
-    corse: [],
+    expert: [],
   },
   geo: {
     debutant: [
@@ -245,7 +245,7 @@ const QUESTIONS = {
       { q: "Quel pays possède le plus long littoral du monde ?", a: ["La Russie", "L'Australie", "Le Canada", "L'Indonésie"], correct: 2 },
       { q: "Comment appelle-t-on la région la plus au sud de la Terre, couverte de glace ?", a: ["Le pôle Nord", "Le pôle Sud", "L'équateur", "Le tropique"], correct: 1 },
     ],
-    corse: [],
+    expert: [],
   },
   litterature: {
     debutant: [
@@ -350,7 +350,7 @@ const QUESTIONS = {
       { q: "Quel écrivain colombien a écrit « L'Amour aux temps du choléra » ?", a: ["Mario Vargas Llosa", "Jorge Luis Borges", "Julio Cortázar", "Gabriel García Márquez"], correct: 3 },
       { q: "Quel auteur a écrit « Le Petit Nicolas » avec le dessinateur Sempé ?", a: ["Marcel Pagnol", "Roald Dahl", "René Goscinny", "Hergé"], correct: 2 },
     ],
-    corse: [],
+    expert: [],
   },
   sciences: {
     debutant: [
@@ -455,7 +455,7 @@ const QUESTIONS = {
       { q: "Comment appelle-t-on le scientifique qui étudie les fossiles de dinosaures ?", a: ["Un archéologue", "Un paléontologue", "Un géographe", "Un chimiste"], correct: 1 },
       { q: "Comment appelle-t-on la disparition totale et définitive d'une espèce animale ?", a: ["La migration", "L'hibernation", "L'extinction", "La domestication"], correct: 2 },
     ],
-    corse: [],
+    expert: [],
   },
   musique: {
     debutant: [
@@ -560,7 +560,7 @@ const QUESTIONS = {
       { q: "Quel compositeur italien a écrit les musiques de nombreux westerns, dont « Le Bon, la Brute et le Truand » ?", a: ["Nino Rota", "Ennio Morricone", "John Williams", "Hans Zimmer"], correct: 1 },
       { q: "Quelle chanteuse américaine fut la voix des Supremes, star de la Motown ?", a: ["Aretha Franklin", "Tina Turner", "Gladys Knight", "Diana Ross"], correct: 3 },
     ],
-    corse: [],
+    expert: [],
   },
   cinema: {
     debutant: [
@@ -665,7 +665,7 @@ const QUESTIONS = {
       { q: "Quelle actrice incarne Rose face à Leonardo DiCaprio dans « Titanic » ?", a: ["Nicole Kidman", "Kate Winslet", "Cate Blanchett", "Charlize Theron"], correct: 1 },
       { q: "Quel acteur, maître d'arts martiaux, a tourné « Opération Dragon » ?", a: ["Jackie Chan", "Jet Li", "Chuck Norris", "Bruce Lee"], correct: 3 },
     ],
-    corse: [],
+    expert: [],
   },
   sport: {
     debutant: [
@@ -770,7 +770,7 @@ const QUESTIONS = {
       { q: "Quel sport consiste à soulever la barre la plus lourde possible ?", a: ["La lutte", "La boxe", "Le lancer", "L'haltérophilie"], correct: 3 },
       { q: "Comment appelle-t-on l'ensemble des règles à respecter dans un sport ?", a: ["Le règlement", "Le classement", "Le championnat", "Le calendrier"], correct: 0 },
     ],
-    corse: [],
+    expert: [],
   },
   geopolitique: {
     debutant: [
@@ -875,19 +875,19 @@ const QUESTIONS = {
       { q: "Comment appelle-t-on un rassemblement de citoyens dans la rue pour défendre une cause ?", a: ["Une élection", "Un référendum", "Une manifestation", "Une cérémonie"], correct: 2 },
       { q: "Comment appelle-t-on une carte à plat qui représente tous les pays du monde ?", a: ["Un globe", "Un atlas", "Une boussole", "Un planisphère"], correct: 3 },
     ],
-    corse: [],
+    expert: [],
   },
   arts: {
-    corse: [],
+    expert: [],
   },
   nature: {
-    corse: [],
+    expert: [],
   },
   gastronomie: {
-    corse: [],
+    expert: [],
   },
   mythologie: {
-    corse: [],
+    expert: [],
   },
 };
 
@@ -897,6 +897,8 @@ const PLAYER_COLORS = [
   { id: 'azur',   label: 'Azur',    color: 'oklch(0.62 0.13 235)', ring: 'oklch(0.48 0.12 235)' },
   { id: 'jade',   label: 'Jade',    color: 'oklch(0.62 0.12 168)', ring: 'oklch(0.47 0.11 168)' },
   { id: 'prune',  label: 'Prune',   color: 'oklch(0.58 0.15 330)', ring: 'oklch(0.46 0.14 330)' },
+  { id: 'ambre',  label: 'Ambre',   color: 'oklch(0.74 0.15 78)',  ring: 'oklch(0.60 0.14 78)' },
+  { id: 'indigo', label: 'Indigo',  color: 'oklch(0.50 0.15 285)', ring: 'oklch(0.40 0.14 285)' },
 ];
 
 // Plateau de 100 cases : 12 cases par catégorie (8×12 = 96) + 4 cases « Joker ».
@@ -1509,6 +1511,7 @@ function CatBadge({ cat, size = 34, ring = true, style = {} }) {
       display: 'grid', placeItems: 'center', flexShrink: 0,
       background: cat.color, color: 'oklch(0.98 0.02 90)',
       fontSize: size * 0.52,
+      textShadow: '0 1px 2px rgba(0,0,0,0.42)',
       border: ring ? '2px solid var(--metal)' : 'none',
       boxShadow: 'inset 0 1px 3px rgba(255,255,255,0.35), inset 0 -2px 5px rgba(0,0,0,0.25), 0 3px 8px rgba(40,20,10,0.22)',
       ...style,
@@ -1604,10 +1607,10 @@ function ScreenAccueil({ onStart }) {
           Le Grand Quiz
         </h1>
         <div style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', fontSize: 26, color: 'color-mix(in oklab, var(--ink) 72%, transparent)' }}>
-          100 cases · 8 catégories
+          100 cases · 12 catégories · 8 par partie
         </div>
 
-        <div style={{ display: 'flex', gap: 12, marginTop: 12, flexWrap: 'wrap', justifyContent: 'center', maxWidth: 620 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, auto)', gap: 12, marginTop: 12, justifyContent: 'center' }}>
           {CATEGORIES.map(c => <CatBadge key={c.id} cat={c} size={48} />)}
         </div>
 
@@ -1726,10 +1729,10 @@ function ScreenNames({ count, players, setPlayers, onStart, onBack }) {
                 {PLAYER_COLORS.find(c => c.id === p.colorId)?.label}
               </div>
               <div style={{ display: 'flex', gap: 0, background: 'color-mix(in oklab, var(--ink) 8%, transparent)', borderRadius: 999, padding: 3 }}>
-                {[['debutant', 'Initié'], ['corse', 'Corsé']].map(([val, lab]) => {
+                {[['debutant', 'Initié'], ['expert', 'Expert']].map(([val, lab]) => {
                   const on = (p.level || 'debutant') === val;
                   return (
-                    <button key={val} onClick={() => setLevel(i, val)} title={val === 'debutant' ? 'Initié — questions accessibles' : 'Corsé — questions relevées'} style={{
+                    <button key={val} onClick={() => setLevel(i, val)} title={val === 'debutant' ? 'Initié — questions accessibles' : 'Expert — questions relevées'} style={{
                       fontFamily: 'var(--font-body)', fontSize: 13, fontWeight: 600, cursor: 'pointer',
                       padding: '7px 13px', borderRadius: 999, border: 'none', whiteSpace: 'nowrap',
                       background: on ? 'var(--ink)' : 'transparent',
@@ -2097,7 +2100,7 @@ function BoardCell({ cell, revealed, peek, canPlay, onPick }) {
         fontSize: 'clamp(16px, 2.4vw, 26px)',
         animation: peek && !revealed ? 'pop .35s cubic-bezier(.2,1.2,.5,1)' : 'none',
       }}>
-        <span style={{ filter: 'drop-shadow(0 1px 1px rgba(0,0,0,0.3))' }}>{joker ? '★' : cat.glyph}</span>
+        <span style={{ filter: 'drop-shadow(0 1px 1.5px rgba(0,0,0,0.45))' }}>{joker ? '★' : cat.glyph}</span>
         <span style={{ position: 'absolute', bottom: 2, right: 4, fontFamily: 'var(--font-display)', fontSize: 13, fontWeight: 700, color: 'oklch(0.98 0.01 90)', textShadow: '0 0 2px rgba(0,0,0,0.9), 0 1px 2px rgba(0,0,0,0.65)' }}>{cell.number}</span>
       </div>
     );
@@ -2492,9 +2495,9 @@ const PLACEHOLDER_Q = { q: 'Question en préparation pour cette catégorie.', a:
 
 function pickQuestion(catId, level, usedMap) {
   const cat = QUESTIONS[catId] || {};
-  // Palier demandé, sinon corsé, sinon initié, sinon n'importe quel palier non vide.
+  // Palier demandé, sinon expert, sinon initié, sinon n'importe quel palier non vide.
   let pool = cat[level];
-  if (!pool || !pool.length) pool = (cat.corse && cat.corse.length) ? cat.corse : cat.debutant;
+  if (!pool || !pool.length) pool = (cat.expert && cat.expert.length) ? cat.expert : cat.debutant;
   if (!pool || !pool.length) pool = Object.values(cat).find(a => Array.isArray(a) && a.length);
   const key = catId + '_' + level;
   if (!pool || !pool.length) return { idx: 0, question: PLACEHOLDER_Q, key };
@@ -2551,7 +2554,7 @@ function App() {
   const discoveryS = t.discoveryTime == null ? 10 : parseInt(t.discoveryTime, 10);
 
   const [phase, setPhase] = useState('accueil'); // accueil | count | names | categories | stars | board | victory | duel
-  const [selectedCats, setSelectedCats] = useState(() => CATEGORIES.slice(0, BOARD_CATS).map(c => c.id));
+  const [selectedCats, setSelectedCats] = useState([]);
   const [count, setCount] = useState(2);
   const [players, setPlayers] = useState([]);
   const [current, setCurrent] = useState(0);
@@ -2755,7 +2758,7 @@ function App() {
   } else if (phase === 'count') {
     content = <ScreenCount onBack={() => setPhase('accueil')} onPick={(n) => { setCount(n); initPlayers(n); setPhase('names'); }} />;
   } else if (phase === 'names') {
-    content = <ScreenNames count={count} players={players} setPlayers={setPlayers} onBack={() => setPhase('count')} onStart={() => setPhase('categories')} />;
+    content = <ScreenNames count={count} players={players} setPlayers={setPlayers} onBack={() => setPhase('count')} onStart={() => { setSelectedCats([]); setPhase('categories'); }} />;
   } else if (phase === 'categories') {
     content = <ScreenCategories selected={selectedCats} setSelected={setSelectedCats} onBack={() => setPhase('names')} onStart={() => {
       // Retire des favoris toute catégorie qui ne fait plus partie de la sélection.
