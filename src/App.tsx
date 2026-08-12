@@ -2336,6 +2336,7 @@ function ScreenAccueil({ onStart }) {
 // ---------- MANCHE OU TOURNOI ----------------------------------
 function ScreenMode({ onPick, onBack }) {
   const [hoverS, setHoverS] = useState(false);
+  const [hoverT, setHoverT] = useState(false);
   const card = (on) => ({
     position: 'relative', background: on ? 'linear-gradient(165deg, color-mix(in oklab, var(--card) 92%, white), var(--card))' : 'var(--card)',
     border: `2px solid ${on ? 'var(--metal)' : 'color-mix(in oklab, var(--ink) 12%, transparent)'}`,
@@ -2345,29 +2346,29 @@ function ScreenMode({ onPick, onBack }) {
   const kicker = { fontFamily: 'var(--font-body)', fontSize: 12, letterSpacing: 3, textTransform: 'uppercase', color: 'var(--metal-deep)', fontWeight: 600 };
   return (
     <div className="screen" style={{ display: 'flex', flexDirection: 'column', height: '100%', padding: '48px 56px' }}>
-      <SetupHeader step={1} title="Une manche ou un tournoi ?" onBack={onBack} />
+      <SetupHeader step={1} title="Manche ou tournoi ?" onBack={onBack} />
       <div style={{ flex: 1, display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 26, alignContent: 'center' }}>
-        {/* Une manche */}
+        {/* Manche */}
         <button onClick={() => onPick('single', 1)} onMouseEnter={() => setHoverS(true)} onMouseLeave={() => setHoverS(false)}
           style={{ ...card(hoverS), cursor: 'pointer', transform: hoverS ? 'translateY(-6px)' : 'none' }}>
           <span style={{ position: 'absolute', inset: 10, borderRadius: 14, border: '1px solid color-mix(in oklab, var(--metal) 55%, transparent)', opacity: hoverS ? 0.9 : 0.45, pointerEvents: 'none', transition: 'opacity .2s' }} />
           <div style={kicker}>Rapide</div>
-          <div style={{ fontFamily: 'var(--font-display)', fontSize: 60, lineHeight: 0.95, color: 'var(--ink)', fontWeight: 500 }}>Une manche</div>
+          <div style={{ fontFamily: 'var(--font-display)', fontSize: 60, lineHeight: 0.95, color: 'var(--ink)', fontWeight: 500 }}>Manche</div>
           <div style={{ fontFamily: 'var(--font-body)', fontSize: 16, color: 'color-mix(in oklab, var(--ink) 62%, transparent)', textAlign: 'center', textWrap: 'balance' }}>Une seule partie, un gagnant. Idéal pour jouer vite.</div>
         </button>
         {/* Tournoi */}
-        <div style={card(true)}>
-          <span style={{ position: 'absolute', inset: 10, borderRadius: 14, border: '1px solid color-mix(in oklab, var(--metal) 55%, transparent)', opacity: 0.6, pointerEvents: 'none' }} />
+        <div onMouseEnter={() => setHoverT(true)} onMouseLeave={() => setHoverT(false)} style={card(hoverT)}>
+          <span style={{ position: 'absolute', inset: 10, borderRadius: 14, border: '1px solid color-mix(in oklab, var(--metal) 55%, transparent)', opacity: hoverT ? 0.9 : 0.45, pointerEvents: 'none', transition: 'opacity .2s' }} />
           <div style={kicker}>Soirée</div>
           <div style={{ fontFamily: 'var(--font-display)', fontSize: 60, lineHeight: 0.95, color: 'var(--ink)', fontWeight: 500 }}>Tournoi</div>
           <div style={{ fontFamily: 'var(--font-body)', fontSize: 16, color: 'color-mix(in oklab, var(--ink) 62%, transparent)', textAlign: 'center', textWrap: 'balance', marginBottom: 2 }}>Plusieurs manches cumulées, classement et titres décernés à la fin.</div>
           <div style={{ fontFamily: 'var(--font-body)', fontSize: 11, letterSpacing: 2, textTransform: 'uppercase', color: 'var(--metal-deep)', fontWeight: 700 }}>Nombre de manches</div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 8, width: '100%' }}>
-            {[2, 3, 4, 5, 6, 7, 8].map(n => (
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 10, width: '100%' }}>
+            {[3, 4, 5].map(n => (
               <button key={n} onClick={() => onPick('tournament', n)} style={{
-                cursor: 'pointer', fontFamily: 'var(--font-display)', fontSize: 26, color: 'var(--ink)',
+                cursor: 'pointer', fontFamily: 'var(--font-display)', fontSize: 30, color: 'var(--ink)',
                 background: 'var(--card)', border: '1.5px solid color-mix(in oklab, var(--ink) 16%, transparent)',
-                borderRadius: 12, padding: '12px 0', transition: 'all .15s',
+                borderRadius: 12, padding: '14px 0', transition: 'all .15s',
               }}
               onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--metal)'; e.currentTarget.style.background = 'color-mix(in oklab, var(--metal) 16%, var(--card))'; }}
               onMouseLeave={e => { e.currentTarget.style.borderColor = 'color-mix(in oklab, var(--ink) 16%, transparent)'; e.currentTarget.style.background = 'var(--card)'; }}>
@@ -3233,7 +3234,7 @@ function ScreenResults({ mode, isFinal, matchNo, matchCount, players, winner, ta
   return (
     <div className="screen" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', height: '100%', overflowY: 'auto', padding: 40, position: 'relative' }}>
       <div style={{ position: 'absolute', inset: 24, borderRadius: 18, border: '1.5px solid var(--metal)', opacity: 0.5, pointerEvents: 'none' }} />
-      <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12, width: 680, maxWidth: '100%' }}>
+      <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12, width: view === 'categories' ? 'min(1060px, 100%)' : 680, maxWidth: '100%', transition: 'width .2s' }}>
         <div style={{ fontFamily: 'var(--font-body)', letterSpacing: 5, fontSize: 14, textTransform: 'uppercase', color: 'var(--metal-deep)', fontWeight: 700 }}>{heading}</div>
         <div style={{ width: 76, height: 76, borderRadius: '50%', display: 'grid', placeItems: 'center', background: 'radial-gradient(circle at 38% 32%, oklch(0.88 0.10 88), var(--metal) 60%, var(--metal-deep))', border: '2px solid var(--metal-deep)', color: 'oklch(0.30 0.04 60)', fontSize: 34, boxShadow: 'inset 0 2px 6px rgba(255,255,255,0.5), inset 0 -3px 8px rgba(0,0,0,0.25), 0 8px 20px rgba(40,20,10,0.25)' }}>★</div>
         <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 44, margin: 0, color: 'var(--ink)', fontWeight: 400, display: 'flex', alignItems: 'center', gap: 16, textAlign: 'center' }}>
@@ -3244,7 +3245,7 @@ function ScreenResults({ mode, isFinal, matchNo, matchCount, players, winner, ta
 
         <div style={{ display: 'flex', gap: 10, marginTop: 4 }}>
           {seg('classement', 'Classement')}
-          {seg('categories', 'Réussite par catégorie')}
+          {seg('categories', 'Résultats par catégorie')}
         </div>
 
         {view === 'classement' ? (
@@ -3473,6 +3474,7 @@ function App() {
   const duelResRef = useRef({});
   const duelCurRef = useRef(null);
   const duelPlayersRef = useRef([]);
+  const duelAskRef = useRef(0);        // compteur de questions de duel → force le remontage de ScreenQuestion
   const selectedCatsRef = useRef(selectedCats);
   useEffect(() => { selectedCatsRef.current = selectedCats; }, [selectedCats]);
   const modeRef = useRef('single');
@@ -3667,7 +3669,8 @@ function App() {
     const level = (duelPlayersRef.current[pid] && duelPlayersRef.current[pid].level) || 'debutant';
     const picked = pickQuestion(cat.id, level, usedRef.current);
     duelCurRef.current = { playerIdx: pid, key: picked.key, qIdx: picked.idx };
-    setDuelView({ mode: 'ask', playerIdx: pid, cat, question: picked.question });
+    duelAskRef.current += 1;
+    setDuelView({ mode: 'ask', playerIdx: pid, cat, question: picked.question, ask: duelAskRef.current });
   }
   function answerDuel(correct) {
     const cur = duelCurRef.current;
@@ -3737,7 +3740,7 @@ function App() {
           <JokerChooser player={players[current]} onPick={chooseJoker} />
         )}
         {active && active.stage === 'question' && (
-          <ScreenQuestion cat={active.cat} question={active.question} player={players[current]} stake={active.stake} timeLimit={questionTime} onAnswer={answerQuestion} />
+          <ScreenQuestion key={'q-' + active.key + '-' + active.qIdx} cat={active.cat} question={active.question} player={players[current]} stake={active.stake} timeLimit={questionTime} onAnswer={answerQuestion} />
         )}
       </>
     );
@@ -3750,7 +3753,7 @@ function App() {
           <DuelOverlay contenders={duelView.contenders} players={duelPlayersRef.current} msg={duelView.msg} onStart={runDuelRound} />
         )}
         {duelView.mode === 'ask' && (
-          <ScreenQuestion cat={duelView.cat} question={duelView.question} player={duelPlayersRef.current[duelView.playerIdx] || {}} stake={0} duel timeLimit={questionTime} onAnswer={answerDuel} />
+          <ScreenQuestion key={'duel-' + duelView.ask} cat={duelView.cat} question={duelView.question} player={duelPlayersRef.current[duelView.playerIdx] || {}} stake={0} duel timeLimit={questionTime} onAnswer={answerDuel} />
         )}
       </>
     );
