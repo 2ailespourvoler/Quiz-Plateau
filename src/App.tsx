@@ -2333,11 +2333,59 @@ function ScreenAccueil({ onStart }) {
 }
 
 // ---------- NOMBRE DE JOUEURS -----------------------------------
+// ---------- MANCHE OU TOURNOI ----------------------------------
+function ScreenMode({ onPick, onBack }) {
+  const [hoverS, setHoverS] = useState(false);
+  const card = (on) => ({
+    position: 'relative', background: on ? 'linear-gradient(165deg, color-mix(in oklab, var(--card) 92%, white), var(--card))' : 'var(--card)',
+    border: `2px solid ${on ? 'var(--metal)' : 'color-mix(in oklab, var(--ink) 12%, transparent)'}`,
+    borderRadius: 20, padding: '38px 26px 32px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14,
+    boxShadow: on ? '0 18px 44px rgba(40,20,10,0.20)' : '0 6px 18px rgba(40,20,10,0.09)', transition: 'all .2s',
+  });
+  const kicker = { fontFamily: 'var(--font-body)', fontSize: 12, letterSpacing: 3, textTransform: 'uppercase', color: 'var(--metal-deep)', fontWeight: 600 };
+  return (
+    <div className="screen" style={{ display: 'flex', flexDirection: 'column', height: '100%', padding: '48px 56px' }}>
+      <SetupHeader step={1} title="Une manche ou un tournoi ?" onBack={onBack} />
+      <div style={{ flex: 1, display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 26, alignContent: 'center' }}>
+        {/* Une manche */}
+        <button onClick={() => onPick('single', 1)} onMouseEnter={() => setHoverS(true)} onMouseLeave={() => setHoverS(false)}
+          style={{ ...card(hoverS), cursor: 'pointer', transform: hoverS ? 'translateY(-6px)' : 'none' }}>
+          <span style={{ position: 'absolute', inset: 10, borderRadius: 14, border: '1px solid color-mix(in oklab, var(--metal) 55%, transparent)', opacity: hoverS ? 0.9 : 0.45, pointerEvents: 'none', transition: 'opacity .2s' }} />
+          <div style={kicker}>Rapide</div>
+          <div style={{ fontFamily: 'var(--font-display)', fontSize: 60, lineHeight: 0.95, color: 'var(--ink)', fontWeight: 500 }}>Une manche</div>
+          <div style={{ fontFamily: 'var(--font-body)', fontSize: 16, color: 'color-mix(in oklab, var(--ink) 62%, transparent)', textAlign: 'center', textWrap: 'balance' }}>Une seule partie, un gagnant. Idéal pour jouer vite.</div>
+        </button>
+        {/* Tournoi */}
+        <div style={card(true)}>
+          <span style={{ position: 'absolute', inset: 10, borderRadius: 14, border: '1px solid color-mix(in oklab, var(--metal) 55%, transparent)', opacity: 0.6, pointerEvents: 'none' }} />
+          <div style={kicker}>Soirée</div>
+          <div style={{ fontFamily: 'var(--font-display)', fontSize: 60, lineHeight: 0.95, color: 'var(--ink)', fontWeight: 500 }}>Tournoi</div>
+          <div style={{ fontFamily: 'var(--font-body)', fontSize: 16, color: 'color-mix(in oklab, var(--ink) 62%, transparent)', textAlign: 'center', textWrap: 'balance', marginBottom: 2 }}>Plusieurs manches cumulées, classement et titres décernés à la fin.</div>
+          <div style={{ fontFamily: 'var(--font-body)', fontSize: 11, letterSpacing: 2, textTransform: 'uppercase', color: 'var(--metal-deep)', fontWeight: 700 }}>Nombre de manches</div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 8, width: '100%' }}>
+            {[2, 3, 4, 5, 6, 7, 8].map(n => (
+              <button key={n} onClick={() => onPick('tournament', n)} style={{
+                cursor: 'pointer', fontFamily: 'var(--font-display)', fontSize: 26, color: 'var(--ink)',
+                background: 'var(--card)', border: '1.5px solid color-mix(in oklab, var(--ink) 16%, transparent)',
+                borderRadius: 12, padding: '12px 0', transition: 'all .15s',
+              }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--metal)'; e.currentTarget.style.background = 'color-mix(in oklab, var(--metal) 16%, var(--card))'; }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = 'color-mix(in oklab, var(--ink) 16%, transparent)'; e.currentTarget.style.background = 'var(--card)'; }}>
+                {n}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function ScreenCount({ onPick, onBack }) {
   const [hover, setHover] = useState(null);
   return (
     <div className="screen" style={{ display: 'flex', flexDirection: 'column', height: '100%', padding: '48px 56px' }}>
-      <SetupHeader step={1} title="Combien de joueurs ?" onBack={onBack} />
+      <SetupHeader step={2} title="Combien de joueurs ?" onBack={onBack} />
       <div style={{ flex: 1, display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 26, alignContent: 'center' }}>
         {[2, 3, 4].map(n => {
           const isHover = hover === n;
@@ -2401,7 +2449,7 @@ function ScreenNames({ count, players, setPlayers, onStart, onBack }) {
 
   return (
     <div className="screen" style={{ display: 'flex', flexDirection: 'column', height: '100%', padding: '44px 56px' }}>
-      <SetupHeader step={2} title="Vos noms et vos couleurs" onBack={onBack} />
+      <SetupHeader step={3} title="Vos noms et vos couleurs" onBack={onBack} />
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 14, justifyContent: 'center', maxWidth: 720, width: '100%', margin: '0 auto' }}>
         {players.map((p, i) => (
           <div key={i} style={{
@@ -2522,7 +2570,7 @@ function ScreenStars({ players, setPlayers, onStart, onBack, cats }) {
 
   return (
     <div className="screen" style={{ display: 'flex', flexDirection: 'column', height: '100%', padding: '34px 56px 28px' }}>
-      <SetupHeader step={4} title="Catégories favorites" onBack={goPrev} />
+      <SetupHeader step={5} title="Catégories favorites" onBack={goPrev} />
 
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 14, margin: '4px 0 14px' }}>
         <Avatar player={p} size={44} active />
@@ -2583,7 +2631,7 @@ function ScreenCategories({ selected, setSelected, onStart, onBack }) {
   }
   return (
     <div className="screen" style={{ display: 'flex', flexDirection: 'column', height: '100%', padding: '34px 56px 28px' }}>
-      <SetupHeader step={3} title="Les catégories de la partie" onBack={onBack} />
+      <SetupHeader step={4} title="Les catégories de la partie" onBack={onBack} />
 
       <div style={{ textAlign: 'center', fontFamily: 'var(--font-body)', fontSize: 15, color: 'color-mix(in oklab, var(--ink) 62%, transparent)', margin: '2px 0 14px' }}>
         Choisissez <strong>{BOARD_CATS} catégories</strong> parmi les {CATEGORIES.length}. Seules celles-ci apparaîtront sur le plateau.
@@ -2644,7 +2692,7 @@ function SetupHeader({ step, title, onBack }) {
       }}>← Retour</button>
       <div style={{ flex: 1, textAlign: 'center' }}>
         <div style={{ fontFamily: 'var(--font-body)', fontSize: 12, letterSpacing: 3, textTransform: 'uppercase', color: 'var(--metal-deep)', fontWeight: 600 }}>
-          Étape {step} sur 4
+          Étape {step} sur 5
         </div>
         <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 40, margin: '2px 0 0', color: 'var(--ink)', fontWeight: 400 }}>{title}</h2>
       </div>
@@ -2653,7 +2701,7 @@ function SetupHeader({ step, title, onBack }) {
   );
 }
 
-Object.assign(window, { ScreenAccueil, ScreenCount, ScreenNames, ScreenCategories, ScreenStars });
+Object.assign(window, { ScreenAccueil, ScreenMode, ScreenCount, ScreenNames, ScreenCategories, ScreenStars });
 
 // ───────────────────────── screens-game ─────────────────────────
 // ============================================================
@@ -3045,8 +3093,8 @@ function ScreenQuestion({ cat, question, player, stake, onAnswer, timeLimit = 30
 }
 
 // ---------- CLASSEMENT / VICTOIRE -------------------------------
-// ---------- TABLEAU DE BORD DE FIN DE PARTIE ------------------
-// Titre décerné par catégorie (« Meilleur Historien », etc.)
+// ---------- RÉSULTATS : classement, réussite par catégorie, titres ------
+// Titre décerné par catégorie (« Meilleur Historien », etc.) — réservé aux tournois.
 const CAT_TITLE = {
   histoire: 'Historien', geo: 'Géographe', litterature: 'Littéraire', sciences: 'Scientifique',
   musique: 'Mélomane', cinema: 'Cinéphile', sport: 'Sportif', geopolitique: 'Diplomate',
@@ -3056,150 +3104,175 @@ const CAT_TITLE = {
 const MIN_TITLE_ATTEMPTS = 2;
 const pctOf = (c, a) => (a ? Math.round((c / a) * 100) : 0);
 
-function StatsDashboard({ players }) {
-  // Catégories réellement jouées (union), dans l'ordre du plateau.
-  const played = new Set();
-  players.forEach(p => Object.keys(p.stats || {}).forEach(id => played.add(id)));
-  const cats = CATEGORIES.filter(c => played.has(c.id));
-  if (!cats.length) return null;
-
-  // Un titre par catégorie : meilleur ratio, à condition d'un échantillon suffisant.
+// rows: [{ player, stats, score }]. Renvoie un titre par catégorie (échantillon suffisant, correct>0).
+function computeTitles(rows, cats) {
   const titles = [];
   cats.forEach(c => {
     let best = null;
-    players.forEach(p => {
-      const s = (p.stats || {})[c.id];
+    rows.forEach(r => {
+      const s = (r.stats || {})[c.id];
       if (!s || s.attempts < MIN_TITLE_ATTEMPTS) return;
-      const r = s.correct / s.attempts;
-      if (!best || r > best.r || (r === best.r && s.attempts > best.s.attempts)) best = { p, s, r };
+      const ratio = s.correct / s.attempts;
+      if (!best || ratio > best.ratio || (ratio === best.ratio && s.attempts > best.s.attempts)) best = { r, s, ratio };
     });
-    if (best && best.s.correct > 0) titles.push({ cat: c, player: best.p, s: best.s });
+    if (best && best.s.correct > 0) titles.push({ cat: c, player: best.r.player, s: best.s });
   });
+  return titles;
+}
 
+function TitlesPanel({ rows, cats }) {
+  const titles = computeTitles(rows, cats);
   const label = { fontFamily: 'var(--font-body)', fontSize: 11, letterSpacing: 2, textTransform: 'uppercase', color: 'var(--metal-deep)', fontWeight: 700 };
-
+  if (!titles.length) {
+    return <div style={{ ...label, textAlign: 'center', marginTop: 10, opacity: 0.85 }}>Pas assez de questions par catégorie pour décerner des titres.</div>;
+  }
   return (
-    <div style={{ width: 620, maxWidth: '100%', marginTop: 26, display: 'flex', flexDirection: 'column', gap: 16 }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 10, color: 'var(--metal)' }}>
-        <span style={{ flex: 1, height: 1, background: 'currentColor', opacity: 0.45 }} />
-        <span style={label}>Tableau de bord de la manche</span>
-        <span style={{ flex: 1, height: 1, background: 'currentColor', opacity: 0.45 }} />
-      </div>
-
-      {/* Palmarès par catégorie */}
-      {titles.length > 0 && (
-        <div>
-          <div style={{ ...label, marginBottom: 8, textAlign: 'left' }}>Les titres de la manche</div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 8 }}>
-            {titles.map(({ cat, player, s }) => (
-              <div key={cat.id} style={{
-                display: 'flex', alignItems: 'center', gap: 10, background: 'var(--card)',
-                border: `1.5px solid color-mix(in oklab, ${cat.color} 45%, transparent)`,
-                borderRadius: 12, padding: '8px 12px',
-              }}>
-                <CatBadge cat={cat} size={30} />
-                <div style={{ flex: 1, minWidth: 0, textAlign: 'left' }}>
-                  <div style={{ fontFamily: 'var(--font-body)', fontSize: 11, color: 'color-mix(in oklab, var(--ink) 55%, transparent)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: 0.5 }}>
-                    Meilleur {CAT_TITLE[cat.id] || cat.label}
-                  </div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                    <Avatar player={player} size={20} />
-                    <span style={{ fontFamily: 'var(--font-display)', fontSize: 18, color: 'var(--ink)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{player.name || 'Joueur'}</span>
-                  </div>
-                </div>
-                <span style={{ fontFamily: 'var(--font-display)', fontSize: 16, color: cat.color, whiteSpace: 'nowrap' }}>{s.correct}/{s.attempts}</span>
+    <div style={{ width: '100%', marginTop: 10 }}>
+      <div style={{ ...label, marginBottom: 10, textAlign: 'center' }}>Les titres du tournoi</div>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 10 }}>
+        {titles.map(({ cat, player, s }) => (
+          <div key={cat.id} style={{
+            display: 'flex', alignItems: 'center', gap: 12, background: 'var(--card)',
+            border: `1.5px solid color-mix(in oklab, ${cat.color} 50%, transparent)`,
+            borderRadius: 14, padding: '10px 14px',
+          }}>
+            <CatBadge cat={cat} size={36} />
+            <div style={{ flex: 1, minWidth: 0, textAlign: 'left' }}>
+              <div style={{ fontFamily: 'var(--font-body)', fontSize: 12, color: 'color-mix(in oklab, var(--ink) 55%, transparent)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: 0.5 }}>Meilleur {CAT_TITLE[cat.id] || cat.label}</div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
+                <Avatar player={player} size={22} />
+                <span style={{ fontFamily: 'var(--font-display)', fontSize: 20, color: 'var(--ink)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{player.name || 'Joueur'}</span>
               </div>
-            ))}
+            </div>
+            <span style={{ fontFamily: 'var(--font-display)', fontSize: 18, color: cat.color, whiteSpace: 'nowrap' }}>{s.correct}/{s.attempts}</span>
           </div>
-        </div>
-      )}
-
-      {/* Profil de chaque joueur */}
-      <div>
-        <div style={{ ...label, marginBottom: 8, textAlign: 'left' }}>Réussite par catégorie</div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-          {players.map((p, pi) => {
-            const tot = Object.values(p.stats || {}).reduce((acc, s) => ({ c: acc.c + s.correct, a: acc.a + s.attempts }), { c: 0, a: 0 });
-            return (
-              <div key={pi} style={{ background: 'var(--card)', border: '1.5px solid color-mix(in oklab, var(--ink) 10%, transparent)', borderRadius: 12, padding: '9px 12px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 9, marginBottom: 6 }}>
-                  <Avatar player={p} size={26} />
-                  <span style={{ flex: 1, textAlign: 'left', fontFamily: 'var(--font-display)', fontSize: 19, color: 'var(--ink)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{p.name || 'Joueur'}</span>
-                  <span style={{ fontFamily: 'var(--font-body)', fontSize: 12, color: 'color-mix(in oklab, var(--ink) 60%, transparent)', fontWeight: 600 }}>
-                    {tot.c}/{tot.a} · {pctOf(tot.c, tot.a)}%
-                  </span>
-                </div>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
-                  {cats.map(c => {
-                    const s = (p.stats || {})[c.id];
-                    if (!s) return null;
-                    const good = s.correct === s.attempts;
-                    return (
-                      <div key={c.id} title={c.label} style={{
-                        display: 'flex', alignItems: 'center', gap: 5, padding: '2px 8px 2px 3px', borderRadius: 999,
-                        background: `color-mix(in oklab, ${c.color} 12%, var(--card))`,
-                        border: `1px solid color-mix(in oklab, ${c.color} 35%, transparent)`,
-                      }}>
-                        <CatBadge cat={c} size={18} />
-                        <span style={{ fontFamily: 'var(--font-body)', fontSize: 12, fontWeight: 700, color: good ? c.color : 'color-mix(in oklab, var(--ink) 70%, transparent)' }}>{s.correct}/{s.attempts}</span>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            );
-          })}
-        </div>
+        ))}
       </div>
     </div>
   );
 }
 
-function ScreenVictory({ players, winner, target, reachedTarget, onReplay, onHome }) {
-  const ranked = [...players].sort((a, b) => b.score - a.score);
+// Grand tableau : ligne = joueur, colonne = catégorie, cellule = réussi/tenté, + colonne Total.
+function CategoryTable({ rows, cats }) {
+  const cell = { padding: '13px 10px', textAlign: 'center', fontFamily: 'var(--font-display)', fontSize: 20, color: 'var(--ink)' };
+  const th = { padding: '8px 10px 14px', textAlign: 'center', verticalAlign: 'bottom' };
+  return (
+    <div style={{ width: '100%', overflowX: 'auto' }}>
+      <table style={{ borderCollapse: 'collapse', width: '100%', minWidth: 640 }}>
+        <thead>
+          <tr style={{ borderBottom: '2px solid color-mix(in oklab, var(--metal) 60%, transparent)' }}>
+            <th style={{ ...th, textAlign: 'left', minWidth: 150 }}>
+              <span style={{ fontFamily: 'var(--font-body)', fontSize: 12, letterSpacing: 2, textTransform: 'uppercase', color: 'var(--metal-deep)', fontWeight: 700 }}>Joueur</span>
+            </th>
+            {cats.map(c => (
+              <th key={c.id} style={{ ...th, minWidth: 70 }}>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 5 }}>
+                  <CatBadge cat={c} size={30} />
+                  <span style={{ fontFamily: 'var(--font-body)', fontSize: 12, fontWeight: 700, color: 'color-mix(in oklab, var(--ink) 72%, transparent)' }}>{c.short || c.label}</span>
+                </div>
+              </th>
+            ))}
+            <th style={{ ...th, minWidth: 92 }}>
+              <span style={{ fontFamily: 'var(--font-body)', fontSize: 12, letterSpacing: 1, textTransform: 'uppercase', color: 'var(--metal-deep)', fontWeight: 700 }}>Total</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((r, ri) => {
+            const tot = cats.reduce((acc, c) => { const s = (r.stats || {})[c.id]; return s ? { c: acc.c + s.correct, a: acc.a + s.attempts } : acc; }, { c: 0, a: 0 });
+            return (
+              <tr key={ri} style={{ background: ri % 2 ? 'color-mix(in oklab, var(--ink) 4%, transparent)' : 'transparent' }}>
+                <td style={{ ...cell, textAlign: 'left' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                    <Avatar player={r.player} size={32} />
+                    <span style={{ fontSize: 20, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: 150 }}>{r.player.name || 'Joueur'}</span>
+                  </div>
+                </td>
+                {cats.map(c => {
+                  const s = (r.stats || {})[c.id];
+                  if (!s) return <td key={c.id} style={{ ...cell, color: 'color-mix(in oklab, var(--ink) 28%, transparent)' }}>—</td>;
+                  const perfect = s.correct === s.attempts;
+                  return <td key={c.id} style={{ ...cell, color: perfect ? c.color : 'var(--ink)', fontWeight: perfect ? 700 : 500 }}>{s.correct}/{s.attempts}</td>;
+                })}
+                <td style={{ ...cell, fontWeight: 700 }}>
+                  {tot.c}/{tot.a}
+                  <span style={{ display: 'block', fontFamily: 'var(--font-body)', fontSize: 13, fontWeight: 700, color: 'var(--metal-deep)' }}>{pctOf(tot.c, tot.a)}%</span>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+function ScreenResults({ mode, isFinal, matchNo, matchCount, players, winner, target, reachedTarget, tour, cats, onNext, onReplay, onHome }) {
+  const [view, setView] = useState('classement');
+  const isTour = mode === 'tournament';
+  const tourFinal = isTour && isFinal;
+  const rows = tourFinal
+    ? players.map((p, i) => ({ player: p, stats: (tour[i] || {}).stats || {}, score: (tour[i] || {}).score || 0, wins: (tour[i] || {}).wins || 0 }))
+    : players.map(p => ({ player: p, stats: p.stats || {}, score: p.score, wins: 0 }));
+  const ranked = [...rows].sort((a, b) => (b.score - a.score) || (b.wins - a.wins));
+  const champ = tourFinal ? (ranked[0] ? ranked[0].player : winner) : winner;
+  const heading = tourFinal ? 'Classement du tournoi'
+    : isTour ? `Manche ${matchNo} sur ${matchCount}`
+    : (reachedTarget ? `Objectif ${target} points atteint` : 'Plateau terminé');
+  const verb = tourFinal ? 'remporte le tournoi' : isTour ? 'remporte la manche' : "l'emporte";
+
+  const seg = (id, txt) => (
+    <button onClick={() => setView(id)} style={{
+      cursor: 'pointer', fontFamily: 'var(--font-body)', fontSize: 14, fontWeight: 700, letterSpacing: 0.5,
+      padding: '9px 18px', borderRadius: 999,
+      border: '1.5px solid ' + (view === id ? 'var(--metal)' : 'color-mix(in oklab, var(--ink) 14%, transparent)'),
+      background: view === id ? 'color-mix(in oklab, var(--metal) 20%, var(--card))' : 'var(--card)', color: 'var(--ink)',
+    }}>{txt}</button>
+  );
+
   return (
     <div className="screen" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', height: '100%', overflowY: 'auto', padding: 40, position: 'relative' }}>
       <div style={{ position: 'absolute', inset: 24, borderRadius: 18, border: '1.5px solid var(--metal)', opacity: 0.5, pointerEvents: 'none' }} />
-      <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 }}>
-        <div style={{ fontFamily: 'var(--font-body)', letterSpacing: 5, fontSize: 14, textTransform: 'uppercase', color: 'var(--metal-deep)', fontWeight: 700 }}>
-          {reachedTarget ? `Objectif ${target} points atteint` : 'Plateau terminé'}
-        </div>
-        <div style={{
-          width: 84, height: 84, borderRadius: '50%', display: 'grid', placeItems: 'center',
-          background: 'radial-gradient(circle at 38% 32%, oklch(0.88 0.10 88), var(--metal) 60%, var(--metal-deep))',
-          border: '2px solid var(--metal-deep)', color: 'oklch(0.30 0.04 60)', fontSize: 38,
-          boxShadow: 'inset 0 2px 6px rgba(255,255,255,0.5), inset 0 -3px 8px rgba(0,0,0,0.25), 0 8px 20px rgba(40,20,10,0.25)',
-        }}>★</div>
-        <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 56, margin: 0, color: 'var(--ink)', fontWeight: 400, whiteSpace: 'nowrap', display: 'flex', alignItems: 'center', gap: 18 }}>
-          <Avatar player={winner} size={54} active />
-          {winner.name || 'Le gagnant'} l'emporte&nbsp;!
+      <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12, width: 680, maxWidth: '100%' }}>
+        <div style={{ fontFamily: 'var(--font-body)', letterSpacing: 5, fontSize: 14, textTransform: 'uppercase', color: 'var(--metal-deep)', fontWeight: 700 }}>{heading}</div>
+        <div style={{ width: 76, height: 76, borderRadius: '50%', display: 'grid', placeItems: 'center', background: 'radial-gradient(circle at 38% 32%, oklch(0.88 0.10 88), var(--metal) 60%, var(--metal-deep))', border: '2px solid var(--metal-deep)', color: 'oklch(0.30 0.04 60)', fontSize: 34, boxShadow: 'inset 0 2px 6px rgba(255,255,255,0.5), inset 0 -3px 8px rgba(0,0,0,0.25), 0 8px 20px rgba(40,20,10,0.25)' }}>★</div>
+        <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 44, margin: 0, color: 'var(--ink)', fontWeight: 400, display: 'flex', alignItems: 'center', gap: 16, textAlign: 'center' }}>
+          <Avatar player={champ} size={46} active />
+          {(champ && champ.name) || 'Le gagnant'} {verb}&nbsp;!
         </h1>
-        <Flourish width={300} />
+        <Flourish width={280} />
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginTop: 8, width: 560, maxWidth: '100%' }}>
-          {ranked.map((p, i) => (
-            <div key={i} style={{
-              display: 'flex', alignItems: 'center', gap: 14,
-              background: 'var(--card)', borderRadius: 14, padding: '11px 18px',
-              border: i === 0 ? '2px solid var(--metal)' : '1.5px solid color-mix(in oklab, var(--ink) 10%, transparent)',
-            }}>
-              <span style={{ fontFamily: 'var(--font-display)', fontSize: 24, color: 'var(--metal-deep)', width: 26 }}>{i + 1}</span>
-              <Avatar player={p} size={40} />
-              <span style={{ flex: 1, textAlign: 'left', fontFamily: 'var(--font-display)', fontSize: 23, color: 'var(--ink)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{p.name || 'Joueur'}</span>
-              <div style={{ display: 'flex', gap: 6 }}>
-                {p.star2 && <FavoriteChip cat={CAT_BY_ID[p.star2]} level={2} compact />}
-                {p.star1 && <FavoriteChip cat={CAT_BY_ID[p.star1]} level={1} compact />}
-              </div>
-              <span style={{ fontFamily: 'var(--font-display)', fontSize: 30, color: 'var(--ink)', minWidth: 44, textAlign: 'right' }}>{p.score}</span>
-            </div>
-          ))}
+        <div style={{ display: 'flex', gap: 10, marginTop: 4 }}>
+          {seg('classement', 'Classement')}
+          {seg('categories', 'Réussite par catégorie')}
         </div>
 
-        <StatsDashboard players={players} />
+        {view === 'classement' ? (
+          <>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginTop: 10, width: 560, maxWidth: '100%' }}>
+              {ranked.map((r, i) => (
+                <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 14, background: 'var(--card)', borderRadius: 14, padding: '11px 18px', border: i === 0 ? '2px solid var(--metal)' : '1.5px solid color-mix(in oklab, var(--ink) 10%, transparent)' }}>
+                  <span style={{ fontFamily: 'var(--font-display)', fontSize: 24, color: 'var(--metal-deep)', width: 26 }}>{i + 1}</span>
+                  <Avatar player={r.player} size={40} />
+                  <span style={{ flex: 1, textAlign: 'left', fontFamily: 'var(--font-display)', fontSize: 23, color: 'var(--ink)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{r.player.name || 'Joueur'}</span>
+                  {tourFinal && r.wins > 0 && <span style={{ fontFamily: 'var(--font-body)', fontSize: 12, fontWeight: 700, color: 'var(--metal-deep)' }}>{r.wins} {r.wins > 1 ? 'manches' : 'manche'}</span>}
+                  <span style={{ fontFamily: 'var(--font-display)', fontSize: 30, color: 'var(--ink)', minWidth: 44, textAlign: 'right' }}>{r.score}</span>
+                </div>
+              ))}
+            </div>
+            {tourFinal && <TitlesPanel rows={rows} cats={cats} />}
+          </>
+        ) : (
+          <div style={{ marginTop: 12, width: '100%' }}>
+            <CategoryTable rows={ranked} cats={cats} />
+          </div>
+        )}
 
-        <div style={{ display: 'flex', gap: 14, marginTop: 18 }}>
+        <div style={{ display: 'flex', gap: 14, marginTop: 20 }}>
           <Button variant="ghost" onClick={onHome}>Accueil</Button>
-          <Button onClick={onReplay}>Rejouer</Button>
+          {isTour && !isFinal
+            ? <Button onClick={onNext}>Manche suivante</Button>
+            : <Button onClick={onReplay}>{isTour ? 'Nouvelle soirée' : 'Rejouer'}</Button>}
         </div>
       </div>
     </div>
@@ -3269,7 +3342,7 @@ function DiscoveryCountdown({ secondsLeft }) {
   );
 }
 
-Object.assign(window, { stakeFor, ScreenBoard, RevealOverlay, JokerChooser, ScreenQuestion, ScreenVictory, DiscoveryOverlay, DiscoveryCountdown });
+Object.assign(window, { stakeFor, ScreenBoard, RevealOverlay, JokerChooser, ScreenQuestion, ScreenResults, DiscoveryOverlay, DiscoveryCountdown });
 
 // ───────────────────────── App + logique de jeu ─────────────────────────
 // Mise à l'échelle du cadre fixe 1280×800
@@ -3372,7 +3445,7 @@ function App() {
   const questionTime = parseInt(t.questionTime, 10) || 30;
   const discoveryS = t.discoveryTime == null ? 10 : parseInt(t.discoveryTime, 10);
 
-  const [phase, setPhase] = useState('accueil'); // accueil | count | names | categories | stars | board | victory | duel
+  const [phase, setPhase] = useState('accueil'); // accueil | mode | count | names | categories | stars | board | victory | duel
   const [selectedCats, setSelectedCats] = useState([]);
   const [count, setCount] = useState(2);
   const [players, setPlayers] = useState([]);
@@ -3385,6 +3458,10 @@ function App() {
   const [reachedTarget, setReachedTarget] = useState(true);
   const [discovery, setDiscovery] = useState('done'); // prompt | reveal | done
   const [discoverLeft, setDiscoverLeft] = useState(0);
+  const [mode, setMode] = useState('single');       // 'single' | 'tournament'
+  const [matchCount, setMatchCount] = useState(3);   // nombre de manches d'un tournoi
+  const [matchNo, setMatchNo] = useState(1);         // manche courante (1-based)
+  const [isFinal, setIsFinal] = useState(true);      // écran de résultats = fin de tournoi ?
 
   const playedRef = useRef({});
   const usedRef = useRef(loadUsed());
@@ -3398,6 +3475,13 @@ function App() {
   const duelPlayersRef = useRef([]);
   const selectedCatsRef = useRef(selectedCats);
   useEffect(() => { selectedCatsRef.current = selectedCats; }, [selectedCats]);
+  const modeRef = useRef('single');
+  useEffect(() => { modeRef.current = mode; }, [mode]);
+  const matchCountRef = useRef(3);
+  useEffect(() => { matchCountRef.current = matchCount; }, [matchCount]);
+  const matchNoRef = useRef(1);       // manche courante (source de vérité pour les timeouts)
+  const tourRef = useRef([]);          // cumul soirée : [{ score, wins, stats:{catId:{correct,attempts}} }]
+  const soireeStartedRef = useRef(false); // une soirée est-elle en cours ? (distingue 1re manche vs suivantes)
   const [duelView, setDuelView] = useState({ mode: 'intro', contenders: [], msg: '' });
 
   useEffect(() => { fitStage(); }, [phase]);
@@ -3413,10 +3497,10 @@ function App() {
     })));
   }
 
-  function startGame() {
+  // Prépare et lance UNE manche (plateau, scores et stats remis à zéro) — sans toucher au cumul du tournoi.
+  function beginMatch() {
     clearTimeout(timerRef.current); clearInterval(discTimerRef.current);
-    playedRef.current = {}; usedRef.current = loadUsed();
-    endgameRef.current = null;
+    playedRef.current = {}; endgameRef.current = null;
     duelIdsRef.current = []; duelQueueRef.current = []; duelResRef.current = {};
     duelCurRef.current = null; duelPlayersRef.current = [];
     setBoard(buildBoard(selectedCats));
@@ -3426,6 +3510,16 @@ function App() {
     setCurrent(0); setActive(null); setWinner(null); setReachedTarget(true);
     setDiscovery(discoveryS > 0 ? 'prompt' : 'done');
     setPhase('board');
+  }
+
+  // Démarre une SOIRÉE (ou une manche simple) : remet à zéro le cumul et le compteur de manches.
+  function startGame() {
+    usedRef.current = loadUsed();
+    tourRef.current = Array.from({ length: players.length || count }, () => ({ score: 0, wins: 0, stats: {} }));
+    matchNoRef.current = 1; setMatchNo(1);
+    setIsFinal(modeRef.current !== 'tournament');
+    soireeStartedRef.current = true;
+    beginMatch();
   }
 
   // Découverte du plateau : tout se dévoile pendant discoveryS, puis se referme.
@@ -3519,12 +3613,38 @@ function App() {
     const max = Math.max(...finalPlayers.map(p => p.score));
     const top = finalPlayers.map((p, i) => i).filter(i => finalPlayers[i].score === max);
     if (top.length === 1) {
-      setWinner(finalPlayers[top[0]]);
       setReachedTarget(max >= target);
-      setPhase('victory');
+      concludeMatch(finalPlayers, top[0]);
     } else {
       startDuel(top, finalPlayers);
     }
+  }
+
+  // Clôture d'une manche : cumule les stats dans la soirée puis affiche les résultats.
+  function concludeMatch(finalPlayers, winnerIdx) {
+    const t = tourRef.current;
+    finalPlayers.forEach((p, i) => {
+      const e = t[i] || { score: 0, wins: 0, stats: {} };
+      const stats = { ...e.stats };
+      Object.entries(p.stats || {}).forEach(([cid, s]) => {
+        const cur = stats[cid] || { correct: 0, attempts: 0 };
+        stats[cid] = { correct: cur.correct + s.correct, attempts: cur.attempts + s.attempts };
+      });
+      t[i] = { score: e.score + p.score, wins: e.wins + (i === winnerIdx ? 1 : 0), stats };
+    });
+    const final = modeRef.current !== 'tournament' || matchNoRef.current >= matchCountRef.current;
+    setWinner(finalPlayers[winnerIdx]);
+    setIsFinal(final);
+    setPhase('victory');
+  }
+
+  // Manche suivante d'un tournoi : mêmes joueurs, mais on re-choisit catégories PUIS favoris.
+  function nextMatch() {
+    clearTimeout(timerRef.current); clearInterval(discTimerRef.current);
+    matchNoRef.current += 1; setMatchNo(matchNoRef.current);
+    setActive(null); setWinner(null);
+    setSelectedCats([]);            // repartir d'une sélection vierge
+    setPhase('categories');
   }
 
   function startDuel(ids, finalPlayers) {
@@ -3567,9 +3687,8 @@ function App() {
     const nameOf = (i) => (duelPlayersRef.current[i] && duelPlayersRef.current[i].name) || ('Joueur ' + (i + 1));
     if (good.length > 0 && bad.length > 0) {
       if (good.length === 1) {
-        setWinner(duelPlayersRef.current[good[0]]);
         setReachedTarget(true);
-        setPhase('victory');
+        concludeMatch(duelPlayersRef.current, good[0]);
       } else {
         duelIdsRef.current = good;
         setDuelView({ mode: 'intro', contenders: good, msg: bad.map(nameOf).join(', ') + (bad.length > 1 ? ' sont elimines !' : ' est elimine !') });
@@ -3582,9 +3701,11 @@ function App() {
   // ----- Rendu selon la phase -----
   let content;
   if (phase === 'accueil') {
-    content = <ScreenAccueil onStart={() => setPhase('count')} />;
+    content = <ScreenAccueil onStart={() => { soireeStartedRef.current = false; setPhase('mode'); }} />;
+  } else if (phase === 'mode') {
+    content = <ScreenMode onBack={() => setPhase('accueil')} onPick={(m, n) => { setMode(m); setMatchCount(n); setPhase('count'); }} />;
   } else if (phase === 'count') {
-    content = <ScreenCount onBack={() => setPhase('accueil')} onPick={(n) => { setCount(n); initPlayers(n); setPhase('names'); }} />;
+    content = <ScreenCount onBack={() => setPhase('mode')} onPick={(n) => { setCount(n); initPlayers(n); setPhase('names'); }} />;
   } else if (phase === 'names') {
     content = <ScreenNames count={count} players={players} setPlayers={setPlayers} onBack={() => setPhase('count')} onStart={() => { setSelectedCats([]); setPhase('categories'); }} />;
   } else if (phase === 'categories') {
@@ -3599,7 +3720,7 @@ function App() {
     }} />;
   } else if (phase === 'stars') {
     const starCats = CATEGORIES.filter(c => selectedCats.includes(c.id));
-    content = <ScreenStars players={players} setPlayers={setPlayers} cats={starCats} onBack={() => setPhase('categories')} onStart={startGame} />;
+    content = <ScreenStars players={players} setPlayers={setPlayers} cats={starCats} onBack={() => setPhase('categories')} onStart={() => (soireeStartedRef.current ? beginMatch() : startGame())} />;
   } else if (phase === 'board') {
     content = (
       <>
@@ -3634,8 +3755,11 @@ function App() {
       </>
     );
   } else if (phase === 'victory') {
-    content = <ScreenVictory players={players} winner={winner || players[0]} target={target}
-      reachedTarget={reachedTarget} onReplay={startGame} onHome={() => setPhase('accueil')} />;
+    const catObjs = CATEGORIES.filter(c => selectedCats.includes(c.id));
+    content = <ScreenResults mode={mode} isFinal={isFinal} matchNo={matchNo} matchCount={matchCount}
+      players={players} winner={winner || players[0]} target={target} reachedTarget={reachedTarget}
+      tour={tourRef.current} cats={catObjs}
+      onNext={nextMatch} onReplay={startGame} onHome={() => setPhase('accueil')} />;
   }
 
   return (
